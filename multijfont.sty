@@ -1,0 +1,654 @@
+%% New-CIDで和文多書体を行う場合の設定です．
+%% ここで設定している和文フォントを使用するには，multijfontのクラスオプションと，
+%% 和文tfm，vf，dvipsでのmap指定が必要です．
+%% またクラスオプションOTFが指定されているとまったく無意味になります．
+%% 一部従属欧文にHelvetica(phv), Avant Gard(pag), Bookman(pbk)を使っています．
+
+
+\if@PsJfont%% ここの処理がされている段階で既にtrueなので，ここのifは本来の意味を無くしているのですが
+           %% 一応残してます．
+%%\ifnum\theJfontselect=21
+%\input ot1phv.fd
+%\input ot1pag.fd
+%\input ot1pbk.fd
+%% 以下和文
+%\ProvidesFile{JY1fbb-JIS.fd}[2003/06/30 ver1  太ゴシック KANJI FONT defines]
+\typeout{%
+-----------------^^J%
+PS multiJfont=YES^^J%
+-----------------}
+\DeclareFontFamily{JY1}{fbb-JIS}{}
+\DeclareFontFamily{JT1}{fbb-JIS}{}
+\DeclareFontShape{JY1}{fbb-JIS}{m}{n}{<->s*[1.0392676] FutoGo-B101-Bold-H}{}
+\DeclareFontShape{JY1}{fbb-JIS}{m}{sl}{<->s*[1.0392676]FutoGo-B101-Bold-H-s}{}
+\DeclareRelationFont{JY1}{fbb-JIS}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{fbb-JIS}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{fbb-JIS}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{fbb-JIS}{m}{n}{OT1}{cmr}{bx}{n}
+
+%\ProvidesFile{JY1fmb-JIS.fd}[2003/06/30 ver1  太ミン KANJI FONT defines]
+\DeclareFontFamily{JY1}{fmb-JIS}{}
+\DeclareFontFamily{JT1}{fmb-JIS}{}
+\DeclareRelationFont{JY1}{fmb-JIS}{m}{}{OT1}{cmr}{m}{}
+\DeclareFontShape{JY1}{fmb-JIS}{m}{n}{<->s*[1.0392676] FutoMin-A101-Bold-H}{}
+\DeclareFontShape{JY1}{fmb-JIS}{m}{sl}{<->s*[1.0392676] FutoMin-A101-Bold-H-s}{}\DeclareFontShape{JT1}{fmb-JIS}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{fmb-JIS}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{fmb-JIS}{m}{}{OT1}{cmr}{m}{}
+
+%\ProvidesFile{JY1junl-JIS.fd}%[2003/06/30 ver1  じゅん KANJI FONT defines]
+\DeclareFontFamily{JY1}{junl-JIS}{}
+\DeclareFontFamily{JT1}{junl-JIS}{}
+%\DeclareRelationFont{JY1}{junl-JIS}{m}{}{OT1}{cmr}{bx}{}
+\DeclareFontShape{JY1}{junl-JIS}{m}{n}{<->s*[1.0392676]Jun-101-Light-H}{}
+\DeclareFontShape{JY1}{junl-JIS}{m}{sl}{<->s*[1.0392676] Jun-101-Light-H-s}{}
+\DeclareRelationFont{JY1}{junl-JIS}{m}{n}{OT1}{pag}{m}{n}
+\DeclareFontShape{JT1}{junl-JIS}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{junl-JIS}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{junl-JIS}{m}{n}{OT1}{pag}{m}{n}
+
+%\ProvidesFile{JY1jun-bold.fd}[2003/06/30 ver1  じゅん501 KANJI FONT defines]
+\DeclareFontFamily{JY1}{jun-bold}{}
+\DeclareFontFamily{JT1}{jun-bold}{}
+\DeclareFontShape{JY1}{jun-bold}{m}{n}{<->s*[1.0392676] Jun501-Bold-H}{}
+\DeclareFontShape{JY1}{jun-bold}{m}{sl}{<->s*[1.0392676]Jun501-Bold-H-s}{}
+\DeclareRelationFont{JY1}{jun-bold}{m}{n}{OT1}{pag}{b}{n}
+\DeclareFontShape{JT1}{jun-bold}{m}{n}{<->s*[1.0392676] tgoth10}{}
+\DeclareFontShape{JT1}{jun-bold}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{jun-bold}{m}{n}{OT1}{pag}{b}{n}
+
+%\ProvidesFile{JY1jun-medium.fd}
+%[2003/06/30 ver1  じゅん34 KANJI FONT defines]
+\DeclareFontFamily{JY1}{jun-medium}{}
+\DeclareFontFamily{JT1}{jun-medium}{}
+\DeclareFontShape{JY1}{jun-medium}{m}{n}{<->s*[1.0392676]Jun34-Medium-H}{}
+\DeclareFontShape{JY1}{jun-medium}{m}{sl}{<->s*[1.0392676]Jun34-Medium-H-s}{}
+\DeclareRelationFont{JY1}{jun-medium}{m}{n}{OT1}{pag}{db}{n}
+\DeclareFontShape{JT1}{jun-medium}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{jun-medium}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{jun-medium}{m}{n}{OT1}{pag}{db}{n}
+
+%\ProvidesFile{JY1kyoka-r.fd}
+%[2003/06/30 ver1  教科書体ICA-R KANJI FONT defines]
+\DeclareFontFamily{JY1}{kyoka-r}{}
+\DeclareFontFamily{JT1}{kyoka-r}{}
+\DeclareFontShape{JY1}{kyoka-r}{m}{n}{<->s*[1.0392676] kyoka-r}{}
+\DeclareFontShape{JY1}{kyoka-r}{m}{sl}{<->s*[1.0392676]kyoka-r-s}{}
+\DeclareFontShape{JT1}{kyoka-r}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{kyoka-r}{m}{sl}{<->s*[1.0392676]tmin10}{}
+
+%\ProvidesFile{JY1matis-b.fd}
+%[2003/06/30 ver1  マティスB KANJI FONT defines]
+\DeclareFontFamily{JY1}{matis-b}{}
+\DeclareFontFamily{JT1}{matis-b}{}
+\DeclareFontShape{JY1}{matis-b}{m}{n}{<->s*[1.0392676] MatisseCID-B-H}{}
+\DeclareFontShape{JY1}{matis-b}{m}{sl}{<->s*[1.0392676]MatisseCID-B-H-s}{}
+\DeclareRelationFont{JY1}{matis-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{matis-b}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-b}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{matis-b}{m}{n}{OT1}{cmr}{bx}{n}
+
+%\ProvidesFile{JY1matis-db.fd}
+%[2003/06/30 ver1  マティスDB KANJI FONT defines]
+\DeclareFontFamily{JY1}{matis-db}{}
+\DeclareFontFamily{JT1}{matis-db}{}
+\DeclareFontShape{JY1}{matis-db}{m}{n}{<->s*[1.0392676] MatisseCID-DB-H}{}
+\DeclareFontShape{JY1}{matis-db}{m}{sl}{<->s*[1.0392676]MatisseCID-DB-H-s}{}
+\DeclareFontShape{JT1}{matis-db}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-db}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{matis-db}{m}{n}{OT1}{cmr}{bx}{n}
+
+%\ProvidesFile{JY1matis-eb.fd}[2003/06/30 ver1  マティスEB KANJI FONT defines]
+\DeclareFontFamily{JY1}{matis-eb}{}
+\DeclareFontFamily{JT1}{matis-eb}{}
+\DeclareFontShape{JY1}{matis-eb}{m}{n}{<->s*[1.0392676] MatisseCID-EB-H}{}
+\DeclareFontShape{JY1}{matis-eb}{m}{sl}{<->s*[1.0392676]MatisseCID-EB-H-s}{}
+\DeclareRelationFont{JY1}{matis-eb}{m}{n}{OT1}{pbk}{bx}{n}
+\DeclareFontShape{JT1}{matis-eb}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-eb}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{matis-eb}{m}{n}{OT1}{pbk}{bx}{n}
+
+%\ProvidesFile{JY1matis-l.fd}[2003/06/30 ver1  マティスL KANJI FONT defines]
+\DeclareFontFamily{JY1}{matis-l}{}
+\DeclareFontFamily{JT1}{matis-l}{}
+\DeclareFontShape{JY1}{matis-l}{m}{n}{<->s*[1.0392676] MatisseCID-L-H}{}
+\DeclareFontShape{JY1}{matis-l}{m}{sl}{<->s*[1.0392676]MatisseCID-L-H-s}{}
+\DeclareFontShape{JT1}{matis-l}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-l}{m}{sl}{<->s*[1.0392676]tmin10}{}
+
+%\ProvidesFile{JY1matis-m.fd}[2003/06/30 ver1  マティスM KANJI FONT defines]
+\DeclareFontFamily{JY1}{matis-m}{}
+\DeclareFontFamily{JT1}{matis-m}{}
+\DeclareFontShape{JY1}{matis-m}{m}{n}{<->s*[1.0392676] MatisseCID-M-H}{}
+\DeclareFontShape{JY1}{matis-m}{m}{sl}{<->s*[1.0392676]MatisseCID-M-H-s}{}
+\DeclareFontShape{JT1}{matis-m}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-m}{m}{sl}{<->s*[1.0392676]tmin10}{}
+
+%\ProvidesFile{JY1matis-ub.fd}[2003/06/30 ver1  マティスUB KANJI FONT defines]
+\DeclareFontFamily{JY1}{matis-ub}{}
+\DeclareFontFamily{JT1}{matis-ub}{}
+\DeclareFontShape{JY1}{matis-ub}{m}{n}{<->s*[1.0392676] MatisseCID-UB-H}{}
+\DeclareFontShape{JY1}{matis-ub}{m}{sl}{<->s*[1.0392676]MatisseCID-UB-H-s}{}
+\DeclareRelationFont{JY1}{matis-ub}{m}{n}{OT1}{pbk}{bx}{n}
+\DeclareFontShape{JT1}{matis-ub}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-ub}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{matis-ub}{m}{n}{OT1}{pbk}{bx}{n}
+
+%\ProvidesFile{JY1mb-b.fd}[2003/06/30 ver1  ゴジックMB101-B KANJI FONT defines]
+\DeclareFontFamily{JY1}{mb-b}{}
+\DeclareFontFamily{JT1}{mb-b}{}
+\DeclareFontShape{JY1}{mb-b}{m}{n}{<->s*[1.0392676] GothicMB101-Bold-H}{}
+\DeclareFontShape{JY1}{mb-b}{m}{sl}{<->s*[1.0392676]GothicMB101-Bold-H-s}{}
+\DeclareRelationFont{JY1}{mb-b}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{mb-b}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mb-b}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mb-b}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1mb-h.fd}[2003/06/30 ver1  ゴジックMB101-H KANJI FONT defines]
+\DeclareFontFamily{JY1}{mb-h}{}
+\DeclareFontFamily{JT1}{mb-h}{}
+\DeclareFontShape{JY1}{mb-h}{m}{n}{<->s*[1.0392676] GothicMB101-hea-H}{}
+\DeclareFontShape{JY1}{mb-h}{m}{sl}{<->s*[1.0392676]GothicMB101-hea-H-s}{}
+\DeclareRelationFont{JY1}{mb-h}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{mb-h}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mb-h}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mb-h}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1mb-u.fd}[2003/06/30 ver1  ゴジックMB101-U KANJI FONT defines]
+\DeclareFontFamily{JY1}{mb-u}{}
+\DeclareFontFamily{JT1}{mb-u}{}
+\DeclareFontShape{JY1}{mb-u}{m}{n}{<->s*[1.0392676] GothicMB101-Ult-H}{}
+\DeclareFontShape{JY1}{mb-u}{m}{sl}{<->s*[1.0392676]GothicMB101-Ult-H-s}{}
+\DeclareRelationFont{JY1}{mb-u}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{mb-u}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mb-u}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mb-u}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1mdgoth-mb.fd}[2003/06/30 ver1  見出ゴ KANJI FONT defines]
+\DeclareFontFamily{JY1}{mdgoth-mb}{}
+\DeclareFontFamily{JT1}{mdgoth-mb}{}
+\DeclareFontShape{JY1}{mdgoth-mb}{m}{n}{<->s*[1.0392676] MidashiGo-MB31-H}{}
+\DeclareFontShape{JY1}{mdgoth-mb}{m}{sl}{<->s*[1.0392676]MidashiGo-MB31-H-s}{}
+\DeclareRelationFont{JY1}{mdgoth-mb}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{mdgoth-mb}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mdgoth-mb}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mdgoth-mb}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1mdmin-ma.fd}[2003/06/30 ver1  見出ミンMA31 KANJI FONT defines]
+\DeclareFontFamily{JY1}{mdmin-ma}{}
+\DeclareFontFamily{JT1}{mdmin-ma}{}
+\DeclareFontShape{JY1}{mdmin-ma}{m}{n}{<->s*[1.0392676] MidashiMin-MA31-H}{}
+\DeclareFontShape{JY1}{mdmin-ma}{m}{sl}{<->s*[1.0392676]MidashiMin-MA31-H-s}{}
+\DeclareRelationFont{JY1}{mdmin-ma}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{mdmin-ma}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{mdmin-ma}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{mdmin-ma}{m}{n}{OT1}{cmr}{bx}{n}
+
+%\ProvidesFile{JY1rm-b.fd}[2003/06/30 ver1  リュウミンB-KL KANJI FONT defines]
+\DeclareFontFamily{JY1}{rm-b}{}
+\DeclareFontFamily{JT1}{rm-b}{}
+\DeclareFontShape{JY1}{rm-b}{m}{n}{<->s*[1.0392676] Ryumin-Bold-H}{}
+\DeclareFontShape{JY1}{rm-b}{m}{sl}{<->s*[1.0392676]Ryumin-Bold-H-s}{}
+\DeclareRelationFont{JY1}{rm-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rm-b}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-b}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{rm-b}{m}{n}{OT1}{cmr}{bx}{n}
+
+%\ProvidesFile{JY1rm-h.fd}[2003/06/30 ver1  リュウミンH-KL KANJI FONT defines]
+\DeclareFontFamily{JY1}{rm-h}{}
+\DeclareFontFamily{JT1}{rm-h}{}
+\DeclareFontShape{JY1}{rm-h}{m}{n}{<->s*[1.0392676] Ryumin-heavy-H}{}
+\DeclareFontShape{JY1}{rm-h}{m}{sl}{<->s*[1.0392676]Ryumin-heavy-H-s}{}
+\DeclareRelationFont{JY1}{rm-h}{m}{n}{OT1}{pbk}{b}{n}
+\DeclareFontShape{JT1}{rm-h}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-h}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{rm-h}{m}{n}{OT1}{pbk}{b}{n}
+
+%\ProvidesFile{JY1rm-m.fd}[2003/06/30 ver1  リュウミンM-KL KANJI FONT defines]
+\DeclareFontFamily{JY1}{rm-m}{}
+\DeclareFontFamily{JT1}{rm-m}{}
+\DeclareFontShape{JY1}{rm-m}{m}{n}{<->s*[1.0392676] Ryumin-Medium-H}{}
+\DeclareFontShape{JY1}{rm-m}{m}{sl}{<->s*[1.0392676]Ryumin-Medium-H-s}{}
+\DeclareRelationFont{JY1}{rm-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rm-m}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-m}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{rm-m}{m}{n}{OT1}{cmr}{bx}{n}
+
+%\ProvidesFile{JY1rm-r.fd}[2003/06/30 ver1  リュウミンR-KL KANJI FONT defines]
+\DeclareFontFamily{JY1}{rm-r}{}
+\DeclareFontFamily{JT1}{rm-r}{}
+\DeclareFontShape{JY1}{rm-r}{m}{n}{<->s*[1.0392676] Ryumin-regular-H}{}
+\DeclareFontShape{JY1}{rm-r}{m}{sl}{<->s*[1.0392676]Ryumin-regular-H-s}{}
+\DeclareRelationFont{JY1}{rm-r}{m}{n}{OT1}{cmr}{m}{n}
+\DeclareFontShape{JT1}{rm-r}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-r}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{rm-r}{m}{n}{OT1}{cmr}{m}{n}
+
+%\ProvidesFile{JY1rm-u.fd}[2003/06/30 ver1  リュウミンU-KL KANJI FONT defines]
+\DeclareFontFamily{JY1}{rm-u}{}
+\DeclareFontFamily{JT1}{rm-u}{}
+\DeclareFontShape{JY1}{rm-u}{m}{n}{<->s*[1.0392676] Ryumin-Ultra-H}{}
+\DeclareFontShape{JY1}{rm-u}{m}{sl}{<->s*[1.0392676]Ryumin-Ultra-H-s}{}
+\DeclareRelationFont{JY1}{rm-u}{m}{n}{OT1}{pbk}{bx}{n}
+\DeclareFontShape{JT1}{rm-u}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-u}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{rm-u}{m}{n}{OT1}{pbk}{bx}{n}
+
+%\ProvidesFile{JY1rodan-b.fd}[2003/06/30 ver1  ロダンB KANJI FONT defines]
+\DeclareFontFamily{JY1}{rodan-b}{}
+\DeclareFontFamily{JT1}{rodan-b}{}
+\DeclareFontShape{JY1}{rodan-b}{m}{n}{<->s*[1.0392676] RodinCID-B-H}{}
+\DeclareFontShape{JY1}{rodan-b}{m}{sl}{<->s*[1.0392676]RodinCID-B-H-s}{}
+\DeclareRelationFont{JY1}{rodan-b}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{rodan-b}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-b}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-b}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1rodan-db.fd}[2003/06/30 ver1  ロダンDB KANJI FONT defines]
+\DeclareFontFamily{JY1}{rodan-db}{}
+\DeclareFontFamily{JT1}{rodan-db}{}
+\DeclareFontShape{JY1}{rodan-db}{m}{n}{<->s*[1.0392676] RodinCID-DB-H}{}
+\DeclareFontShape{JY1}{rodan-db}{m}{sl}{<->s*[1.0392676]RodinCID-DB-H-s}{}
+\DeclareRelationFont{JY1}{rodan-db}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{rodan-db}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-db}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-db}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1rodan-eb.fd}[2003/06/30 ver1  ロダンEB KANJI FONT defines]
+\DeclareFontFamily{JY1}{rodan-eb}{}
+\DeclareFontFamily{JT1}{rodan-eb}{}
+\DeclareFontShape{JY1}{rodan-eb}{m}{n}{<->s*[1.0392676] RodinCID-EB-H}{}
+\DeclareFontShape{JY1}{rodan-eb}{m}{sl}{<->s*[1.0392676]RodinCID-EB-H-s}{}
+\DeclareRelationFont{JY1}{rodan-eb}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{rodan-eb}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-eb}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-eb}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1rodan-l.fd}[2003/06/30 ver1  ロダンL KANJI FONT defines]
+\DeclareFontFamily{JY1}{rodan-l}{}
+\DeclareFontFamily{JT1}{rodan-l}{}
+\DeclareFontShape{JY1}{rodan-l}{m}{n}{<->s*[1.0392676] RodinCID-L-H}{}
+\DeclareFontShape{JY1}{rodan-l}{m}{sl}{<->s*[1.0392676]RodinCID-L-H-s}{}
+\DeclareRelationFont{JY1}{rodan-l}{m}{n}{OT1}{phv}{l}{n}
+\DeclareFontShape{JT1}{rodan-l}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-l}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-l}{m}{n}{OT1}{phv}{l}{n}
+
+%\ProvidesFile{JY1rodan-m.fd}[2003/06/30 ver1  ロダンM KANJI FONT defines]
+\DeclareFontFamily{JY1}{rodan-m}{}
+\DeclareFontFamily{JT1}{rodan-m}{}
+\DeclareFontShape{JY1}{rodan-m}{m}{n}{<->s*[1.0392676] RodinCID-M-H}{}
+\DeclareFontShape{JY1}{rodan-m}{m}{sl}{<->s*[1.0392676]RodinCID-M-H-s}{}
+\DeclareRelationFont{JY1}{rodan-m}{m}{n}{OT1}{phv}{m}{n}
+\DeclareFontShape{JT1}{rodan-m}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-m}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-m}{m}{n}{OT1}{phv}{m}{n}
+
+%\ProvidesFile{JY1rodan-ub.fd}[2003/06/30 ver1  ロダンUB KANJI FONT defines]
+\DeclareFontFamily{JY1}{rodan-ub}{}
+\DeclareFontFamily{JT1}{rodan-ub}{}
+\DeclareFontShape{JY1}{rodan-ub}{m}{n}{<->s*[1.0392676] RodinCID-UB-H}{}
+\DeclareFontShape{JY1}{rodan-ub}{m}{sl}{<->s*[1.0392676]RodinCID-UB-H-s}{}
+\DeclareRelationFont{JY1}{rodan-ub}{m}{n}{OT1}{phv}{bx}{n}
+\DeclareFontShape{JT1}{rodan-ub}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-ub}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-ub}{m}{n}{OT1}{phv}{bx}{n}
+
+%\ProvidesFile{JY1singo-b.fd}[2003/06/30 ver1  新ゴB KANJI FONT defines]
+\DeclareFontFamily{JY1}{singo-b}{}
+\DeclareFontFamily{JT1}{singo-b}{}
+\DeclareFontShape{JY1}{singo-b}{m}{n}{<->s*[1.0392676] ShinGo-Bold-H}{}
+\DeclareFontShape{JY1}{singo-b}{m}{sl}{<->s*[1.0392676]ShinGo-Bold-H-s}{}
+\DeclareRelationFont{JY1}{singo-b}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{singo-b}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-b}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-b}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1singo-l.fd}[2003/06/30 ver1  新ゴL KANJI FONT defines]
+\DeclareFontFamily{JY1}{singo-l}{}
+\DeclareFontFamily{JT1}{singo-l}{}
+\DeclareFontShape{JY1}{singo-l}{m}{n}{<->s*[1.0392676] ShinGo-Light-H}{}
+\DeclareFontShape{JY1}{singo-l}{m}{sl}{<->s*[1.0392676]ShinGo-Light-H-s}{}
+\DeclareRelationFont{JY1}{singo-l}{m}{n}{OT1}{phv}{l}{n}
+\DeclareFontShape{JT1}{singo-l}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-l}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-l}{m}{n}{OT1}{phv}{l}{n}
+
+%\ProvidesFile{JY1singo-m.fd}[2003/06/30 ver1  新ゴM KANJI FONT defines]
+\DeclareFontFamily{JY1}{singo-m}{}
+\DeclareFontFamily{JT1}{singo-m}{}
+\DeclareFontShape{JY1}{singo-m}{m}{n}{<->s*[1.0392676] ShinGo-Medium-H}{}
+\DeclareFontShape{JY1}{singo-m}{m}{sl}{<->s*[1.0392676]ShinGo-Medium-H-s}{}
+\DeclareRelationFont{JY1}{singo-m}{m}{n}{OT1}{phv}{m}{n}
+\DeclareFontShape{JT1}{singo-m}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-m}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-m}{m}{n}{OT1}{phv}{m}{n}
+
+%\ProvidesFile{JY1singo-r.fd}[2003/06/30 ver1  新ゴR KANJI FONT defines]
+\DeclareFontFamily{JY1}{singo-r}{}
+\DeclareFontFamily{JT1}{singo-r}{}
+\DeclareFontShape{JY1}{singo-r}{m}{n}{<->s*[1.0392676] ShinGo-regular-H}{}
+\DeclareFontShape{JY1}{singo-r}{m}{sl}{<->s*[1.0392676]ShinGo-regular-H-s}{}
+\DeclareRelationFont{JY1}{singo-r}{m}{n}{OT1}{phv}{m}{n}
+\DeclareFontShape{JT1}{singo-r}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-r}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-r}{m}{n}{OT1}{phv}{m}{n}
+
+%\ProvidesFile{JY1singo-u.fd}[2003/06/30 ver1  新ゴU KANJI FONT defines]
+\DeclareFontFamily{JY1}{singo-u}{}
+\DeclareFontFamily{JT1}{singo-u}{}
+\DeclareFontShape{JY1}{singo-u}{m}{n}{<->s*[1.0392676] ShinGo-Ultra-H}{}
+\DeclareFontShape{JY1}{singo-u}{m}{sl}{<->s*[1.0392676]ShinGo-Ultra-H-s}{}
+\DeclareRelationFont{JY1}{singo-u}{m}{n}{OT1}{phv}{b}{n}
+\DeclareFontShape{JT1}{singo-u}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-u}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-u}{m}{n}{OT1}{phv}{b}{n}
+
+%\ProvidesFile{JY1kyoka-r.fd}[2003/06/30 ver1  新正楷書 KANJI FONT defines]
+\DeclareFontFamily{JY1}{sinseikaisyo}{}
+\DeclareFontFamily{JT1}{sinseikaisyo}{}
+\DeclareFontShape{JY1}{sinseikaisyo}{m}{n}{<->s*[1.0392676] ShinseiKai-CBSK1-H}{}
+\DeclareFontShape{JY1}{sinseikaisyo}{m}{sl}{<->s*[1.0392676]ShinseiKai-CBSK1-H-s}{}
+\DeclareRelationFont{JY1}{sinseikaisyo}{m}{n}{OT1}{cmr}{m}{n}
+\DeclareFontShape{JT1}{sinseikaisyo}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{sinseikaisyo}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareRelationFont{JT1}{sinseikaisyo}{m}{n}{OT1}{cmr}{m}{n}
+\else
+\typeout{%
+-----------------^^J%
+PS multiJfont= NO^^J%
+-----------------}
+\DeclareFontFamily{JY1}{fbb-JIS}{}
+\DeclareFontFamily{JT1}{fbb-JIS}{}
+\DeclareFontShape{JY1}{fbb-JIS}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{fbb-JIS}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{fbb-JIS}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{fbb-JIS}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{fbb-JIS}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{fbb-JIS}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{fmb-JIS}{}
+\DeclareFontFamily{JT1}{fmb-JIS}{}
+\DeclareRelationFont{JY1}{fmb-JIS}{m}{}{OT1}{cmr}{m}{}
+\DeclareFontShape{JY1}{fmb-JIS}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{fmb-JIS}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareRelationFont{JT1}{fmb-JIS}{m}{}{OT1}{cmr}{m}{}
+\DeclareFontShape{JT1}{fmb-JIS}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{fmb-JIS}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{junl-JIS}{}
+\DeclareFontFamily{JT1}{junl-JIS}{}
+\DeclareRelationFont{JY1}{junl-JIS}{m}{}{OT1}{cmr}{bx}{}
+\DeclareFontShape{JY1}{junl-JIS}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{junl-JIS}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+%\DeclareRelationFont{JY1}{junl-JIS}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{junl-JIS}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{junl-JIS}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+%\DeclareRelationFont{JT1}{junl-JIS}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{jun-bold}{}
+\DeclareFontFamily{JT1}{jun-bold}{}
+\DeclareFontShape{JY1}{jun-bold}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{jun-bold}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+%\DeclareRelationFont{JY1}{jun-bold}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{jun-bold}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{jun-bold}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+%\DeclareRelationFont{JT1}{jun-bold}{m}{n}{OT1}{pag}{b}{n}
+\DeclareFontFamily{JY1}{jun-medium}{}
+\DeclareFontFamily{JT1}{jun-medium}{}
+\DeclareFontShape{JY1}{jun-medium}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{jun-medium}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+%\DeclareRelationFont{JY1}{jun-medium}{m}{n}{OT1}{pag}{db}{n}
+\DeclareFontShape{JT1}{jun-medium}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{jun-medium}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+%\DeclareRelationFont{JT1}{jun-medium}{m}{n}{OT1}{pag}{db}{n}
+\DeclareFontFamily{JY1}{kyoka-r}{}
+\DeclareFontFamily{JT1}{kyoka-r}{}
+\DeclareFontShape{JY1}{kyoka-r}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{kyoka-r}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{kyoka-r}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{kyoka-r}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{matis-b}{}
+\DeclareFontFamily{JT1}{matis-b}{}
+\DeclareFontShape{JY1}{matis-b}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{matis-b}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{matis-b}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-b}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{matis-db}{}
+\DeclareFontFamily{JT1}{matis-db}{}
+\DeclareFontShape{JY1}{matis-db}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{matis-db}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{matis-db}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-db}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{matis-eb}{}
+\DeclareFontFamily{JT1}{matis-eb}{}
+\DeclareFontShape{JY1}{matis-eb}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{matis-eb}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{matis-eb}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-eb}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{matis-l}{}
+\DeclareFontFamily{JT1}{matis-l}{}
+\DeclareFontShape{JY1}{matis-l}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{matis-l}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{matis-l}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-l}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{matis-m}{}
+\DeclareFontFamily{JT1}{matis-m}{}
+\DeclareFontShape{JY1}{matis-m}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{matis-m}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{matis-m}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-m}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{matis-ub}{}
+\DeclareFontFamily{JT1}{matis-ub}{}
+\DeclareFontShape{JY1}{matis-ub}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{matis-ub}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{matis-ub}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{matis-ub}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\DeclareFontFamily{JY1}{mb-b}{}
+\DeclareFontFamily{JT1}{mb-b}{}
+\DeclareFontShape{JY1}{mb-b}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{mb-b}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{mb-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{mb-b}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mb-b}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mb-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{mb-h}{}
+\DeclareFontFamily{JT1}{mb-h}{}
+\DeclareFontShape{JY1}{mb-h}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{mb-h}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{mb-h}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{mb-h}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mb-h}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mb-h}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{mb-u}{}
+\DeclareFontFamily{JT1}{mb-u}{}
+\DeclareFontShape{JY1}{mb-u}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{mb-u}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{mb-u}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{mb-u}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mb-u}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mb-u}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{mdgoth-mb}{}
+\DeclareFontFamily{JT1}{mdgoth-mb}{}
+\DeclareFontShape{JY1}{mdgoth-mb}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{mdgoth-mb}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{mdgoth-mb}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{mdgoth-mb}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{mdgoth-mb}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{mdgoth-mb}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{mdmin-ma}{}
+\DeclareFontFamily{JT1}{mdmin-ma}{}
+\DeclareFontShape{JY1}{mdmin-ma}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{mdmin-ma}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+%\DeclareRelationFont{JY1}{mdmin-ma}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{mdmin-ma}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{mdmin-ma}{m}{sl}{<->s*[1.0392676]tmin10}{}
+%\DeclareRelationFont{JT1}{mdmin-ma}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rm-b}{}
+\DeclareFontFamily{JT1}{rm-b}{}
+\DeclareFontShape{JY1}{rm-b}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{rm-b}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+%\DeclareRelationFont{JY1}{rm-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rm-b}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-b}{m}{sl}{<->s*[1.0392676]tmin10}{}
+%\DeclareRelationFont{JT1}{rm-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rm-h}{}
+\DeclareFontFamily{JT1}{rm-h}{}
+\DeclareFontShape{JY1}{rm-h}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{rm-h}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+%\DeclareRelationFont{JY1}{rm-h}{m}{n}{OT1}{pbk}{b}{n}
+\DeclareFontShape{JT1}{rm-h}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-h}{m}{sl}{<->s*[1.0392676]tmin10}{}
+%\DeclareRelationFont{JT1}{rm-h}{m}{n}{OT1}{pbk}{b}{n}
+\DeclareFontFamily{JY1}{rm-m}{}
+\DeclareFontFamily{JT1}{rm-m}{}
+\DeclareFontShape{JY1}{rm-m}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{rm-m}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+%\DeclareRelationFont{JY1}{rm-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rm-m}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-m}{m}{sl}{<->s*[1.0392676]tmin10}{}
+%\DeclareRelationFont{JT1}{rm-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rm-r}{}
+\DeclareFontFamily{JT1}{rm-r}{}
+\DeclareFontShape{JY1}{rm-r}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{rm-r}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+%\DeclareRelationFont{JY1}{rm-r}{m}{n}{OT1}{cmr}{m}{n}
+\DeclareFontShape{JT1}{rm-r}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-r}{m}{sl}{<->s*[1.0392676]tmin10}{}
+%\DeclareRelationFont{JT1}{rm-r}{m}{n}{OT1}{cmr}{m}{n}
+\DeclareFontFamily{JY1}{rm-u}{}
+\DeclareFontFamily{JT1}{rm-u}{}
+\DeclareFontShape{JY1}{rm-u}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{rm-u}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+%\DeclareRelationFont{JY1}{rm-u}{m}{n}{OT1}{pbk}{bx}{n}
+\DeclareFontShape{JT1}{rm-u}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{rm-u}{m}{sl}{<->s*[1.0392676]tmin10}{}
+%\DeclareRelationFont{JT1}{rm-u}{m}{n}{OT1}{pbk}{bx}{n}
+\DeclareFontFamily{JY1}{rodan-b}{}
+\DeclareFontFamily{JT1}{rodan-b}{}
+\DeclareFontShape{JY1}{rodan-b}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{rodan-b}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{rodan-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rodan-b}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-b}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rodan-db}{}
+\DeclareFontFamily{JT1}{rodan-db}{}
+\DeclareFontShape{JY1}{rodan-db}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{rodan-db}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{rodan-db}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rodan-db}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-db}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-db}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rodan-eb}{}
+\DeclareFontFamily{JT1}{rodan-eb}{}
+\DeclareFontShape{JY1}{rodan-eb}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{rodan-eb}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{rodan-eb}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rodan-eb}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-eb}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-eb}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rodan-l}{}
+\DeclareFontFamily{JT1}{rodan-l}{}
+\DeclareFontShape{JY1}{rodan-l}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{rodan-l}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{rodan-l}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rodan-l}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-l}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-l}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rodan-m}{}
+\DeclareFontFamily{JT1}{rodan-m}{}
+\DeclareFontShape{JY1}{rodan-m}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{rodan-m}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{rodan-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rodan-m}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-m}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{rodan-ub}{}
+\DeclareFontFamily{JT1}{rodan-ub}{}
+\DeclareFontShape{JY1}{rodan-ub}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{rodan-ub}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{rodan-ub}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{rodan-ub}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{rodan-ub}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{rodan-ub}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{singo-b}{}
+\DeclareFontFamily{JT1}{singo-b}{}
+\DeclareFontShape{JY1}{singo-b}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{singo-b}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{singo-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{singo-b}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-b}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-b}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{singo-l}{}
+\DeclareFontFamily{JT1}{singo-l}{}
+\DeclareFontShape{JY1}{singo-l}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{singo-l}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{singo-l}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{singo-l}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-l}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-l}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{singo-m}{}
+\DeclareFontFamily{JT1}{singo-m}{}
+\DeclareFontShape{JY1}{singo-m}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{singo-m}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{singo-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{singo-m}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-m}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-m}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{singo-r}{}
+\DeclareFontFamily{JT1}{singo-r}{}
+\DeclareFontShape{JY1}{singo-r}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{singo-r}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{singo-r}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{singo-r}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-r}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-r}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{singo-u}{}
+\DeclareFontFamily{JT1}{singo-u}{}
+\DeclareFontShape{JY1}{singo-u}{m}{n}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareFontShape{JY1}{singo-u}{m}{sl}{<->s*[1.0392676]\JfontTfmG}{}
+\DeclareRelationFont{JY1}{singo-u}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontShape{JT1}{singo-u}{m}{n}{<->s*[1.0392676]tgoth10}{}
+\DeclareFontShape{JT1}{singo-u}{m}{sl}{<->s*[1.0392676]tgoth10}{}
+\DeclareRelationFont{JT1}{singo-u}{m}{n}{OT1}{cmr}{bx}{n}
+\DeclareFontFamily{JY1}{sinseikaisyo}{}
+\DeclareFontFamily{JT1}{sinseikaisyo}{}
+\DeclareFontShape{JY1}{sinseikaisyo}{m}{n}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JY1}{sinseikaisyo}{m}{sl}{<->s*[1.0392676]\JfontTfmM}{}
+\DeclareFontShape{JT1}{sinseikaisyo}{m}{n}{<->s*[1.0392676]tmin10}{}
+\DeclareFontShape{JT1}{sinseikaisyo}{m}{sl}{<->s*[1.0392676]tmin10}{}
+\fi
+
+\def\singoL{\kanjifamily{singo-l}\userelfont\selectfont}%新ゴＬ
+\def\singoM{\kanjifamily{singo-m}\userelfont\selectfont}%新ゴM
+\def\singoR{\kanjifamily{singo-r}\userelfont\selectfont}%新ゴR
+\def\singoB{\kanjifamily{singo-b}\userelfont\selectfont}%新ゴB
+\def\singoU{\kanjifamily{singo-u}\userelfont\selectfont}%新ゴU
+\def\gothMbB{\kanjifamily{mb-b}\userelfont\selectfont}%ゴジックMB101-B
+\def\gothMbH{\kanjifamily{mb-h}\userelfont\selectfont}%ゴジックMB101-H
+\def\gothMbU{\kanjifamily{mb-u}\userelfont\selectfont}%ゴジックMB101-U
+\def\ryuminM{\kanjifamily{rm-m}\userelfont\selectfont}%リュウミンM-KL
+\def\ryuminR{\kanjifamily{rm-r}\userelfont\selectfont}%リュウミンR-KL
+\def\ryuminB{\kanjifamily{rm-b}\userelfont\selectfont}%リュウミンB-KL
+\def\ryuminH{\kanjifamily{rm-h}\userelfont\selectfont}%リュウミンH-KL
+\def\ryuminU{\kanjifamily{rm-u}\userelfont\selectfont}%リュウミンU-KL
+\def\midasiminMA{\kanjifamily{mdmin-ma}\userelfont\selectfont}%見出ミンMA31
+\def\midasigothMB{\kanjifamily{mdgoth-mb}\userelfont\selectfont}%見出ゴMB31
+\def\junM{\kanjifamily{jun-medium}\userelfont\selectfont}%じゅん34Medium
+\def\junB{\kanjifamily{jun-bold}\userelfont\selectfont}%じゅん501Bold
+\def\sinseikaisyo{\kanjifamily{sinseikaisyo}\userelfont\selectfont}%新正楷書CBSX1
+\def\rodanL{\kanjifamily{rodan-l}\userelfont\selectfont}%FW-ロダンCID-L
+\def\rodanM{\kanjifamily{rodan-m}\userelfont\selectfont}%FW-ロダンCID-M
+\def\rodanDB{\kanjifamily{rodan-db}\userelfont\selectfont}%FW-ロダンCID-DB
+\def\rodanB{\kanjifamily{rodan-b}\userelfont\selectfont}%FW-ロダンCID-B
+\def\rodanEB{\kanjifamily{rodan-eb}\userelfont\selectfont}%FW-ロダンCID-EB
+\def\rodanUB{\kanjifamily{rodan-ub}\userelfont\selectfont}%FW-ロダンCID-UB
+\def\matisL{\kanjifamily{matis-l}\userelfont\selectfont}%FW-マティスCID-L
+\def\matisM{\kanjifamily{matis-m}\userelfont\selectfont}%FW-マティスCID-M
+\def\matisDB{\kanjifamily{matis-db}\userelfont\selectfont}%FW-マティスCID-DB
+\def\matisB{\kanjifamily{matis-b}\userelfont\selectfont}%FW-マティスCID-B
+\def\matisEB{\kanjifamily{matis-eb}\userelfont\selectfont}%FW-マティスCID-EB
+\def\matisUB{\kanjifamily{matis-ub}\userelfont\selectfont}%FW-マティスCID-UB
+\def\fbb{\kanjifamily{fbb-JIS}\userelfont\selectfont}%太ゴ
+\def\fmb{\kanjifamily{fmb-JIS}\userelfont\selectfont}%太ミン
+\def\junl{\kanjifamily{junl-JIS}\userelfont\selectfont}%じゅん101
+\def\gbm{\kanjifamily{jisg}\userelfont\selectfont}%中ゴシックBBB
+
+\endinput

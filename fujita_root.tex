@@ -1,0 +1,46 @@
+\documentclass[a5,tombow,multijfont,A4size]{ttclass}
+
+\usepackage{wrapfig}
+\usepackage{makeidx,multicol}
+\usepackage[dvipdfmx]{color,graphicx}
+\usepackage{pifont}
+\usepackage{framed}
+\usepackage{amsmath,amssymb}
+\usepackage{ascmac}
+\usepackage{emathMw}
+
+\usepackage{my-emathBk}
+\usepackage{ulem}
+\usepackage{fancybox} 
+\usepackage{slashbox} 
+\usepackage{mdwlist} %2010/2/6 ノリマツ追加
+
+\usepackage{colortbl}
+\usepackage{macros9th}[2010/03/08]
+%%\usepackage{origimal_macros}
+
+
+\makeindex
+\usepackage{slashbox}%表のセルに斜線を引く
+\usepackage{multirow}%表のセルを複数行結合する
+
+\renewcommand{\prechaptername}{Chapter.}
+\renewcommand{\postchaptername}{}
+
+
+\includeonly{
+Chap01,
+shuffleTEST
+}
+
+\begin{document}
+\frontmatter
+\include{maegaki}%まえがき
+\tableofcontents
+\mainmatter
+\include{Chap01}       %第1章
+\include{shuffleTEST}  %TESTshuffle20
+\printindex          %東京図書で追加
+\end{document}
+
+

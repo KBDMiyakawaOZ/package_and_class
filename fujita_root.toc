@@ -1,0 +1,3 @@
+\contentsline {chapterII}{\numberline {\textmd {\itshape Chapter}\tmspace +\thinmuskip {.1667em}{\fontsize {28Q}{0pt}\selectfont 1.}}概要}{1}
+\contentsline {Section}{\def \tocendsq {□□□}\numberline {問題\relax 01}[標準]\hskip 1zwTITLE}{2}
+\contentsline {section}{\global \let \tocendsq \relax \Sfface {Tea Time}\hskip .1zw\hbox to1.25zw{\hfil \leavevmode {\color {GrayXX}●}\hfil }タイトル}{2}

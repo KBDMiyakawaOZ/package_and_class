@@ -1,0 +1,68 @@
+% 以下を編集して設定します----------
+\本文サイズ{13Q}	% 本文サイズを単位付きで指定します．
+\行送り{22H}		% 行送りを単位付きで指定します．
+\左右{36}		% 版面左右の``文字数''を指定します．
+\天地{34}		% 版面天地の``行数''を指定します．
+\小口{15mm}		% ``小口側のアキ''を単位を付けて指定します．
+			%%% 指定自体をコメントアウトすれば左右中央に組まれます．
+\ノンブル{12Q}{}% ノンブルのサイズと書体の設定です．最初にサイズ，次に書体を指定します．
+\柱{12Q}{}           % 柱のサイズと書体の設定です．ノンブル，柱いずれも二番目の書体は省略可能で
+                        % Romanと明朝になります．
+\@@marginparwidth=0pt	% 
+% -----------------------------------
+
+
+\endinput
+\AtEndOfClass{%
+%
+%
+%
+%
+%% 以下再定義の頻度の高いもの．必要に応じて追加して再定義．
+\def\@makechapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
+\toplinebox{10}{%
+   \raggedright
+   \@@ChapterNumFont
+   \ifnum \c@secnumdepth >\m@ne
+     \setlength\@tempdima{\linewidth}%
+    \if@mainmatter
+      \@chapapp\thechapter\@chappos
+     \else
+      \hbox{}
+    \fi
+     \vspace{.9\Cvs}\par
+     \@@ChapterFont\@inhibitglue#1\vfil}}%
+}
+\def\@schapter#1{%
+  \@makeschapterhead{#1}\@afterheading}
+\def\@makeschapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
+\toplinebox{10}{%
+     \centerline{\@@ChapterFont\@inhibitglue#1}\vfil}
+   }}
+\renewcommand{\section}{\IfSecFontChange\S@ectiontrue%
+   \@startsection{section}{1}{\z@}%
+    {1.5\baselineskip}
+    {.5\baselineskip}
+   {\@@SectionFont}}
+\renewcommand{\subsection}{\IfSecFontChange\subS@ectiontrue%
+   \@startsection{subsection}{2}{\z@}%
+   {\baselineskip}%
+   {0.1pt}%
+   {\@@subSectionFont}}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+}

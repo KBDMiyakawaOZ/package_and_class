@@ -1,0 +1,211 @@
+%% OMXの指定間違いを修正
+%% 和文とCMフォントとのバランス調整 Beta版
+%% 
+%% OT1/cmr/m/n/10とOMX/cmex/m/n/10 を初期化
+\DeclarePreloadSizes{OT1}{cmr}{m}{n}{10}
+\DeclarePreloadSizes{OMX}{cmex}{m}{n}{10}
+%ot1cmr.fd
+%\DeclareFontFamily{OT1}{cmr}{\hyphenchar\font45 }
+\DeclareFontShape{OT1}{cmr}{m}{n}%
+   {<-5> s*  [1.056000]cmr5%
+   <5-7> s*  [1.056000]cmr6%
+   <7-8> s*  [1.056000]cmr7%
+   <8-9> s*  [1.056000]cmr8%
+   <9-10> s*  [1.056000]cmr9%
+   <10-12> s*  [1.056000]cmr10%
+   <12-17> s*  [1.056000]cmr12%
+   <17-> s*  [1.056000]cmr17}{}%
+\DeclareFontShape{OT1}{cmr}{m}{sl}%
+{%
+   <-9> s* [1.056000]cmsl8%
+   <9-10> s* [1.056000]cmsl9%
+   <10-12> s* [1.056000]cmsl10%
+   <12-> s* [1.056000]cmsl12%
+}{}
+\DeclareFontShape{OT1}{cmr}{m}{it}%
+{%
+   <-8> s* [1.056000]cmti7%
+   <8-9> s* [1.056000]cmti8%
+   <9-10> s* [1.056000]cmti9%
+   <10-12> s* [1.056000]cmti10%
+   <12-> s* [1.056000]cmti12%
+}{}
+\DeclareFontShape{OT1}{cmr}{m}{sc}%
+   {<-> s* [1.056000]cmcsc10}{}%
+\DeclareFontShape{OT1}{cmr}{m}{ui}%
+   {<-> s* [1.056000]cmu10}{}%
+\DeclareFontShape{OT1}{cmr}{b}{n}{<-> s* [1.056000]cmb10}{}%
+\DeclareFontShape{OT1}{cmr}{bx}{n}%
+{%
+   <-6> s* [1.056000]cmbx5%
+   <6-7> s* [1.056000]cmbx6%
+   <7-8> s* [1.056000]cmbx7%
+   <8-9> s* [1.056000]cmbx8%
+   <9-10> s* [1.056000]cmbx9%
+   <10-12> s* [1.056000]cmbx10%
+   <12-> s* [1.056000]cmbx12%
+}{}
+\DeclareFontShape{OT1}{cmr}{bx}{sl}
+   {<-> s* [1.056000]cmbxsl10%
+}{}
+\DeclareFontShape{OT1}{cmr}{bx}{it}
+   {<-> s* [1.056000]cmbxti10}{}
+\DeclareFontShape{OT1}{cmr}{bx}{ui}
+   {<-> s* [1.056000]ssub*cmr/m/ui}{}
+%omscmsy.fd
+%\DeclareFontFamily{OMS}{cmsy}{\skewchar\font48 }
+\DeclareFontShape{OMS}{cmsy}{m}{n}{%
+   <-6> s* [1.056000]cmsy5%
+   <6-7> s* [1.056000]cmsy6%
+   <7-8> s* [1.056000]cmsy7%
+   <8-9> s* [1.056000]cmsy8%
+   <9-10> s* [1.056000]cmsy9%
+   <10-> s* [1.056000]cmsy10}{}
+\DeclareFontShape{OMS}{cmsy}{b}{n}{%
+   <-6> s* [1.056000]cmbsy5%
+   <6-7> s* [1.056000]cmbsy6%
+   <7-8> s* [1.056000]cmbsy7%
+   <8-9> s* [1.056000]cmbsy8%
+   <9-10> s* [1.056000]cmbsy9%
+   <10-> s* [1.056000]cmbsy10%
+}{}
+%omxcmex.fd
+\DeclareFontFamily{OMX}{cmex}{}{}
+%\DeclareFontShape{OMX}{cmex}{m}{n}{<->sfixed*[1.056000]cmex10}{}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->s*[1.056000]cmex10}{}
+%ucmr.fd
+%\DeclareFontFamily{U}{cmr}{\hyphenchar\font45 }
+\DeclareFontShape{U}{cmr}{m}{n}%
+   {<-6> s* [1.056000]cmr5%
+   <6-7> s* [1.056000]cmr6%
+   <7-8> s* [1.056000]cmr7%
+   <8-9> s* [1.056000]cmr8%
+   <9-10> s* [1.056000]cmr9%
+   <10-12> s* [1.056000]cmr10%
+   <12-17> s* [1.056000]cmr12%
+   <17-> s* [1.056000]cmr17}{}%
+\DeclareFontShape{U}{cmr}{m}{sl}%
+{%
+   <-8> s* [1.056000]cmsl8%
+   <8-9> s* [1.056000]cmsl9%
+   <9-10> s* [1.056000]cmsl10%
+   <12-> s* [1.056000]cmsl12%
+}{}
+\DeclareFontShape{U}{cmr}{m}{it}%
+{%
+   <-6> s* [1.056000]cmti5%
+   <6-7> s* [1.056000]cmti6%
+   <7-8> s* [1.056000]cmti7%
+   <8-9> s* [1.056000]cmti8%
+   <9-10> s* [1.056000]cmti9%
+   <10-12> s* [1.056000]cmti10%
+   <12-> s* [1.056000]cmti12%
+}{}
+\DeclareFontShape{U}{cmr}{m}{sc}%
+{%
+   <-> s* [1.056000]cmcsc10%
+      }{}
+\DeclareFontShape{U}{cmr}{m}{ui}
+   {
+   <-> s* [1.056000]cmu10}{}
+\DeclareFontShape{U}{cmr}{b}{n}%
+     {%
+   <-> s* [1.056000]cmb10%
+      }{}
+\DeclareFontShape{U}{cmr}{bx}{n}%
+   {%
+   <-6> s* [1.056000]cmbx5%
+   <6-7> s* [1.056000]cmbx6%
+   <7-8> s* [1.056000]cmbx7%
+   <8-9> s* [1.056000]cmbx8%
+   <9-10> s* [1.056000]cmbx9%
+   <10-12> s* [1.056000]cmbx10%
+   <12-> s* [1.056000]cmbx12%
+}{}
+\DeclareFontShape{U}{cmr}{bx}{sl}%
+   {<-> s* [1.056000]cmbxsl10}{}
+\DeclareFontShape{U}{cmr}{bx}{it}%
+{%
+   <-> s* [1.056000]cmbxti10%
+}{}
+\DeclareFontShape{U}{cmr}{bx}{ui}%
+      {<->ssub*[1.056000]cmr/m/ui}{}
+%ot1cmss.fd
+\DeclareFontShape{OT1}{cmss}{m}{n}
+{%
+   <-9> s* [1.056000]cmss8%
+   <9-10> s* [1.056000]cmss9%
+   <10-12> s* [1.056000]cmss10%
+   <12-17> s* [1.056000]cmss12%
+   <17-> s* [1.056000]cmss17%
+}{}
+\DeclareFontShape{OT1}{cmss}{m}{it}{%
+   <->sub*cmss/m/sl}{}
+\DeclareFontShape{OT1}{cmss}{m}{sl}{%
+   <-9> s* [1.056000]cmssi8%
+   <9-10> s* [1.056000]cmssi9%
+   <10-12> s* [1.056000]cmssi10%
+   <12-17> s* [1.056000]cmssi12%
+   <17-> s* [1.056000]cmssi17%
+}{}
+\DeclareFontShape{OT1}{cmss}{m}{sc}
+       {<->sub*cmr/m/sc}{}
+\DeclareFontShape{OT1}{cmss}{m}{ui}
+       {<->sub*cmr/m/ui}{}
+\DeclareFontShape{OT1}{cmss}{sbc}{n}
+     {%
+   <-6> s* [1.056000]cmssdc5%
+   <6-7> s* [1.056000]cmssdc6%
+   <7-8> s* [1.056000]cmssdc7%
+   <8-9> s* [1.056000]cmssdc8%
+   <8-10> s* [1.056000]cmssdc10%
+}{}
+\DeclareFontShape{OT1}{cmss}{bx}{n}
+{%
+   <-6> s* [1.056000]cmssbx5%
+   <6-7> s* [1.056000]cmssbx6%
+   <7-8> s* [1.056000]cmssbx7%
+   <8-9> s* [1.056000]cmssbx8%
+   <9-> s* [1.056000]cmssbx10%
+}{}
+\DeclareFontShape{OT1}{cmss}{bx}{ui}
+       {<->sub*cmr/bx/ui}{}
+%ot1cmtt.fd
+\DeclareFontShape{OT1}{cmtt}{m}{n}
+{%
+   <-9> s* [1.056000]cmtt8%
+   <9-10> s* [1.056000]cmtt9%
+   <10-12> s* [1.056000]cmtt10%
+   <12-> s* [1.056000]cmtt12%
+}{}
+\DeclareFontShape{OT1}{cmtt}{m}{it}
+{%
+   <-> s* [1.056000]cmitt10%
+}{}
+\DeclareFontShape{OT1}{cmtt}{m}{sl}{%
+   <-> s* [1.056000]cmsltt10}{}
+\DeclareFontShape{OT1}{cmtt}{m}{sc}
+   {<-> s* [1.056000]cmtcsc10}{}
+
+%\ProvidesFile{omlcmm.fd}[1998/03/27 v2.5g Standard LaTeX font definitions]
+%\DeclareFontFamily{OML}{cmm}{\skewchar\font127 }
+\DeclareFontShape{OML}{cmm}{m}{it}%
+     {%
+    <-6> s*  [1.056000]cmmi5%
+    <6-7> s*  [1.056000]cmmi6%
+    <7-8> s*  [1.056000]cmmi7%
+    <8-9> s*  [1.056000]cmmi8%
+    <9-10> s*  [1.056000]cmmi9%
+    <10-12> s*  [1.056000]cmmi10%
+    <12-> s*  [1.056000]cmmi12%
+      }{}
+\DeclareFontShape{OML}{cmm}{b}{it}{%
+    <-6> s*  [1.056000]cmmib5%
+    <6-7> s*  [1.056000]cmmib6%
+    <7-8> s*  [1.056000]cmmib8%
+    <8-9> s*  [1.056000]cmmib9%
+    <9-10> s*  [1.056000]cmmib9%
+    <10-> s*  [1.056000]cmmib10%
+}{}
+\DeclareFontShape{OML}{cmm}{bx}{it}%
+   {<->ssub*cmm/b/it}{}
