@@ -1001,8 +1001,8 @@ JFM=min10.tfm^^J%
 \newcommand{\paragraph}{%
     \@startsection{paragraph}{4}{\z@}%
    {3.25ex \@plus 1ex \@minus .2ex}%
-   {-1em}%
-   {\@@ParagraphFont}}
+   {1sp}%
+   {\@@ParagraphFont Å°}}
 \newcommand{\subparagraph}{%
    \@startsection{subparagraph}{5}{\z@}%
    {3.25ex \@plus 1ex \@minus .2ex}%

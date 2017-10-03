@@ -114,7 +114,7 @@
 
 
 \def\end問題{\vskip{2mm}A\end{minipage}\egroup%
-\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
+\par\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
 \begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{80mm}p{2zw}@{\vrule width1pt}}
 \hline
 \cellcolor[gray]{0}\textcolor{white}{\bf 問題}&\cellcolor[gray]{.9}\textsl{\themondai}&\問題@@title&\multicolumn{1}{c|}{\cellcolor[gray]{.6}\leve@@l@@}\\
@@ -137,7 +137,8 @@
 
 
 \def\end問題{\vspace{-1.5mm}\vskip\z@\end{minipage}\egroup%
-\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
+\begin{center}
+\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
 \begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{80mm}p{2zw}@{\vrule width1pt}}
 \hline
 \cellcolor[gray]{0}\textcolor{white}{\bf 問題}&\cellcolor[gray]{.9}\textsl{\themondai}&\textbf{\問題@@title}&\multicolumn{1}{c|}{\cellcolor[gray]{.6}\leve@@l@@}\\
@@ -145,6 +146,7 @@
 \multicolumn{4}{|c@{\hskip.9\tabcolsep\vrule width1pt}}{\hfil\small\usebox{\mondaibox}\hfil}\\
 \hline
 \end{tabular}%
+\end{center}%
 \addcontentsline{toc}{Section}{\protect\def\protect\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
 }%---------------------------------------------------
 
@@ -372,8 +374,8 @@
 \●%
 \fi%
 \teatimetitle%
-}\vspace{-.5\baselineskip}\fboxsep.5zw\begin{shaded}
-}
+}\par\nobreak\vspace{-.5\baselineskip}\fboxsep.5zw\@nobreaktrue\begin{shaded}
+\if@nobreak\@nobreakfalse\fi}
 
 
 \definecolor{shadecolor}{gray}{0.9}
@@ -594,4 +596,21 @@
 }
 
 
-\renewenvironment{tyuukai}{\trivlist\item[]}{\\endtrivlist}
+\renewenvironment{tyuukai}{\trivlist\item[]}{\endtrivlist}
+
+\newcommand{\maegaki}[1]{%
+\clearpage%ページ調整のための強制改ページ
+\addcontentsline{toc}{chapter}{まえがき}%%  「まえがき」の目次へのエントリ
+\markboth{}{}%%  柱はとりえず偶数奇数両ページ「」としてます．
+\thispagestyle{empty}\par
+\vspace*{2zw}
+\begin{center}
+#1\par\prevdepth-10000pt\vskip2mm
+{\color[gray]{0.8}
+\vbox to-2mm{\hsize=\textwidth\vrule height2mm width\textwidth depth0pt\vss}}
+\end{center}
+\vspace*{3zw}
+}
+
+
+\def\XXX{\if@nobreak \fbox{NOBREAK}\else \fbox{BREAK}\fi}
