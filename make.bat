@@ -1,2 +1,2 @@
-platex --synctex=1 fujita_root.tex
-dvipdfmx fujita_root.dvi
+platex --synctex=1 sample.tex
+dvipdfmx sample.dvi
