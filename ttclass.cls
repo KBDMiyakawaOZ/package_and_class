@@ -2,12 +2,12 @@
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{ttclass}[2009/05/07 v2.1]
 
-%% option.sty‚Æ‚¢‚¤ƒtƒ@ƒCƒ‹‚Å”äŠr“I—eˆÕ‚ÉŠî–{“I‚È
-%% ‘ÌÙî•ñ‚ğİ’è‚Å‚«‚é‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·D
-%% option.styˆÈŠO‚Ìî•ñ‚É‚Â‚¢‚Ä‚Í‰º‚Ìİ’è‚ğ‚²——‚É‚È‚Á‚Ä
-%% Äİ’è‚ğs‚Á‚Ä‚­‚¾‚³‚¢D
+%% option.styã¨ã„ã†ãƒ•ã‚¡ã‚¤ãƒ«ã§æ¯”è¼ƒçš„å®¹æ˜“ã«åŸºæœ¬çš„ãª
+%% ä½“è£æƒ…å ±ã‚’è¨­å®šã§ãã‚‹ã‚ˆã†ã«ã—ã¦ã„ã¾ã™ï¼
+%% option.styä»¥å¤–ã®æƒ…å ±ã«ã¤ã„ã¦ã¯ä¸‹ã®è¨­å®šã‚’ã”è¦§ã«ãªã£ã¦
+%% å†è¨­å®šã‚’è¡Œã£ã¦ãã ã•ã„ï¼
 
-%% •¶šƒTƒCƒY‚Æs‘—‚è—p‚Ì•Ï”‚ÌéŒ¾‚Å‚·D
+%% æ–‡å­—ã‚µã‚¤ã‚ºã¨è¡Œé€ã‚Šç”¨ã®å¤‰æ•°ã®å®£è¨€ã§ã™ï¼
 \newdimen\@@tiny
 \newdimen\@@scriptsize
 \newdimen\@@footnotesize
@@ -31,11 +31,11 @@
 \newdimen\@@Huge@@baseline
 \newdimen\@@HUGE@@baseline
 
-%% \@@`SIZENAME'‚ÉŠeƒtƒHƒ“ƒgƒTƒCƒY‚ÌƒfƒtƒHƒ‹ƒg’l‚ğƒZƒbƒg‚µ‚Ü‚·D
-%%i’PˆÊ‚Í–â‚¢‚Ü‚¹‚ñj
-%% \@@`SIZENAME'@@baseline‚Í`SIZENAME'‚É‘Î‰‚³‚¹‚és‘—‚è‚Å‚·D
-%% ‰Šú’l‚ÌŠeŠ„‚è“–‚Ä‚Í‚²——‚Ì’Ê‚è‚Å‚·D
-% •¶šƒTƒCƒY		s‘—‚è
+%% \@@`SIZENAME'ã«å„ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã‚’ã‚»ãƒƒãƒˆã—ã¾ã™ï¼
+%%ï¼ˆå˜ä½ã¯å•ã„ã¾ã›ã‚“ï¼‰
+%% \@@`SIZENAME'@@baselineã¯`SIZENAME'ã«å¯¾å¿œã•ã›ã‚‹è¡Œé€ã‚Šã§ã™ï¼
+%% åˆæœŸå€¤ã®å„å‰²ã‚Šå½“ã¦ã¯ã”è¦§ã®é€šã‚Šã§ã™ï¼
+% æ–‡å­—ã‚µã‚¤ã‚º		è¡Œé€ã‚Š
 \@@tiny=7Q		\@@tiny@@baseline=9Q
 \@@scriptsize=10Q	\@@scriptsize@@baseline=12Q
 \@@footnotesize=11Q	\@@footnotesize@@baseline=14Q
@@ -50,17 +50,17 @@
 
 
 
-%% \bfs‚È‚é‘‘ÌØ‚è‘Ö‚¦ƒRƒ}ƒ“ƒh‚ğVİ‚µ‚Ä‚¢‚Ü‚·D
-%% ‚±‚Ì\bfs‚ÍŠeƒp[ƒc‚Ì\bfseries ‚É’u‚«Š·‚¦‚é‚æ‚¤‚É’è‹`‚µ‚Ä‚Ü‚·D
-%% ƒNƒ‰ƒXƒIƒvƒVƒ‡ƒ“[gtsf]‚Å‚±‚ê‚Í\sffamily+\gtfamily‚É’u‚«Š·‚í‚è‚Ü‚·D
-%% —áF \documentclass[gtsf,tombow]{ttcalss}
-%% ‚±‚ê‚É‚æ‚èCŒ©o‚µ‚âƒLƒƒƒvƒVƒ‡ƒ“‚È‚Çå—v‚Èƒp[ƒc‚Í\sffamily+\gtfamily
-%% ‚É‚È‚è‚Ü‚·D\bf ‚â\textbf‚Å‚Í]—ˆ’Ê‚è(\rmfamily bfseries)+\gtfamily
-%% ‚Å‚·‚Ì‚Å‚²—¯ˆÓ‚­‚¾‚³‚¢D
-%% ‚±‚Ì“_‚É‚Â‚¢‚Ä“–‰\bf ‚Æ\textbf‚Å‚à\sffamily+\gtfamily‚Ì‘g‡‚¹‚É‚µ‚æ‚¤‚Æ
-%% v‚¢‚Ü‚µ‚½‚ª‚Æ‚è‚ ‚¦‚¸~‚ß‚É‚µ‚Ä‚¢‚Ü‚·D
-%% \sffamily‚É\gtfamily‚ğ˜A“®‚³‚¹‚Ä‚¢‚Ü‚·‚Ì‚ÅC
-%% –{•¶’†‚Å‚±‚Ì‘g‡‚¹‚É‚µ‚½‚¢ê‡‚Í\sf, \textsf‚Æ‚µ‚Ü‚·D
+%% \bfsãªã‚‹æ›¸ä½“åˆ‡ã‚Šæ›¿ãˆã‚³ãƒãƒ³ãƒ‰ã‚’æ–°è¨­ã—ã¦ã„ã¾ã™ï¼
+%% ã“ã®\bfsã¯å„ãƒ‘ãƒ¼ãƒ„ã®\bfseries ã«ç½®ãæ›ãˆã‚‹ã‚ˆã†ã«å®šç¾©ã—ã¦ã¾ã™ï¼
+%% ã‚¯ãƒ©ã‚¹ã‚ªãƒ—ã‚·ãƒ§ãƒ³[gtsf]ã§ã“ã‚Œã¯\sffamily+\gtfamilyã«ç½®ãæ›ã‚ã‚Šã¾ã™ï¼
+%% ä¾‹ï¼š \documentclass[gtsf,tombow]{ttcalss}
+%% ã“ã‚Œã«ã‚ˆã‚Šï¼Œè¦‹å‡ºã—ã‚„ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ãªã©ä¸»è¦ãªãƒ‘ãƒ¼ãƒ„ã¯\sffamily+\gtfamily
+%% ã«ãªã‚Šã¾ã™ï¼\bf ã‚„\textbfã§ã¯å¾“æ¥é€šã‚Š(\rmfamily bfseries)+\gtfamily
+%% ã§ã™ã®ã§ã”ç•™æ„ãã ã•ã„ï¼
+%% ã“ã®ç‚¹ã«ã¤ã„ã¦å½“åˆ\bf ã¨\textbfã§ã‚‚\sffamily+\gtfamilyã®çµ„åˆã›ã«ã—ã‚ˆã†ã¨
+%% æ€ã„ã¾ã—ãŸãŒã¨ã‚Šã‚ãˆãšæ­¢ã‚ã«ã—ã¦ã„ã¾ã™ï¼
+%% \sffamilyã«\gtfamilyã‚’é€£å‹•ã•ã›ã¦ã„ã¾ã™ã®ã§ï¼Œ
+%% æœ¬æ–‡ä¸­ã§ã“ã®çµ„åˆã›ã«ã—ãŸã„å ´åˆã¯\sf, \textsfã¨ã—ã¾ã™ï¼
 %% 
 %\DeclareRobustCommand*{\bfs}{\kanjifamily\gtdefault\romanfamily\sfdefault\selectfont}
 \DeclareRobustCommand*{\bfs}{\rmfamily\bfseries}
@@ -68,9 +68,9 @@
 
 %%\DeclareTextFontCommand{\textbf}{\rmfamily\bfseries}
 
-%% Šeƒp[ƒc‚ÉƒtƒHƒ“ƒg‚ÆƒTƒCƒY‚ğƒZƒbƒg‚µ‚Ü‚·D
-%% \@@`ƒp[ƒc–¼'Font‚Ì‹K‘¥‚Å–½–¼‚µ‚Ä‚¢‚Ü‚·D
-%% –½–¼•¶š—ñ‚É‚ ‚é`Num'‚Í‚»‚ê‚¼‚ê‚Éˆóš‚³‚ê‚éƒJƒEƒ“ƒ^‚Ö‚ÌƒtƒHƒ“ƒgƒTƒCƒYİ’è‚Å‚·
+%% å„ãƒ‘ãƒ¼ãƒ„ã«ãƒ•ã‚©ãƒ³ãƒˆã¨ã‚µã‚¤ã‚ºã‚’ã‚»ãƒƒãƒˆã—ã¾ã™ï¼
+%% \@@`ãƒ‘ãƒ¼ãƒ„å'Fontã®è¦å‰‡ã§å‘½åã—ã¦ã„ã¾ã™ï¼
+%% å‘½åæ–‡å­—åˆ—ã«ã‚ã‚‹`Num'ã¯ãã‚Œãã‚Œã«å°å­—ã•ã‚Œã‚‹ã‚«ã‚¦ãƒ³ã‚¿ã¸ã®ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºè¨­å®šã§ã™
  \newcommand{\@@ChapterFont}             {\reset@font\Huge\bfs}
  \newcommand{\@@ChapterNumFont}          {\reset@font\huge\bfs}
  \newcommand{\@@Indexheadfont}           {\reset@font\huge\bfs}%
@@ -97,14 +97,14 @@
  \newcommand{\@@TocNumsubsubSectionFont} {\reset@font\rmfamily \normalcolor}
  \newcommand{\@@MarginparFont}           {\fontsize{10Q}{12Q}\selectfont}
 
-%% Šî–{‘ÌÙŠÈˆÕİ’è—p‚Ìƒpƒ‰ƒ[ƒ^‚Å‚·D
+%% åŸºæœ¬ä½“è£ç°¡æ˜“è¨­å®šç”¨ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§ã™ï¼
 \def\PublisherDefined#1{\def\PublisherDefined{#1}}
-\PublisherDefined{“Œ‹}‘Š”®‰ïĞ}%% \maketitle‚Åˆóš‚³‚ê‚Ü‚·D\publisher{}‚Ìw’è‚ª‚ ‚ê‚Î‚»‚ê‚ª—Dæ‚³‚ê‚Ü‚·D
-\let\¶‰E\relax
-\let\“V’n\relax
+\PublisherDefined{æ±äº¬å›³æ›¸æ ªå¼ä¼šç¤¾}%% \maketitleã§å°å­—ã•ã‚Œã¾ã™ï¼\publisher{}ã®æŒ‡å®šãŒã‚ã‚Œã°ãã‚ŒãŒå„ªå…ˆã•ã‚Œã¾ã™ï¼
+\let\å·¦å³\relax
+\let\å¤©åœ°\relax
 \let\@@Para\relax
 
-%% ŠeğŒ•ªŠò‚ÌéŒ¾‚Å‚·D
+%% å„æ¡ä»¶åˆ†å²ã®å®£è¨€ã§ã™ï¼
 \newif\if@Koguchi\@Koguchifalse
 \newif\if@BfSf\@BfSffalse
 \newif\if@JisTFM\@JisTFMtrue
@@ -118,8 +118,8 @@
 \newif\if@noinputoption\@noinputoptionfalse
 \newif\if@keepfline@@\@keepfline@@false
 %\@keepfline@@true
-%% ‚Ç‚ÌŒ©o‚µƒŒƒxƒ‹‚Å\@startsection‚ªÀs‚³‚ê‚½‚©‚ğ
-%% ”»’f‚µ‚Ä\section`\subsection‚Ü‚Å‚Ì•¶šƒTƒCƒY‚ğƒZƒbƒg‚µ‚Ü‚·D
+%% ã©ã®è¦‹å‡ºã—ãƒ¬ãƒ™ãƒ«ã§\@startsectionãŒå®Ÿè¡Œã•ã‚ŒãŸã‹ã‚’
+%% åˆ¤æ–­ã—ã¦\sectionï½\subsectionã¾ã§ã®æ–‡å­—ã‚µã‚¤ã‚ºã‚’ã‚»ãƒƒãƒˆã—ã¾ã™ï¼
 \newcommand{\@SectionSlectNumFont}{%
 \ifS@ection
   \@@SectionNumFont
@@ -135,8 +135,8 @@
     \fi
 \fi
 }
-%% ‚Ç‚ÌŒ©o‚µƒŒƒxƒ‹‚Ì\@dottedtocline‚ªÀs‚³‚ê‚½‚©‚ğ
-%% ”»’f‚µ‚Ä–ÚŸ‚Ì•¶šƒTƒCƒY‚ğƒZƒbƒg‚µ‚Ü‚·D
+%% ã©ã®è¦‹å‡ºã—ãƒ¬ãƒ™ãƒ«ã®\@dottedtoclineãŒå®Ÿè¡Œã•ã‚ŒãŸã‹ã‚’
+%% åˆ¤æ–­ã—ã¦ç›®æ¬¡ã®æ–‡å­—ã‚µã‚¤ã‚ºã‚’ã‚»ãƒƒãƒˆã—ã¾ã™ï¼
 \newcommand{\@TocSectionSlectFont}{%
 \ifS@ection
   \@@TocSectionFontt
@@ -152,7 +152,7 @@
     \fi
 \fi
 }
-%% “¯‚¶‚Å‚·D‚±‚ê‚Í–ÚŸ‚Åˆø‚©‚ê‚éƒy[ƒW”Ô†
+%% åŒã˜ã§ã™ï¼ã“ã‚Œã¯ç›®æ¬¡ã§å¼•ã‹ã‚Œã‚‹ãƒšãƒ¼ã‚¸ç•ªå·
 \newcommand{\@TocSectionNumSlectFont}{%
 \ifS@ection%
   \@@TocNumSectionFont%
@@ -168,12 +168,12 @@
      \fi%
 \fi%
 }
-% ‹Ö‘¥penalty‚Ì•â³‚Å‚·D
+% ç¦å‰‡penaltyã®è£œæ­£ã§ã™ï¼
 \prebreakpenalty\jis"2147=10000
 \postbreakpenalty\jis"2148=10000
 \prebreakpenalty\jis"2149=10000
-%% ‚±‚Ì‚ ‚½‚è‚Íjbook‚Ì‚Ü‚Ü‚Å‚·D
-%% ‚½‚¾bannerfont‚Íï–¡‚ÅƒXƒ‰ƒ“ƒg‚É‚µ‚Ü‚µ‚½D
+%% ã“ã®ã‚ãŸã‚Šã¯jbookã®ã¾ã¾ã§ã™ï¼
+%% ãŸã bannerfontã¯è¶£å‘³ã§ã‚¹ãƒ©ãƒ³ãƒˆã«ã—ã¾ã—ãŸï¼
 \newif\if@landscape \@landscapefalse
 \newcommand{\@ptsize}{}
 \newif\if@restonecol
@@ -204,13 +204,13 @@
   \@bannertoken{\@empty}
   \maketombowbox}
 \DeclareOption{tate}{%
-  \AtBeginDocument{\tate\message{sc‘gƒ‚[ƒht}% c‘gƒ‚[ƒh‚Í“®ì–¢Šm”F.
+  \AtBeginDocument{\tate\message{ã€Šç¸¦çµ„ãƒ¢ãƒ¼ãƒ‰ã€‹}% ç¸¦çµ„ãƒ¢ãƒ¼ãƒ‰ã¯å‹•ä½œæœªç¢ºèª.
                    \adjustbaseline}%
 }
-%% cmscale, gtsf‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‚¢‚Ü‚·D
-%% gtsf‚Í\bsf‚ğƒ{[ƒ‹ƒh‚©‚çƒTƒ“ƒZƒŠƒt‚É‚µ‚Ü‚·D
-%% cmscale‚ÍƒXƒP[ƒ‰ƒuƒ‹‚Åmag‚ğC³‚µ‚½cmfont‚ğload‚µ‚Ü‚·Di‰Šú’lj
-%% noinputoption‚Íoption.sty‚ğ“Ç‚İ‚İ‚ğ‚µ‚È‚¢ƒIƒvƒVƒ‡ƒ“‚Å‚·D
+%% cmscale, gtsfãªã©ã‚’è¿½åŠ ã—ã¦ã„ã¾ã™ï¼
+%% gtsfã¯\bsfã‚’ãƒœãƒ¼ãƒ«ãƒ‰ã‹ã‚‰ã‚µãƒ³ã‚»ãƒªãƒ•ã«ã—ã¾ã™ï¼
+%% cmscaleã¯ã‚¹ã‚±ãƒ¼ãƒ©ãƒ–ãƒ«ã§magã‚’ä¿®æ­£ã—ãŸcmfontã‚’loadã—ã¾ã™ï¼ï¼ˆåˆæœŸå€¤ï¼‰
+%% noinputoptionã¯option.styã‚’èª­ã¿è¾¼ã¿ã‚’ã—ãªã„ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã§ã™ï¼
 \DeclareOption{oneside}{\@twosidefalse}
 \DeclareOption{twoside}{\@twosidetrue}
 \DeclareOption{onecolumn}{\@twocolumnfalse}
@@ -223,10 +223,10 @@
 \DeclareOption{fleqn}{\input{fleqn.clo}}
 \DeclareOption{cmscale}{\input{cmscale.sty}}
 \DeclareOption{gtsf}{\@BfSftrue}
-\DeclareOption{A4size}{\AFourtrue}%% —p†ƒTƒCƒY‚ğA4‚É‚µ‚Ü‚·D
-\DeclareOption{noinputoption}{\@noinputoptiontrue}%% İ’èƒtƒ@ƒCƒ‹‚ğ“Ç‚Ü‚È‚¢D
+\DeclareOption{A4size}{\AFourtrue}%% ç”¨ç´™ã‚µã‚¤ã‚ºã‚’A4ã«ã—ã¾ã™ï¼
+\DeclareOption{noinputoption}{\@noinputoptiontrue}%% è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¾ãªã„ï¼
 \DeclareOption{keepfline}{\@keepfline@@true}
-%% ã‚Íƒy[ƒW‚Ì‘æˆês–Ú‚É”w‚Ì‚‚¢•¶š‚ª—ˆ‚Ä‚à‹É—Íˆês–Ú‚ª‰º‚É‚¸‚ê‚È‚¢‚½‚ß‚Ìˆ’u‚Å‚·D‚½‚¾‚µC‘å‚«‚È•¶š‚ğg‚Á‚½\section‚È‚Ç‚Å‚à“V‚ğ‚Í‚İo‚µ‚Ä‚µ‚Ü‚¤•›ì—p‚ª‚ ‚é‚Ì‚ÅƒfƒtƒHƒ‹ƒg‚Ífalse‚É‚µ‚Ä‚Ü‚·D‚¹‚Á‚©‚­İ’è‚µ‚½‚Ì‚ÅƒIƒvƒVƒ‡ƒ“ˆµ‚¢‚Åc‚µ‚Ü‚·D
+%% ä¸Šã¯ãƒšãƒ¼ã‚¸ã®ç¬¬ä¸€è¡Œç›®ã«èƒŒã®é«˜ã„æ–‡å­—ãŒæ¥ã¦ã‚‚æ¥µåŠ›ä¸€è¡Œç›®ãŒä¸‹ã«ãšã‚Œãªã„ãŸã‚ã®å‡¦ç½®ã§ã™ï¼ãŸã ã—ï¼Œå¤§ããªæ–‡å­—ã‚’ä½¿ã£ãŸ\sectionãªã©ã§ã‚‚å¤©ã‚’ã¯ã¿å‡ºã—ã¦ã—ã¾ã†å‰¯ä½œç”¨ãŒã‚ã‚‹ã®ã§ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯falseã«ã—ã¦ã¾ã™ï¼ã›ã£ã‹ãè¨­å®šã—ãŸã®ã§ã‚ªãƒ—ã‚·ãƒ§ãƒ³æ‰±ã„ã§æ®‹ã—ã¾ã™ï¼
 \DeclareOption{openbib}{%
   \AtEndOfPackage{%
    \renewcommand\@openbib@code{%
@@ -241,8 +241,8 @@
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
 \DeclareOption{min10}{\@JisTFMfalse}
 \DeclareOption{multijfont}{\@PsJfonttrue}
-%% dã‚ª‚è‚Ìİ’èD
-%% ‘z’è‚µ‚Ä‚¢‚édã‚ª‚èƒTƒCƒY‚ÍA5³¡CB5³¡CB5•ÏŒ`(210mm~182mm)‚ÌO‚Â‚Å‚·D
+%% ä»•ä¸ŠãŒã‚Šã®è¨­å®šï¼
+%% æƒ³å®šã—ã¦ã„ã‚‹ä»•ä¸ŠãŒã‚Šã‚µã‚¤ã‚ºã¯A5æ­£å¯¸ï¼ŒB5æ­£å¯¸ï¼ŒB5å¤‰å½¢(210mmÃ—182mm)ã®ä¸‰ã¤ã§ã™ï¼
 \DeclareOption{b5}{%
 \PaperSizeBtrue%
 \setlength\paperheight{257mm}%
@@ -257,7 +257,7 @@
 \fi
     \advance\textheight by\topskip
 }
-\DeclareOption{b5var}{% b5Def‚©‚çb5var‚É•Ï‚¦‚Ü‚µ‚½D
+\DeclareOption{b5var}{% b5Defã‹ã‚‰b5varã«å¤‰ãˆã¾ã—ãŸï¼
 \PaperSizeBtrue%
 \setlength\paperheight{210mm}%
 \setlength\paperwidth{182mm}%
@@ -288,12 +288,12 @@
 \ExecuteOptions{a5,twoside,cmscale,onecolumn,final,openright}
 \ProcessOptions\relax
 
-%% \@@marginparwidth‚Æ‚¢‚¤‚Ì‚ª\marginparwidth‚É‘ã“ü‚³‚ê‚Ü‚·‚ªC“¯‚É
-%% \marginparwidth‚Ìè“®w’è‚Ìƒtƒ‰ƒO‚É‚È‚Á‚Ä‚Ü‚·D‚±‚Ì’l‚ª0ptˆÈã‚É‚È‚Á‚Ä‚¢‚é‚Æ
-%% ‚»‚ê‚ª\marginparwidth‚Ì’·‚³‚É‚È‚è‚Ü‚·D‰Šú’l‚Í0pt‚É‚µ‚ÄC
-%% •ÏX‚Íoption.sty‚Ås‚¢‚Ü‚·D
-%% option.sty‘¤‚Å‚à0pti‚à‚µ‚­‚Í–³w’èj‚É‚µ‚Ä‚¢‚é‚Æ\marginparwidth‚Í
-%% \evensidemargin‚Ì’·‚³‚Ì0.8”{‚É‚È‚é‚æ‚¤‚É‚µ‚Ü‚µ‚½D
+%% \@@marginparwidthã¨ã„ã†ã®ãŒ\marginparwidthã«ä»£å…¥ã•ã‚Œã¾ã™ãŒï¼ŒåŒæ™‚ã«
+%% \marginparwidthã®æ‰‹å‹•æŒ‡å®šã®ãƒ•ãƒ©ã‚°ã«ãªã£ã¦ã¾ã™ï¼ã“ã®å€¤ãŒ0ptä»¥ä¸Šã«ãªã£ã¦ã„ã‚‹ã¨
+%% ãã‚ŒãŒ\marginparwidthã®é•·ã•ã«ãªã‚Šã¾ã™ï¼åˆæœŸå€¤ã¯0ptã«ã—ã¦ï¼Œ
+%% å¤‰æ›´ã¯option.styã§è¡Œã„ã¾ã™ï¼
+%% option.styå´ã§ã‚‚0ptï¼ˆã‚‚ã—ãã¯ç„¡æŒ‡å®šï¼‰ã«ã—ã¦ã„ã‚‹ã¨\marginparwidthã¯
+%% \evensidemarginã®é•·ã•ã®0.8å€ã«ãªã‚‹ã‚ˆã†ã«ã—ã¾ã—ãŸï¼
 \newdimen\@@marginparwidth
 \@@marginparwidth=0pt
 
@@ -309,26 +309,26 @@
 \DeclareRobustCommand*{\cal}{\@fontswitch\relax\mathcal}
 \DeclareRobustCommand*{\mit}{\@fontswitch\relax\mathnormal}
 
-%% noinputoption‚ªw’è‚³‚ê‚Ä‚¢‚éê‡Coption.sty‚ª“Ç‚Ü‚ê‚Ä‚¢‚È‚¢|‚ÌƒAƒ‰[ƒg‚Ì•\¦‚Å‚·D
+%% noinputoptionãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆï¼Œoption.styãŒèª­ã¾ã‚Œã¦ã„ãªã„æ—¨ã®ã‚¢ãƒ©ãƒ¼ãƒˆã®è¡¨ç¤ºã§ã™ï¼
 \if@noinputoption
 \typeout{-----Attention!!-----^^Joption.sty is not read. Are you all right? ^^J---------------------}
 \relax
 \else
-%% option.sty‚ÅŠî–{‘ÌÙ‚ğİ’è‚·‚é‚Æ‚«‚Ìƒpƒ‰ƒ[ƒ^‚ğ‘ã“ü‚·‚éƒ}ƒNƒ‚Å‚·D
-%% “ú–{Œê‚ğg‚Á‚Ä‚í‚©‚è‚â‚·‚­‚µ‚Ä‚¢‚Ü‚·D
-\def\–{•¶ƒTƒCƒY#1{\setlength{\@@normalsize}{#1}}
-\def\s‘—‚è#1{\setlength{\@@normalsize@@baseline}{#1}}
-\def\¶‰E#1{\gdef\¶‰E{#1}}
-\def\“V’n#1{\gdef\“V’n{#1}}
-\def\¬Œû#1{\@Koguchitrue\gdef\@¬Œû{#1}}
-\def\’Œ#1#2{\gdef\’Œ{\fontsize{#1}{#1}\relax\selectfont#2}}
-\def\ƒmƒ“ƒuƒ‹#1#2{\gdef\ƒmƒ“ƒuƒ‹{\fontsize{#1}{#1}\selectfont\relax\selectfont#2}}
-%% option.sty‚ğ“Ç‚İ‚İC‚»‚ÌŒãİ’è‚³‚ê‚½î•ñ‚ğŠeƒpƒ‰ƒ[ƒ^‚ÉƒZƒbƒg‚µ‚Ü‚·D
+%% option.styã§åŸºæœ¬ä½“è£ã‚’è¨­å®šã™ã‚‹ã¨ãã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ä»£å…¥ã™ã‚‹ãƒã‚¯ãƒ­ã§ã™ï¼
+%% æ—¥æœ¬èªã‚’ä½¿ã£ã¦ã‚ã‹ã‚Šã‚„ã™ãã—ã¦ã„ã¾ã™ï¼
+\def\æœ¬æ–‡ã‚µã‚¤ã‚º#1{\setlength{\@@normalsize}{#1}}
+\def\è¡Œé€ã‚Š#1{\setlength{\@@normalsize@@baseline}{#1}}
+\def\å·¦å³#1{\gdef\å·¦å³{#1}}
+\def\å¤©åœ°#1{\gdef\å¤©åœ°{#1}}
+\def\å°å£#1{\@Koguchitrue\gdef\@å°å£{#1}}
+\def\æŸ±#1#2{\gdef\æŸ±{\fontsize{#1}{#1}\relax\selectfont#2}}
+\def\ãƒãƒ³ãƒ–ãƒ«#1#2{\gdef\ãƒãƒ³ãƒ–ãƒ«{\fontsize{#1}{#1}\selectfont\relax\selectfont#2}}
+%% option.styã‚’èª­ã¿è¾¼ã¿ï¼Œãã®å¾Œè¨­å®šã•ã‚ŒãŸæƒ…å ±ã‚’å„ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«ã‚»ãƒƒãƒˆã—ã¾ã™ï¼
 \input option.sty
 \setlength\textwidth{\@@normalsize}
-\multiply\textwidth \¶‰E
+\multiply\textwidth \å·¦å³
 \setlength\textheight{\@@normalsize@@baseline}
-\multiply\textheight \“V’n
+\multiply\textheight \å¤©åœ°
 \advance\textheight by-\@@normalsize@@baseline
 \if@keepfline@@
 	\topskip\@@normalsize@@baseline
@@ -336,12 +336,12 @@
 	\topskip\Cht
 \fi
 \advance\textheight by\topskip
-\renewcommand{\@@PageNumFont}{\reset@font\ƒmƒ“ƒuƒ‹}
-\renewcommand{\@@HeaderFont}{\reset@font\’Œ}
+\renewcommand{\@@PageNumFont}{\reset@font\ãƒãƒ³ãƒ–ãƒ«}
+\renewcommand{\@@HeaderFont}{\reset@font\æŸ±}
 \fi
 
-%% \sffamily‚Ættfamily‚Å]‘®˜a•¶‚ğƒSƒVƒbƒN‚É‚·‚é‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·D
-%% jsbook‚É€‹’‚Å‚·D
+%% \sffamilyã¨ttfamilyã§å¾“å±å’Œæ–‡ã‚’ã‚´ã‚·ãƒƒã‚¯ã«ã™ã‚‹ã‚ˆã†ã«ã—ã¦ã„ã¾ã™ï¼
+%% jsbookã«æº–æ‹ ã§ã™ï¼
 \DeclareRobustCommand\sffamily
         {\not@math@alphabet\sffamily\mathsf
          \romanfamily\sfdefault\kanjifamily\gtdefault\selectfont}
@@ -351,19 +351,19 @@
 \if@BfSf
      \DeclareRobustCommand*{\bfs}
         {\kanjifamily\gtdefault\romanfamily\sfdefault\selectfont}
-%% \bfs‚ÍƒfƒtƒHƒ‹ƒg‚Å‚Í\rmfamily\bfseries+\gtfamily‚É‚µ‚Ä‚¢‚Ü‚·‚ªC
-%% ƒNƒ‰ƒXƒIƒvƒVƒ‡ƒ“gtsf‚ğw’è‚·‚é‚Æ\sffamily+\gtfamily ‚É‚È‚è‚Ü‚·D
-%% ‚±‚±‚Å\sffamily‚ğÄ’è‹`‚µ‚Ä˜a•¶ƒSƒVƒbƒN‚Æ˜A“®‚³‚¹‚é‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·D
+%% \bfsã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯\rmfamily\bfseries+\gtfamilyã«ã—ã¦ã„ã¾ã™ãŒï¼Œ
+%% ã‚¯ãƒ©ã‚¹ã‚ªãƒ—ã‚·ãƒ§ãƒ³gtsfã‚’æŒ‡å®šã™ã‚‹ã¨\sffamily+\gtfamily ã«ãªã‚Šã¾ã™ï¼
+%% ã“ã“ã§\sffamilyã‚’å†å®šç¾©ã—ã¦å’Œæ–‡ã‚´ã‚·ãƒƒã‚¯ã¨é€£å‹•ã•ã›ã‚‹ã‚ˆã†ã«ã—ã¦ã„ã¾ã™ï¼
 %-------
-%% *‰º‚Ìs‚ğƒAƒNƒeƒBƒu‚É‚·‚ê‚ÎC\bfs‚ÉŠÖ‚í‚ç‚¸\bfseriesˆÈ‰º\bfC\textbf‚Å\sffamily+\gtfamily‚É‚È‚è‚Ü‚·D
-%% ‚»‚Ìê‡‚Å’ˆÓ‚ª•K—v‚È‚Ì‚Í”®‚ÅC”®’†‚Å\textbf‚ğ—p‚¢‚é‚Æ\sffamily‚È‚èC\bf‚ğ
-%% g‚¤‚Æbold‚ªo—Í‚³‚ê‚Ü‚·D(‚Â‚Ü‚è”®’†‚Åbold‚ğg‚¢‚½‚¢ê‡‚Í\bf‚ª•K—v‚Å‚·)
+%% *ä¸‹ã®è¡Œã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚Œã°ï¼Œ\bfsã«é–¢ã‚ã‚‰ãš\bfseriesä»¥ä¸‹\bfï¼Œ\textbfã§\sffamily+\gtfamilyã«ãªã‚Šã¾ã™ï¼
+%% ãã®å ´åˆã§æ³¨æ„ãŒå¿…è¦ãªã®ã¯æ•°å¼ã§ï¼Œæ•°å¼ä¸­ã§\textbfã‚’ç”¨ã„ã‚‹ã¨\sffamilyãªã‚Šï¼Œ\bfã‚’
+%% ä½¿ã†ã¨boldãŒå‡ºåŠ›ã•ã‚Œã¾ã™ï¼(ã¤ã¾ã‚Šæ•°å¼ä¸­ã§boldã‚’ä½¿ã„ãŸã„å ´åˆã¯\bfãŒå¿…è¦ã§ã™)
 %     \DeclareRobustCommand\bfseries
 %        {\not@math@alphabet\bfseries\mathbf
 %        \kanjifamily\gtdefault\romanfamily\sfdefault\selectfont}
 \fi
 
-%% İ’è‚µ‚½•¶šƒTƒCƒY‚Æ‚»‚ê‚¼‚ê‚Ìs‘—‚è‚ğ®”‰»‚µ‚Ü‚·D
+%% è¨­å®šã—ãŸæ–‡å­—ã‚µã‚¤ã‚ºã¨ãã‚Œãã‚Œã®è¡Œé€ã‚Šã‚’æ•´æ•°åŒ–ã—ã¾ã™ï¼
 \edef\@vpt{\strip@pt\@@tiny}
 \edef\@viipt{\strip@pt\@@scriptsize}
 \edef\@viiipt{\strip@pt\@@footnotesize}
@@ -388,9 +388,9 @@
 \edef\@HUGE@@base@@line{\strip@pt\@@HUGE@@baseline}
 
 
-%% g—p‚·‚éjtfm‚ğjisŒn‚É‚µ‚Ü‚·D
-%% g‚¤‚±‚Æ‚Í‹H‚Å‚ ‚ë‚¤‚Æ‚Ív‚¢‚Ü‚·‚ª
-%% ƒNƒ‰ƒXƒIƒvƒVƒ‡ƒ“min10‚Å‹Œ—ˆ‚Ìmin10.tfm‚ªg‚¦‚Ü‚·D
+%% ä½¿ç”¨ã™ã‚‹jtfmã‚’jisç³»ã«ã—ã¾ã™ï¼
+%% ä½¿ã†ã“ã¨ã¯ç¨€ã§ã‚ã‚ã†ã¨ã¯æ€ã„ã¾ã™ãŒ
+%% ã‚¯ãƒ©ã‚¹ã‚ªãƒ—ã‚·ãƒ§ãƒ³min10ã§æ—§æ¥ã®min10.tfmãŒä½¿ãˆã¾ã™ï¼
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \if@JisTFM
 \def\JfontTfmM{jis}\def\JfontTfmG{jisg}
@@ -407,13 +407,13 @@ JFM=jistfm.tfm^^J%
 JFM=min10.tfm^^J%
 -------------}
 \fi
-%% min10.tfm—R—ˆ‚Ì˜a•¶ƒtƒHƒ“ƒgƒTƒCƒY‚ğ•â³‚µ‚Ä‚¢‚Ü‚·D
-%% pTeX‚Å‚ÍcmƒtƒHƒ“ƒg‚É‘å‚«‚³‚ğ‡‚í‚¹‚é‚½‚ß‚ÉC˜a•¶ƒTƒCƒY‚ğ
-%% –ñ0.961”{’ö“x‚Ék¬‚µ‚Äo—Í‚µ‚Ü‚·D
-%% ‚»‚Ì‚½‚ßC13Q‚ğo—Í‚³‚¹‚½‚­‚Ä‚à13*0.961=12.493Q‚Æ‚¢‚¤’†“r”¼’[‚È
-%% ‘å‚«‚³‚É‚È‚Á‚Ä‚µ‚Ü‚¢‚Ü‚·D
-%% ‚±‚±‚Å‚±‚ê‚ğ•â³‚µ‚Ä13Q‚Æw’è‚·‚ê‚ÎÀƒTƒCƒY‚Å13Q‚ªo—Í‚³‚ê‚é‚æ‚¤‚É
-%% ‚µ‚Ä‚¢‚Ü‚·D‚±‚Ì•â³‚Í–{ƒNƒ‰ƒXƒtƒ@ƒCƒ‹‚É•t‚·‚émultijfont.sty‚Å‚àŒp³‚µ‚Ä‚¢‚Ü‚·D
+%% min10.tfmç”±æ¥ã®å’Œæ–‡ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºã‚’è£œæ­£ã—ã¦ã„ã¾ã™ï¼
+%% pTeXã§ã¯cmãƒ•ã‚©ãƒ³ãƒˆã«å¤§ãã•ã‚’åˆã‚ã›ã‚‹ãŸã‚ã«ï¼Œå’Œæ–‡ã‚µã‚¤ã‚ºã‚’
+%% ç´„0.961å€ç¨‹åº¦ã«ç¸®å°ã—ã¦å‡ºåŠ›ã—ã¾ã™ï¼
+%% ãã®ãŸã‚ï¼Œ13Qã‚’å‡ºåŠ›ã•ã›ãŸãã¦ã‚‚13*0.961=12.493Qã¨ã„ã†ä¸­é€”åŠç«¯ãª
+%% å¤§ãã•ã«ãªã£ã¦ã—ã¾ã„ã¾ã™ï¼
+%% ã“ã“ã§ã“ã‚Œã‚’è£œæ­£ã—ã¦13Qã¨æŒ‡å®šã™ã‚Œã°å®Ÿã‚µã‚¤ã‚ºã§13QãŒå‡ºåŠ›ã•ã‚Œã‚‹ã‚ˆã†ã«
+%% ã—ã¦ã„ã¾ã™ï¼ã“ã®è£œæ­£ã¯æœ¬ã‚¯ãƒ©ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã«ä»˜éšã™ã‚‹multijfont.styã§ã‚‚ç¶™æ‰¿ã—ã¦ã„ã¾ã™ï¼
 \DeclareKanjiFamily{JY1}{rm-l}{}
 \DeclareKanjiFamily{JT1}{rm-l}{}
 \DeclareFontShape{JY1}{rm-l}{m}{n}{<-> s *  [1.0392676] \JfontTfmM}{}
@@ -434,16 +434,16 @@ JFM=min10.tfm^^J%
 
 \renewcommand{\mcdefault}{rm-l}
 \renewcommand{\gtdefault}{gbm}
-%% New-CID‚É‚æ‚é‘½‘‘Ì—p‚Ìİ’è‚ğ“Ç‚İ‚İ‚Ü‚·D
-%% ƒNƒ‰ƒXƒIƒvƒVƒ‡ƒ“multijfont‚Å“Ç‚Ü‚ê‚Ü‚·D
-%% ÀÛ‚Ì‰^—p‚É‚ÍŠetfm, vfƒtƒ@ƒCƒ‹C‚»‚ê‚É‰‚¶‚Äİ’è‚³‚ê‚½dvips—p‚Ìmapƒtƒ@ƒCƒ‹‚ª•K—v‚Å‚·D
+%% New-CIDã«ã‚ˆã‚‹å¤šæ›¸ä½“ç”¨ã®è¨­å®šã‚’èª­ã¿è¾¼ã¿ã¾ã™ï¼
+%% ã‚¯ãƒ©ã‚¹ã‚ªãƒ—ã‚·ãƒ§ãƒ³multijfontã§èª­ã¾ã‚Œã¾ã™ï¼
+%% å®Ÿéš›ã®é‹ç”¨ã«ã¯å„tfm, vfãƒ•ã‚¡ã‚¤ãƒ«ï¼Œãã‚Œã«å¿œã˜ã¦è¨­å®šã•ã‚ŒãŸdvipsç”¨ã®mapãƒ•ã‚¡ã‚¤ãƒ«ãŒå¿…è¦ã§ã™ï¼
 \if@PsJfont
 \input multijfont.sty
 \fi
 
-%% ŠeƒTƒCƒYƒRƒ}ƒ“ƒh‚Ìİ’è‚Å‚·D
-%% ‚½‚Æ‚¦‚Î\normalsize‚Ìê‡C\@xpt‚Æ\@normalsize@@base@@line‚Í–‘O‚É®”‰»
-%% ‚³‚ê‚½‚à‚Ì‚ğ‚±‚±‚Åg‚¢‚Ü‚·D
+%% å„ã‚µã‚¤ã‚ºã‚³ãƒãƒ³ãƒ‰ã®è¨­å®šã§ã™ï¼
+%% ãŸã¨ãˆã°\normalsizeã®å ´åˆï¼Œ\@xptã¨\@normalsize@@base@@lineã¯äº‹å‰ã«æ•´æ•°åŒ–
+%% ã•ã‚ŒãŸã‚‚ã®ã‚’ã“ã“ã§ä½¿ã„ã¾ã™ï¼
 \DeclareMathSizes{\@xpt}{\@xpt}{6}{5}
 \renewcommand{\normalsize}{%
 \@setfontsize\normalsize\@xpt{\@normalsize@@base@@line}%
@@ -491,15 +491,15 @@ JFM=min10.tfm^^J%
 \newcommand{\Huge}{\@setfontsize\Huge\@xxpt{\@Huge@@base@@line}}
 \newcommand{\HUGE}{\@setfontsize\HUGE\@xxvpt{\@HUGE@@base@@line}}
 
-%% \headheight‚Ì‚‚³‚ğZo‚µ‚Ü‚·D
-%% ƒmƒ“ƒuƒ‹‚Æ’Œ‚Åˆá‚¤•¶šƒTƒCƒY‚ªİ’è‚³‚ê‚é‚±‚Æ‚à‚ ‚é‚Ì‚ÅC
-%% ‘å‚«‚¢‚Ù‚¤‚Ì‚‚³‚ğ\headheight‚Æ‚µ‚Äİ’è‚µ‚Ü‚·D
+%% \headheightã®é«˜ã•ã‚’ç®—å‡ºã—ã¾ã™ï¼
+%% ãƒãƒ³ãƒ–ãƒ«ã¨æŸ±ã§é•ã†æ–‡å­—ã‚µã‚¤ã‚ºãŒè¨­å®šã•ã‚Œã‚‹ã“ã¨ã‚‚ã‚ã‚‹ã®ã§ï¼Œ
+%% å¤§ãã„ã»ã†ã®é«˜ã•ã‚’\headheightã¨ã—ã¦è¨­å®šã—ã¾ã™ï¼
 \setbox0\hbox{\@@HeaderFont\char\euc"A1A1}%
 \setbox2\hbox{\@@PageNumFont\char\euc"A1A1}%
 \ifdim\ht0>\ht2\@tempdima\ht0\else\@tempdima\ht2\fi
 \setlength\headheight{\@tempdima}
 \setlength\headsep{4mm}
-%% ƒy[ƒW‚Ì‘æˆês–Ú‚É”w‚Ì‚‚¢•¶š‚ª—ˆ‚Ä‚às‚ªo—ˆ‚é‚¾‚¯‰º‚É‚¸‚ê‚È‚¢‚½‚ß‚Ìˆ’u‚Å‚·D‚»‚Ì‚Ü‚Ü‚Å‚Í”»–Ê“V’nˆÊ’u‚ª‚¨‚©‚µ‚­‚È‚é‚Ì‚ÅC\headsep‚Å•â³‚µ‚Â‚ÂC\topmargin‚ÌZo•û–@‚ğ•Ï‚¦‚Ü‚µ‚½D<- Œ±“I‚Éİ’è‚µ‚Ü‚µ‚½‚ªC\section‚È‚Ç‚Å‚à”Å–Ê‚ğ“V•ûŒü‚É”ò‚Ño‚µ‚Ä‚µ‚Ü‚¤‚Ì‚Å~‚ß‚Ä‚¢‚Ü‚·D‚¹‚Á‚©‚­‚È‚Ì‚ÅƒNƒ‰ƒXƒIƒvƒVƒ‡ƒ“[keepfline]‚Å\@keepfline@@true‚ª—LŒø‚É‚È‚éİ’è‚Íc‚µ‚Ä‚¢‚Ü‚·D
+%% ãƒšãƒ¼ã‚¸ã®ç¬¬ä¸€è¡Œç›®ã«èƒŒã®é«˜ã„æ–‡å­—ãŒæ¥ã¦ã‚‚è¡ŒãŒå‡ºæ¥ã‚‹ã ã‘ä¸‹ã«ãšã‚Œãªã„ãŸã‚ã®å‡¦ç½®ã§ã™ï¼ãã®ã¾ã¾ã§ã¯åˆ¤é¢å¤©åœ°ä½ç½®ãŒãŠã‹ã—ããªã‚‹ã®ã§ï¼Œ\headsepã§è£œæ­£ã—ã¤ã¤ï¼Œ\topmarginã®ç®—å‡ºæ–¹æ³•ã‚’å¤‰ãˆã¾ã—ãŸï¼<- è©¦é¨“çš„ã«è¨­å®šã—ã¾ã—ãŸãŒï¼Œ\sectionãªã©ã§ã‚‚ç‰ˆé¢ã‚’å¤©æ–¹å‘ã«é£›ã³å‡ºã—ã¦ã—ã¾ã†ã®ã§æ­¢ã‚ã¦ã„ã¾ã™ï¼ã›ã£ã‹ããªã®ã§ã‚¯ãƒ©ã‚¹ã‚ªãƒ—ã‚·ãƒ§ãƒ³[keepfline]ã§\@keepfline@@trueãŒæœ‰åŠ¹ã«ãªã‚‹è¨­å®šã¯æ®‹ã—ã¦ã„ã¾ã™ï¼
 \if@keepfline@@
 	\setlength\topskip{\baselineskip}
 	\advance\headsep by-\topskip
@@ -513,9 +513,9 @@ JFM=min10.tfm^^J%
 \setlength\marginparsep{.5zw}
 
 %%%%%%%%%%%%%%%%
-%% \@@evensidemargin‚Í\marginparwidth‚ğŒˆ‚ß‚é‚½‚ß‚Ì•Û‘¶—p‚Å‚·D
-%% \marginparwidth‚Í\marginparsep‚ğˆø‚¢‚½\evensidemargin‚Ì0.8”{‚É‚µ‚Ä‚Ü‚·D
-%% \¬Œû‚Ìw’è‚ª‚ ‚éê‡‚à\marginparsep‚ğˆø‚¢‚½0.8”{‚Å‚·D
+%% \@@evensidemarginã¯\marginparwidthã‚’æ±ºã‚ã‚‹ãŸã‚ã®ä¿å­˜ç”¨ã§ã™ï¼
+%% \marginparwidthã¯\marginparsepã‚’å¼•ã„ãŸ\evensidemarginã®0.8å€ã«ã—ã¦ã¾ã™ï¼
+%% \å°å£ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆã‚‚\marginparsepã‚’å¼•ã„ãŸ0.8å€ã§ã™ï¼
 \newdimen\@@evensidemargin
 \setlength\columnsep{2zw}
 \columnseprule\z@
@@ -535,9 +535,9 @@ JFM=min10.tfm^^J%
 \setlength\footnotesep{6.65\p@}
 %\setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
 \setlength{\skip\footins}{12\p@ \@plus 4\p@ \@minus 2\p@}
-\setlength\floatsep    {12pt \@plus0pt \@minus2pt}%  209”Å ky_a5.sty €‹’
-\setlength\textfloatsep{15.5pt \@plus0pt \@minus2pt}% 209”Å ky_a5.sty €‹’
-\setlength\intextsep   {11pt \@plus0pt \@minus2pt}% 209”Å ky_a5.sty €‹’
+\setlength\floatsep    {12pt \@plus0pt \@minus2pt}%  209ç‰ˆ ky_a5.sty æº–æ‹ 
+\setlength\textfloatsep{15.5pt \@plus0pt \@minus2pt}% 209ç‰ˆ ky_a5.sty æº–æ‹ 
+\setlength\intextsep   {11pt \@plus0pt \@minus2pt}% 209ç‰ˆ ky_a5.sty æº–æ‹ 
 \setlength\dblfloatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
 \setlength\@fptop{0\p@ \@plus 1fil}
@@ -573,7 +573,7 @@ JFM=min10.tfm^^J%
 \def\@listvi {\leftmargin\leftmarginvi
               \labelwidth\leftmarginvi
               \advance\labelwidth-\labelsep}
-%% ÊŒ¤sapcol‚ÌGK‚ÌŠ´‚¶‚É‚µ‚½‚¢‚Æ‚«D
+%% å†™ç ”sapcolã®GKã®æ„Ÿã˜ã«ã—ãŸã„ã¨ãï¼
 %\@tempdima\baselineskip
 %\advance\@tempdima  by-\Cht
 %\advance\@tempdima  by-\Cdp
@@ -621,7 +621,7 @@ JFM=min10.tfm^^J%
 %  \def\@oddfoot{\hfil\@@PageNumFont\thepage}%
 %  \let\@oddhead\@empty\let\@evenhead\@empty}
 
-%% Šeheader‚É–ñ•¨‚Ìs“ªƒpƒ^[ƒ“ˆ—‚ğ’Ç‰Á‚µ‚Ü‚µ‚½D
+%% å„headerã«ç´„ç‰©ã®è¡Œé ­ãƒ‘ã‚¿ãƒ¼ãƒ³å‡¦ç†ã‚’è¿½åŠ ã—ã¾ã—ãŸï¼
   \def\ps@footnombre{\let\ps@jpl@in\ps@footnombre
     \let\@evenhead\@empty
     \let\@oddhead\@empty
@@ -728,24 +728,24 @@ JFM=min10.tfm^^J%
      \fi
     }
 
-%% \maketitle‚Å‚Ìo—Í‚É`PUBLISHER'‚ª“ü‚é‚æ‚¤‚É‚µ‚Ü‚µ‚½D
-%% \publisher‚Åw’è‚³‚ê‚Ä‚¢‚ê‚ÎC‚»‚ê‚ª—Dæ‚³‚ê‚Äo—Í‚³‚ê‚Ü‚·D
-%% `PUBLISHER'‚ğˆóš‚³‚¹‚½‚­‚È‚¯‚ê‚ÎC\publisher{}‚Æˆø”‚ğ‹ó‚É‚µ‚Ü‚·D
-%% \author‚Åg‚í‚ê‚é\and‚à`’†•'‚Å‹æØ‚é‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·D
-%% ‚Ü‚½C\title‚É[]ƒIƒvƒVƒ‡ƒ“‚Å•›‘è‚ğ“ü‚ê‚ç‚ê‚é‚æ‚¤‚É‚µ‚Ü‚µ‚½D
-%% \title[•›‘è]{ƒ^ƒCƒgƒ‹}‚Æ‚È‚è‚Ü‚·D
+%% \maketitleã§ã®å‡ºåŠ›ã«`PUBLISHER'ãŒå…¥ã‚‹ã‚ˆã†ã«ã—ã¾ã—ãŸï¼
+%% \publisherã§æŒ‡å®šã•ã‚Œã¦ã„ã‚Œã°ï¼Œãã‚ŒãŒå„ªå…ˆã•ã‚Œã¦å‡ºåŠ›ã•ã‚Œã¾ã™ï¼
+%% `PUBLISHER'ã‚’å°å­—ã•ã›ãŸããªã‘ã‚Œã°ï¼Œ\publisher{}ã¨å¼•æ•°ã‚’ç©ºã«ã—ã¾ã™ï¼
+%% \authorã§ä½¿ã‚ã‚Œã‚‹\andã‚‚`ä¸­é»’'ã§åŒºåˆ‡ã‚‹ã‚ˆã†ã«ã—ã¦ã„ã¾ã™ï¼
+%% ã¾ãŸï¼Œ\titleã«[]ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã§å‰¯é¡Œã‚’å…¥ã‚Œã‚‰ã‚Œã‚‹ã‚ˆã†ã«ã—ã¾ã—ãŸï¼
+%% \title[å‰¯é¡Œ]{ã‚¿ã‚¤ãƒˆãƒ«}ã¨ãªã‚Šã¾ã™ï¼
 
 \def\title{\@ifnextchar[{\title@}{\title@[\hbox{}]}}
 \def\title@[#1]#2{\gdef\@title{\begin{tabular}{c}#2\\
 \Large#1\end{tabular}}}
 \def\publisher#1{\gdef\@publisher{#1}}
-\gdef\@publisher{“Œ‹}‘Š”®‰ïĞ}
+\gdef\@publisher{æ±äº¬å›³æ›¸æ ªå¼ä¼šç¤¾}
 \def\p@thanks#1{\footnotemark
   \protected@xdef\@thanks{\@thanks
     \protect{\noindent$\m@th^\thefootnote$~#1\protect\par}}}
 \def\and{%                  % \begin{tabular}
   \end{tabular}%
-  E
+  ãƒ»
   \begin{tabular}[t]{@{}c@{}}\normalsize}%   % \end{tabular}
 \if@titlepage
   \newcommand{\maketitle}{\begin{titlepage}%
@@ -895,7 +895,7 @@ JFM=min10.tfm^^J%
 \def\@endpart{\vfil\newpage
    \if@twoside\null\thispagestyle{empty}\newpage\fi
    \if@tempswa\twocolumn\fi}
-%% \chapter‚É–ñ•¨‚Ìs“ªˆ—‚ğ’Ç‰Á‚µ‚Ü‚µ‚½D
+%% \chapterã«ç´„ç‰©ã®è¡Œé ­å‡¦ç†ã‚’è¿½åŠ ã—ã¾ã—ãŸï¼
 \newcommand{\chapter}{%
   \if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}%
@@ -903,7 +903,7 @@ JFM=min10.tfm^^J%
 %  \@afterindentfalse
   \@afterindenttrue
   \secdef\@chapter\@schapter}
-%% multicite.sty‚Åg‚¤\@ref@prefix‚ğ’Ç‰Á‚µ‚Ä‚¢‚Ü‚·D
+%% multicite.styã§ä½¿ã†\@ref@prefixã‚’è¿½åŠ ã—ã¦ã„ã¾ã™ï¼
 \def\@chapter[#1]#2{%
   \ifnum \c@secnumdepth >\m@ne
     \if@mainmatter
@@ -921,7 +921,7 @@ JFM=min10.tfm^^J%
   \@makechapterhead{#2}\@afterheading}
 %%%%%%%
 \def\@makechapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
-\toplinebox{10}{% 10sæ‚è‚É‚µ‚Ä‚¢‚Ü‚·D
+\toplinebox{10}{% 10è¡Œå–ã‚Šã«ã—ã¦ã„ã¾ã™ï¼
    \raggedright
    \@@ChapterNumFont
    \ifnum \c@secnumdepth >\m@ne
@@ -940,7 +940,7 @@ JFM=min10.tfm^^J%
 }
 
 \def\@makeschapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
-\toplinebox{10}{% 10sæ‚è‚É‚µ‚Ä‚¢‚Ü‚·D
+\toplinebox{10}{% 10è¡Œå–ã‚Šã«ã—ã¦ã„ã¾ã™ï¼
      \centerline{\@@ChapterFont\@inhibitglue#1}\vfil}
    }}
 
@@ -1159,16 +1159,16 @@ JFM=min10.tfm^^J%
                {\end@dblfloat}
 \newlength\abovecaptionskip
 \newlength\belowcaptionskip
-%%   ˆê”Ê“I‚É`}'‚Ìcaption‚Í‚»‚Ì}‚Ì‰ºC`•\'‚Ícaption‚Í‚»‚Ì•\‚Ìã‚É”z’u‚µ‚Ü‚·D
-%%   –{ƒNƒ‰ƒXƒtƒ@ƒCƒ‹‚Å‚Í}‚ğ”z’u‚·‚é–Ú“I‚Åg‚í‚ê‚éfigureŠÂ‹«‚É‚¨‚¢‚Ä
-%%   object‚Ì‰º‚Écaption‚ğ’u‚­‘O’ñ‚Å\abovecaptionskip‚ÍfigureŠÂ‹«“à‚Å‚Ì
-%%   object‚Æcaption‚Æ‚ÌƒAƒL‚Æ‚µ‚Ä’è‹`‚µ‚Ä‚Ü‚·D
-%%   \belowcaptionskip‚ÍtableŠÂ‹«“à‚Åobject‚Ìã‚Écaption‚ª”z’u‚³‚ê‚½‚Æ‚«
-%%   ‚ÌƒAƒL‚Å‚·D
-%%   ‚æ‚Á‚ÄfigureŠÂ‹«‚Åobject‚ğã‚É”z’uC‚à‚µ‚­‚ÍtableŠÂ‹«‚Åobject‚Ì‰º‚É
-%%   caption‚ğ”z’u‚·‚é‚Æ­‚µ‚¨‚©‚µ‚È–‚É‚È‚è‚Ü‚·D
-\setlength\abovecaptionskip{1.5mm}% }‚Æcaption ‚Æ‚ÌƒAƒL
-\setlength\belowcaptionskip{1.5mm}% •\‚Æcaption ‚Æ‚ÌƒAƒL
+%%   ä¸€èˆ¬çš„ã«`å›³'ã®captionã¯ãã®å›³ã®ä¸‹ï¼Œ`è¡¨'ã¯captionã¯ãã®è¡¨ã®ä¸Šã«é…ç½®ã—ã¾ã™ï¼
+%%   æœ¬ã‚¯ãƒ©ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯å›³ã‚’é…ç½®ã™ã‚‹ç›®çš„ã§ä½¿ã‚ã‚Œã‚‹figureç’°å¢ƒã«ãŠã„ã¦
+%%   objectã®ä¸‹ã«captionã‚’ç½®ãå‰æã§\abovecaptionskipã¯figureç’°å¢ƒå†…ã§ã®
+%%   objectã¨captionã¨ã®ã‚¢ã‚­ã¨ã—ã¦å®šç¾©ã—ã¦ã¾ã™ï¼
+%%   \belowcaptionskipã¯tableç’°å¢ƒå†…ã§objectã®ä¸Šã«captionãŒé…ç½®ã•ã‚ŒãŸã¨ã
+%%   ã®ã‚¢ã‚­ã§ã™ï¼
+%%   ã‚ˆã£ã¦figureç’°å¢ƒã§objectã‚’ä¸Šã«é…ç½®ï¼Œã‚‚ã—ãã¯tableç’°å¢ƒã§objectã®ä¸‹ã«
+%%   captionã‚’é…ç½®ã™ã‚‹ã¨å°‘ã—ãŠã‹ã—ãªäº‹ã«ãªã‚Šã¾ã™ï¼
+\setlength\abovecaptionskip{1.5mm}% å›³ã¨caption ã¨ã®ã‚¢ã‚­
+\setlength\belowcaptionskip{1.5mm}% è¡¨ã¨caption ã¨ã®ã‚¢ã‚­
 \def\@@Figure{table}
 \newdimen\tempCapNumBox
 \newdimen\@tempCapNumBox
@@ -1242,7 +1242,7 @@ JFM=min10.tfm^^J%
 \newdimen\toclineskip
 \setlength\toclineskip{\z@}
 \newdimen\@lnumwidth
-%% –ÚŸ‚Å–ñ•¨‚ªs“ª‚É—ˆ‚½‚Æ‚«\inhibitglue‚·‚é‚æ‚¤‚É•ÏX‚µ‚Ü‚µ‚½D
+%% ç›®æ¬¡ã§ç´„ç‰©ãŒè¡Œé ­ã«æ¥ãŸã¨ã\inhibitglueã™ã‚‹ã‚ˆã†ã«å¤‰æ›´ã—ã¾ã—ãŸï¼
 \def\numberline#1{\hbox to\@lnumwidth{#1\hfil}\@inhibitglue}
 %\def\numberline#1{%
 %    \settowidth\@tempdima{\hbox{#1}}
@@ -1260,7 +1260,7 @@ JFM=min10.tfm^^J%
    \@lnumwidth #3\relax
    \advance\leftskip \@lnumwidth \hbox{}\hskip -\leftskip
     {\@TocSectionSlectFont#4}
-    \nobreak\leaders\hbox{$\m@th \mkern \@dotsep muE\mkern \@dotsep
+    \nobreak\leaders\hbox{$\m@th \mkern \@dotsep muãƒ»\mkern \@dotsep
        mu$}\hfill \nobreak\hbox to\@pnumwidth{%
          \hss\@TocSectionNumSlectFont#5}\par}\fi}
 \def\addcontentsline#1#2#3{%
@@ -1395,44 +1395,44 @@ JFM=min10.tfm^^J%
 \@addtoreset{footnote}{chapter}
 \newcommand\@makefntext[1]{\parindent1zw
   \noindent\hbox to 1.5zw{\hss\@makefnmark\,}#1}
-\newif\if¼—ï \¼—ïfalse
-\def\¼—ï{\¼—ïtrue}
-\def\˜a—ï{\¼—ïfalse}
+\newif\ifè¥¿æš¦ \è¥¿æš¦false
+\def\è¥¿æš¦{\è¥¿æš¦true}
+\def\å’Œæš¦{\è¥¿æš¦false}
 \newcount\heisei \heisei\year \advance\heisei-1988\relax
 \def\today{{%
   \iftdir
-    \if¼—ï
-      \kansuji\number\year ”N
-      \kansuji\number\month Œ
-      \kansuji\number\day “ú
+    \ifè¥¿æš¦
+      \kansuji\number\year å¹´
+      \kansuji\number\month æœˆ
+      \kansuji\number\day æ—¥
     \else
-      •½¬\ifnum\heisei=1 Œ³”N\else\kansuji\number\heisei ”N\fi
-      \kansuji\number\month Œ
-      \kansuji\number\day “ú
+      å¹³æˆ\ifnum\heisei=1 å…ƒå¹´\else\kansuji\number\heisei å¹´\fi
+      \kansuji\number\month æœˆ
+      \kansuji\number\day æ—¥
     \fi
   \else
-    \if¼—ï
-      \number\year~”N
-      \number\month~Œ
-      \number\day~“ú
+    \ifè¥¿æš¦
+      \number\year~å¹´
+      \number\month~æœˆ
+      \number\day~æ—¥
     \else
-      •½¬\ifnum\heisei=1 Œ³”N\else\number\heisei~”N\fi
-      \number\month~Œ
-      \number\day~“ú
+      å¹³æˆ\ifnum\heisei=1 å…ƒå¹´\else\number\heisei~å¹´\fi
+      \number\month~æœˆ
+      \number\day~æ—¥
     \fi
   \fi}}
-\newcommand{\prepartname}{‘æ}
-\newcommand{\postpartname}{•”}
-\newcommand{\prechaptername}{‘æ}
-\newcommand{\postchaptername}{Í}
-\newcommand{\contentsname}{–Ú@Ÿ}
-\newcommand{\listfigurename}{} –Ú Ÿ}
-\newcommand{\listtablename}{•\ –Ú Ÿ}
-\newcommand{\bibname}{Ql•¶Œ£}
-\newcommand{\indexname}{õ@ˆø}
-\newcommand{\figurename}{}}
-\newcommand{\tablename}{•\}
-\newcommand{\appendixname}{•t˜^}
+\newcommand{\prepartname}{ç¬¬}
+\newcommand{\postpartname}{éƒ¨}
+\newcommand{\prechaptername}{ç¬¬}
+\newcommand{\postchaptername}{ç« }
+\newcommand{\contentsname}{ç›®ã€€æ¬¡}
+\newcommand{\listfigurename}{å›³ ç›® æ¬¡}
+\newcommand{\listtablename}{è¡¨ ç›® æ¬¡}
+\newcommand{\bibname}{å‚è€ƒæ–‡çŒ®}
+\newcommand{\indexname}{ç´¢ã€€å¼•}
+\newcommand{\figurename}{å›³}
+\newcommand{\tablename}{è¡¨}
+\newcommand{\appendixname}{ä»˜éŒ²}
 \pagestyle{headings}
 \pagenumbering{arabic}
 \raggedbottom
@@ -1449,9 +1449,9 @@ JFM=min10.tfm^^J%
   \@mparswitchfalse
 \fi
 
-%newtheoremŠÂ‹«‚Åì‚ç‚ê‚éŠÂ‹«‚Å‚Ì()‚ğ‘SŠp‚Ö•ÏXD‚¨‚æ‚Ñ\it‚ğƒLƒƒƒ“ƒZƒ‹
+%newtheoremç’°å¢ƒã§ä½œã‚‰ã‚Œã‚‹ç’°å¢ƒã§ã®()ã‚’å…¨è§’ã¸å¤‰æ›´ï¼ãŠã‚ˆã³\itã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 \def\@opargbegintheorem#1#2#3{\trivlist
-      \item[\hskip \labelsep{\bfs #1\ #2i#3j}]}
+      \item[\hskip \labelsep{\bfs #1\ #2ï¼ˆ#3ï¼‰}]}
 
 \def\Koguchi#1{%
 \evensidemargin=#1
@@ -1469,10 +1469,10 @@ JFM=min10.tfm^^J%
 \advance\topmargin-1in
 }
 
-%% \marginparwidth‚Í\marginparsep‚ğˆø‚¢‚½\evensidemargin‚Ì0.8”{‚É‚µ‚Ä‚Ü‚·D
-%% \¬Œû‚Ìw’è‚ª‚ ‚éê‡‚à‚»‚Ìw’è‚Ì0.8”{‚Å‚·D
+%% \marginparwidthã¯\marginparsepã‚’å¼•ã„ãŸ\evensidemarginã®0.8å€ã«ã—ã¦ã¾ã™ï¼
+%% \å°å£ã®æŒ‡å®šãŒã‚ã‚‹å ´åˆã‚‚ãã®æŒ‡å®šã®0.8å€ã§ã™ï¼
 \if@Koguchi
-\Koguchi{\@¬Œû}
+\Koguchi{\@å°å£}
 \fi
 \ifdim\@@marginparwidth=0pt
 \advance\@@evensidemargin by-\marginparsep
@@ -1503,10 +1503,10 @@ JFM=min10.tfm^^J%
 
 
 
-%% šæ‚èƒ}ƒNƒ^\jidori{’·‚³}{TEXT}
+%% å­—å–ã‚Šãƒã‚¯ãƒ­ï¼\jidori{é•·ã•}{TEXT}
 \def\jidori#1#2{\leavevmode\hbox to #1{\kanjiskip\fill\xkanjiskip\kanjiskip#2}}
 
-%%%% }”ÅƒAƒ^ƒŠƒPƒCˆø‚­^#1=•, #2=‚‚³.
+%%%% å›³ç‰ˆã‚¢ã‚¿ãƒªã‚±ã‚¤å¼•ãï¼#1=å¹…, #2=é«˜ã•.
 \def\Fig#1#2{%
 \parbox[b]{#1}{%
 \hbox to#1{\vtop to#2{\hsize#1\hrule\vss
@@ -1514,12 +1514,12 @@ JFM=min10.tfm^^J%
 \vss\hrule}}}}
 
 
-%% \displaystyle ‚ÌÈ—ªŒ`
+%% \displaystyle ã®çœç•¥å½¢
 \let\dis\displaystyle
 
-%% ƒx[ƒX‚ÍLaTeX2e ”ü•¶‘ì¬“ü–å‚ğQl‚Éì‚è‚Ü‚µ‚½D
-%% ƒ‹ƒr•¶š‚ª”»–Ê‚Ì“V‚É‚Â‚¢‚Ä‚àˆês–Ú‚Ìƒx[ƒXƒ‰ƒCƒ“‚ª‰º‚ª‚ç‚È‚¢‚æ‚¤‚É‚µ‚Ü‚µ‚½D
-% \ruby{–{•¶}{ƒ‹ƒr•¶š}
+%% ãƒ™ãƒ¼ã‚¹ã¯LaTeX2e ç¾æ–‡æ›¸ä½œæˆå…¥é–€ã‚’å‚è€ƒã«ä½œã‚Šã¾ã—ãŸï¼
+%% ãƒ«ãƒ“æ–‡å­—ãŒåˆ¤é¢ã®å¤©ã«ã¤ã„ã¦ã‚‚ä¸€è¡Œç›®ã®ãƒ™ãƒ¼ã‚¹ãƒ©ã‚¤ãƒ³ãŒä¸‹ãŒã‚‰ãªã„ã‚ˆã†ã«ã—ã¾ã—ãŸï¼
+% \ruby{æœ¬æ–‡}{ãƒ«ãƒ“æ–‡å­—}
 \newdimen\mytempdima
 \newcommand{\ruby}[2]{%
 \leavevmode
@@ -1536,12 +1536,12 @@ JFM=min10.tfm^^J%
 \nointerlineskip
 \hbox to\dimen0{\mathstrut\hfil#1\hfil}}}}
 
-%ƒTƒNš—pƒ}ƒNƒ need graphicx package
+%ã‚µã‚¯å­—ç”¨ãƒã‚¯ãƒ­ need graphicx package
 % 
 \newcommand{\sakuji}[2]{\scalebox{0.5}[1]{\hbox to2zw{#1\hskip-.1zw#2}}}
 
 
-%% \\ ‚É‚æ‚è‰üs‚Ì‚Å‚«‚é caption
+%% \\ ã«ã‚ˆã‚Šæ”¹è¡Œã®ã§ãã‚‹ caption
 %% \pcation{TEXT\\TEXT}
 \newif\ifp@rc@ption
 \p@rc@ptionfalse
@@ -1559,7 +1559,7 @@ JFM=min10.tfm^^J%
 \caption{\usebox{\@parc@ptionB}}%
 }
 
-% ‘OŒãƒAƒLƒ[ƒ‚ÌcenterŠÂ‹«
+% å‰å¾Œã‚¢ã‚­ã‚¼ãƒ­ã®centerç’°å¢ƒ
 \def\Center{%
       \topsep0pt
       \partopsep0pt
@@ -1569,8 +1569,8 @@ JFM=min10.tfm^^J%
 \let\endCenter=\endtrivlist
 
 
-%% š‰º‚°•‚ğ“K’²®‚Å‚«‚éƒŠƒXƒg
-%% \begin{Description}{2zw}‚Åš‰º‚°2”{‚ÌƒŠƒXƒg‚·‚éD
+%% å­—ä¸‹ã’å¹…ã‚’é©æ™‚èª¿æ•´ã§ãã‚‹ãƒªã‚¹ãƒˆ
+%% \begin{Description}{2zw}ã§å­—ä¸‹ã’2å€ã®ãƒªã‚¹ãƒˆã™ã‚‹ï¼
 \newdimen\Departopsep
 \Departopsep.5\baselineskip
 \newenvironment{Description}[1]%
@@ -1587,7 +1587,7 @@ JFM=min10.tfm^^J%
 \newcommand{\Descriptionlabel}[1]{%
    \normalfont#1\hfil}
 
-%% “Æ—§”®‚ğs“ª‚É‚¨‚¯‚é‚æ‚¤‚É‚·‚éD
+%% ç‹¬ç«‹æ•°å¼ã‚’è¡Œé ­ã«ãŠã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹ï¼
 \predisplaypenalty100\relax
 
 \def\HO{\makebox[1zw][c]{\rule{.75zw}{.1mm}}}
@@ -1597,7 +1597,7 @@ JFM=min10.tfm^^J%
 \long\def\@savemarbox#1#2{%
    \global\setbox#1%
       \color@vbox
-      \normalcolor%% \textcolorÀs‚É\marginpar‚É`color'‚ª‹y‚Î‚È‚¢‚æ‚¤‚ÉD
+      \normalcolor%% \textcolorå®Ÿè¡Œæ™‚ã«\marginparã«`color'ãŒåŠã°ãªã„ã‚ˆã†ã«ï¼
       \vtop{%
          \hsize\marginparwidth
          \@parboxrestore
@@ -1608,7 +1608,7 @@ JFM=min10.tfm^^J%
     \color@endbox}
 
 
-%% \section‚È‚Ç‚ÌŒ©o‚µ‚É‘Î‚µ‚Äs“ª–ñ•¨‚Ìˆ—‚ğ’Ç‰Á‚µ‚Ü‚µ‚½D
+%% \sectionãªã©ã®è¦‹å‡ºã—ã«å¯¾ã—ã¦è¡Œé ­ç´„ç‰©ã®å‡¦ç†ã‚’è¿½åŠ ã—ã¾ã—ãŸï¼
 \def\@xsect#1{%
   \@tempskipa #1\relax
   \ifdim \@tempskipa<\z@
@@ -1647,39 +1647,39 @@ JFM=min10.tfm^^J%
   \fi
   \@xsect{#3}}
 
-%% s“ªˆ—‚Å‚·DŠî–{“I‚Èˆ—‚Íjsbook‚ğQl‚É‚µ‚Ü‚µ‚½D
-%% ‘ÎÛ–ñ•¨‚ğ’Ç‰Á‚µ‚Ä‚Ü‚·D
+%% è¡Œé ­å‡¦ç†ã§ã™ï¼åŸºæœ¬çš„ãªå‡¦ç†ã¯jsbookã‚’å‚è€ƒã«ã—ã¾ã—ãŸï¼
+%% å¯¾è±¡ç´„ç‰©ã‚’è¿½åŠ ã—ã¦ã¾ã™ï¼
 \def\@inhibitglue{%
   \futurelet\@let@token\@@inhibitglue}
 \def\@@inhibitglue{%
-  \ifx\@let@tokenu
+  \ifx\@let@tokenã€Œ
     \inhibitglue
   \else
-    \ifx\@let@tokeni
+    \ifx\@let@tokenï¼ˆ
       \inhibitglue
     \else
-      \ifx\@let@tokenw
+      \ifx\@let@tokenã€
         \inhibitglue
       \else
-        \ifx\@let@tokenm
+        \ifx\@let@tokenï¼»
           \inhibitglue
         \else
-          \ifx\@let@tokens
+          \ifx\@let@tokenã€Š
            \inhibitglue
           \else
-            \ifx\@let@tokeny
+            \ifx\@let@tokenã€
              \inhibitglue
             \else
-              \ifx\@let@tokenq
+              \ifx\@let@tokenã€ˆ
                \inhibitglue
               \else
-               \ifx\@let@tokeng
+               \ifx\@let@tokenâ€œ
                 \inhibitglue
                \else
-                 \ifx\@let@tokenk
+                 \ifx\@let@tokenã€”
                   \inhibitglue
                  \else
-                   \ifx\@let@tokenƒ
+                   \ifx\@let@tokenï¼œ
                     \inhibitglue
                    \else
                    \fi
@@ -1776,17 +1776,17 @@ JFM=min10.tfm^^J%
     \fi\everyparhook}}
 
 
-%% dvips—p‚Ìsplecial‚Ì–„‚ß‚İ‚Å‚·D(dviout, dvipdfmx‚Å‚à—LŒø‚Å‚·)
-%% \AFourtlue‚Í—p†ƒTƒCƒY‚ğA4”»‚ÉŒÀ’è‚µ‚Ä“V’n’†‰›‚É(tombow‚ªw’è‚³‚ê‚Ä
-%% ‚¢‚ê‚Îƒgƒ“ƒ{‚ğŠÜ‚ñ‚¾ó‘Ô‚Å)”z’u‚³‚¹‚Ü‚·D
-%% jsbook‚Å‚Í\paperwidth‚Æ\paperheight‚ğŠî€‚É‚µ‚Äsplecial—p†ƒTƒCƒY‚ğ
-%% Œˆ’è‚µ‚Ä‚¢‚Ü‚·D
-%% ‚±‚±‚Å‚ÍƒvƒŠƒ“ƒ^o—Í‚É•Ö—˜‚È‚æ‚¤‚ÉA4”»‚ğŠî€‚ÉZo‚³‚¹‚Ä‚¢‚Ü‚·D
-%% ƒNƒ‰ƒXƒIƒvƒVƒ‡ƒ“A4sizeijbook‚È‚Ç‚Ìa4paper‚âa4‚Æ‚ÍˆÓ–¡‚ªˆÙ‚È‚è‚Ü‚·j‚Å
-%% A4Šî€‚Ìd—l‚É‚È‚èCw’è‚µ‚È‚¢‚Æ\paperwidth‚Æ\paperheight‚ğŠî€‚É‚µ‚½
-%% —p†ƒTƒCƒY‚ÉŒˆ’è‚·‚é‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·D
-%% (tombow‚ ‚è‚Ì”»–Ê{ƒgƒ“ƒ{‚Ì—p†ƒTƒCƒY‚É‚È‚è‚Ü‚·D)
-%% PDF‚âdviout‚Ì‰æ–Êã‚Å—]”’‚É–³‘Ê‚È‚­•\¦‚³‚¹‚é‚É‚Íw’è‚µ‚È‚¢‚Ù‚¤‚ªƒXƒbƒLƒŠ‚µ‚Ü‚·D
+%% dvipsç”¨ã®splecialã®åŸ‹ã‚è¾¼ã¿ã§ã™ï¼(dviout, dvipdfmxã§ã‚‚æœ‰åŠ¹ã§ã™)
+%% \AFourtlueã¯ç”¨ç´™ã‚µã‚¤ã‚ºã‚’A4åˆ¤ã«é™å®šã—ã¦å¤©åœ°ä¸­å¤®ã«(tombowãŒæŒ‡å®šã•ã‚Œã¦
+%% ã„ã‚Œã°ãƒˆãƒ³ãƒœã‚’å«ã‚“ã çŠ¶æ…‹ã§)é…ç½®ã•ã›ã¾ã™ï¼
+%% jsbookã§ã¯\paperwidthã¨\paperheightã‚’åŸºæº–ã«ã—ã¦splecialç”¨ç´™ã‚µã‚¤ã‚ºã‚’
+%% æ±ºå®šã—ã¦ã„ã¾ã™ï¼
+%% ã“ã“ã§ã¯ãƒ—ãƒªãƒ³ã‚¿å‡ºåŠ›ã«ä¾¿åˆ©ãªã‚ˆã†ã«A4åˆ¤ã‚’åŸºæº–ã«ç®—å‡ºã•ã›ã¦ã„ã¾ã™ï¼
+%% ã‚¯ãƒ©ã‚¹ã‚ªãƒ—ã‚·ãƒ§ãƒ³A4sizeï¼ˆjbookãªã©ã®a4paperã‚„a4ã¨ã¯æ„å‘³ãŒç•°ãªã‚Šã¾ã™ï¼‰ã§
+%% A4åŸºæº–ã®ä»•æ§˜ã«ãªã‚Šï¼ŒæŒ‡å®šã—ãªã„ã¨\paperwidthã¨\paperheightã‚’åŸºæº–ã«ã—ãŸ
+%% ç”¨ç´™ã‚µã‚¤ã‚ºã«æ±ºå®šã™ã‚‹ã‚ˆã†ã«ã—ã¦ã„ã¾ã™ï¼
+%% (tombowã‚ã‚Šã®åˆ¤é¢ï¼‹ãƒˆãƒ³ãƒœã®ç”¨ç´™ã‚µã‚¤ã‚ºã«ãªã‚Šã¾ã™ï¼)
+%% PDFã‚„dvioutã®ç”»é¢ä¸Šã§ä½™ç™½ã«ç„¡é§„ãªãè¡¨ç¤ºã•ã›ã‚‹ã«ã¯æŒ‡å®šã—ãªã„ã»ã†ãŒã‚¹ãƒƒã‚­ãƒªã—ã¾ã™ï¼
 
 \ifAFour
 \newdimen\Hof@@fset
