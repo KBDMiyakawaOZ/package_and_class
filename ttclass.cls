@@ -1,4 +1,3 @@
-
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{ttclass}[2009/05/07 v2.1]
 

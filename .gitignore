@@ -6,3 +6,10 @@
 *.idx
 *.ilg
 *.fls
+*.pdf
+*.xbb
+*.zip
+*.bat
+!sample.pdf
+Chap01.tex
+

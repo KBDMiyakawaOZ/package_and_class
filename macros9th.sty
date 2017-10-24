@@ -1,3 +1,5 @@
+% -- 2017/10/24 teatime環境にfigure, tableの指定可能へ
+%               emathの式番号をキャンセル \resettagform
 % ---2017/10/02 新版用に若干modify
 % ---2010/03/08
 % 目次と索引の柱修正
@@ -347,7 +349,19 @@
 
 \DeclareRobustCommand{\Sfface}[1]{{\fontfamily{phv}\fontseries{b}\selectfont#1}}
 
+
+
 %% ティータイム
+
+\def\kb@figure{\@ifnextchar[{\kb@@figure}{\kb@@figure[\relax]}}
+\def\kb@@figure[#1]{\def\@captype{figure}%
+	\ifhmode\par\fi\addvspace{.25\baselineskip}%
+	\noindent\begin{minipage}{\linewidth}}
+\def\kb@table{\@ifnextchar[{\kb@@table}{\kb@@table[\relax]}}
+\def\kb@@table[#1]{\def\@captype{table}%
+	\ifhmode\par\fi\addvspace{.25\baselineskip}%
+	\noindent\begin{minipage}{\linewidth}}
+
 \definecolor{GrayXX}{gray}{0.8}
 \protected@edef\●{\hbox to1.25zw{\hfil\textcolor{GrayXX}{●}\hfil}}
 
@@ -355,6 +369,8 @@
 \def\Ch@@teatime@@title{\relax}
 \def\teatime@[#1]{\par\vspace{4mm}\noindent\markright{Tea Time}%
 \bgroup
+\def\figure{\kb@figure}\def\endfigure{\end{minipage}\vspace{.25\baselineskip}\par}%
+\def\table{\kb@table}\def\endtable{\end{minipage}\vspace{.25\baselineskip}\par}%
 \def\teatimetitle{#1}
 \ifx\Ch@@teatime@@title\teatimetitle%
     \addcontentsline{toc}{section}{\global\let\protect\tocendsq\relax Tea Time}%
@@ -611,6 +627,9 @@
 \end{center}
 \vspace*{3zw}
 }
+
+%% emathの式番号をキャンセル
+\resettagform
 
 
 \def\XXX{\if@nobreak \fbox{NOBREAK}\else \fbox{BREAK}\fi}
