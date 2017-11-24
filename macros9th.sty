@@ -94,6 +94,8 @@
 \small}{\end{@@@@tyuukai}}
 
 
+
+
 %%\begin{itembox}[l]{\kreidai \quad{\bfseries 標本空間・事象・確率}}
 \def\問題title{\relax}
 \newcounter{mondai}
@@ -135,6 +137,8 @@
 \gdef\問題title{\@tempdima\fboxsep\dimen1=\f@size\p@%
 問題\textsl{\themondai}\hskip.5zw{\fboxrule.12mm\fboxsep.1zw{\fontsize{.8\dimen1}{0pt}\selectfont\fbox{\leve@@l@@}}\hskip.5zw#2\relax\fboxsep\@tempdima}}
 \renewcommand{\labelenumi}{(\theenumi)}%
+\def\figure{\kb@figure}\def\endfigure{\end{minipage}\vspace{.25\baselineskip}\par}%
+\def\table{\kb@table}\def\endtable{\end{minipage}\vspace{.25\baselineskip}\par}%
 \setbox\mondaibox=\hbox\bgroup\begin{minipage}{.95\textwidth}\parindent1zw\vskip2mm}
 
 
@@ -206,6 +210,9 @@
 		\item[\raisebox{-2mm}{\@解説}]
 		}
 	{\endlist}
+
+
+
 
 
 \newif\if@tempmathindent

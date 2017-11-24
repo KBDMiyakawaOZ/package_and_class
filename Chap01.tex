@@ -11,8 +11,27 @@
 \end{abstract}
 
 
+
 \begin{問題}[標準]{ベイズの定理（Bayes' Theorem）}
+\begin{minipage}{.5\linewidth}\textsf{minipageのテスト}\parindent1zw\par
 有望と思えるガン発見のある検査法が開発された。大病院のガン患者の $97\%$ がこの検査に陽性反応を示し，ガンでない患者の $5\%$ が同じ陽性反応を示したとしよう。病院の患者の $2\%$ がガンにかかっているとするとき，無作為に選んだある患者がこの検査に陽性反応を示したとして，以下の問いに答えよ。
+\end{minipage}
+\begin{table}\centering
+	\caption{tableのテスト}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A & B & C\\
+		\hline
+		A & B & C\\
+		\hline
+		A & B & C\\
+		\hline
+	\end{tabular}
+\end{table}
+\begin{figure}\centering
+\includegraphics[keepaspectratio,scale=0.17]{cups.pdf}
+	\caption{figureのテスト}
+\end{figure}
 
 \begin{enumerate}
 \item 抽出された患者が本当にガンにかかっている確率を求めよ。
@@ -121,6 +140,11 @@ $
 %\dumyword{60}
 
 \begin{問題}[やや難]{正規分布$N(\mu, 1)$の$2$乗の分布}
+\begin{wrapfigure}[9]{l}{50mm} 
+\centering
+\includegraphics[keepaspectratio,scale=0.17]{cups.pdf}%
+\caption{wrapfigureのテスト}
+\end{wrapfigure}
 湖に野生してる蓮の花がそよ風に揺れ、時折不規則的に水面に触れる。
 水面から$25$センチ突き出ている蓮の花をじっと見ていたら、
 $53$センチ前後離れた水面に触れることに段々と確信した。
@@ -135,7 +159,7 @@ $53$センチ前後離れた水面に触れることに段々と確信した。
 確率変数の関数の分布や積率母関数の求め方を理解することが前提である。
 
 \begin{解説}
-$X\sim N(\mu,1)$とする。$\mu =0$のとき、すなわち、$X$が標準正規分布$N(0,1)$に従うとき，$X^2$は自由度$1$のカイ自乗分布に従う。ここで、$-\infty < \mu < \infty $として、$Y=X^2$の密度関数$f(y)$と積率母関数$M(t)$を求めてみよう。
+	$X\sim N(\mu,1)$とする。$\mu =0$のとき、すなわち、$X$が標準正規分布$N(0,1)$に従うとき，$X^2$は自由度$1$のカイ自乗分布に従う。ここで、$-\infty < \mu < \infty $として、$Y=X^2$の密度関数$f(y)$と積率母関数$M(t)$を求めてみよう。
 
 $\Phi(\cdot)$を$N(0,1)$の分布関数とする。$X-\mu \sim N(0,1)$に注意すると、任意の$y> 0$に対して、$Y$の分布関数は
 \begin{eqnarray*}
@@ -221,7 +245,7 @@ $$
 
 \end{enumerate}
 \end{解答}
-
+\pagebreak
 \begin{teatime}[実験の計画が重要である：円周率の推定の場合]
 データを要約したら、データを支配する法則を推量したりする方法論の構築が統計学の使命である。しかし、統計的方法論の選択よりも、まず質の高いデータの取得がより重要であることを肝に銘じてほしい。ここで円周率$\pi$を未知の定数として、$\pi$を推定する問題を通して実験計画の重要性を考えよう。
 %\end{teatime}
