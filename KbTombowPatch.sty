@@ -1,0 +1,15 @@
+% graphicxを使うとPDF化したのち版全体がずれる事象への対応
+% texlivi2016でのdvipdfmx.def改修に対応するpatch
+
+%% ※graphicxやxcolor packageよりも前に読み込む
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{KbTombowPatch}[2017/12/07 v0.1]%
+\newdimen\stockwidth \newdimen\stockheight
+\setlength{\stockwidth}{\paperwidth}
+\setlength{\stockheight}{\paperheight}
+\iftombow
+\addtolength{\stockwidth}{1in}
+\addtolength{\stockheight}{1in}
+\fi
+\AtBeginDvi{\special{papersize=\the\stockwidth,\the\stockheight}}
