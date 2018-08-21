@@ -8,8 +8,13 @@
 *.fls
 *.pdf
 *.xbb
+*.bb
 *.zip
 *.bat
+!cups.pdf
+!toufu.pdf
 !sample.pdf
-Chap01.tex
+!toukeigaku-sample.pdf
+!sample.pdf
+work/
 

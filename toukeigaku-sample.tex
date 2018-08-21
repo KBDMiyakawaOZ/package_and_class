@@ -1,0 +1,53 @@
+\documentclass[a5,tombow,multijfont]{ttclass}
+\usepackage{makeidx,multicol}
+\usepackage[noreplace]{otf}
+\usepackage[dvipdfmx]{graphicx,color}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+\usepackage{ascmac}
+%\usepackage{eucal}
+%\usepackage{cancel}
+%\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{longtable,multirow}
+\usepackage{colortbl}
+\usepackage{KbTombowPatch}
+\usepackage{xparse}
+\usepackage{nccmath}
+\usepackage{ulem}
+\usepackage{framed}
+\usepackage{braket}
+\usepackage{subfigmat}
+\usepackage{emathMw}
+\usepackage{my-emathBk}
+
+\usepackage{toukeigaku}%% 統計学の基本設定
+%\usepackage{basic}%%     統計学以外で使う基本設定
+
+\usepackage{auh}
+
+\def\theequation{\arabic{equation}}
+
+\graphicspath{{./fig/}{./samplefig/}}
+
+\includeonly{
+./sampletexfiles/maegaki,
+./sampletexfiles/toukeisample,
+./sampletexfiles/Chap01,
+./sampletexfiles/shuffleTEST
+}
+
+\begin{document}
+\frontmatter
+\include{maegaki}%まえがき
+\tableofcontents
+\mainmatter
+\include{./sampletexfiles/toukeisample}       %% 統計学サンプル
+\include{./sampletexfiles/Chap01}       %第1章
+\include{./sampletexfiles/shuffleTEST}  %TESTshuffle20
+\printindex
+
+
+\end{document}
+
+[width=]{}

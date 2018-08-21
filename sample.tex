@@ -18,7 +18,7 @@
 \usepackage{mdwlist} %2010/2/6 ノリマツ追加
 
 \usepackage{colortbl}
-\usepackage{macros9th}[2010/03/08]
+\usepackage{basic}
 %%\usepackage{origimal_macros}
 
 \makeindex
@@ -28,18 +28,22 @@
 \renewcommand{\postchaptername}{}
 
 
-\includeonly{maegaki,
-Chap01,
-shuffleTEST
+\graphicspath{{./fig/}{./samplefig/}}
+
+\includeonly{
+./sampletexfiles/maegaki,
+./sampletexfiles/maegaki,
+./sampletexfiles/Chap01,
+./sampletexfiles/shuffleTEST
 }
 
 \begin{document}
 \frontmatter
-\include{maegaki}%まえがき
+\include{./sampletexfiles/maegaki}%まえがき
 \tableofcontents
 \mainmatter
-\include{Chap01}       %第1章
-\include{shuffleTEST}  %TESTshuffle20
+\include{./sampletexfiles/Chap01}       %第1章
+\include{./sampletexfiles/shuffleTEST}  %TESTshuffle20
 \printindex          %東京図書で追加
 \end{document}
 

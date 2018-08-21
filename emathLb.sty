@@ -1,27 +1,38 @@
 % emathLb.sty by tDB(CQB00260@nifty.ne.jp)
-
+%
   \NeedsTeXFormat{LaTeX2e}
-  \ProvidesPackage{emathLb}[2004/09/27 v 0.04]%
-
-% 相互参照形式ラベル書き出し
-% \WriteLabel#1#2
-%   #1 : ラベル名
-%   #2 : 書き出す内容
-\def\writeLabel#1#2{%
+  \ProvidesPackage{emathLb}[2015/01/22 v 0.27]%
+%
+  \DeclareOption{onlyLb}{\def\only@Lb{}}%
+  \DeclareOption{dplabel}{\def\dp@label{}}%
+  \ProcessOptions\relax
+%
+  \@ifundefined{only@Lb}{%
+    \@ifpackageloaded{emath}{}{%
+      \RequirePackage{emath}}%
+  }{}%
+%
+% $BAj8_;2>H7A<0%i%Y%k=q$-=P$7(B
+% \writeLabel#1#2
+%   #1 : $B%i%Y%kL>(B
+%   #2 : $B=q$-=P$9FbMF(B
+\def\writeLabel#1#2{\leavevmode\put(0,0){%
+\@ifundefined{wL@#1}{%\expandafter\xdef\csname wL@#1\endcsname{}%
 \@ifundefined{Fld@menulength}{%
   \@bsphack%
   \protected@write\@auxout{}%
          {\string\newlabel{#1}{{#2}{\thepage}}}%
   \@esphack
-}{% (hyperref.sty 形式 --- 応急手当版)
+}{% (hyperref.sty $B7A<0(B --- $B1~5^<jEvHG(B)
   \@bsphack%
   \protected@write\@auxout{}%
     {\string\newlabel{#1}{{#2}{\thepage}{\string\relax\space}{}{}}}%
   \@esphack
-}}
+}}{}}}%
+\def\EMwriteLabel#1{\writeLabel{\prelabel #1}}%
 %
-% hyperref.sty 対策
-% LaTeX の \ref を \ltxref として，このファイルではこちらを用いる。
+% hyperref.sty $BBP:v(B
+% LaTeX $B$N(B \ref $B$r(B \ltxref $B$H$7$F!$$3$N%U%!%$%k$G$O$3$A$i$rMQ$$$k!#(B
 \def\ltx@setref#1#2#3{%
   \ifx#1\relax
    \protect\G@refundefinedtrue
@@ -31,22 +42,48 @@
   \else
    \expandafter#2#1\null
   \fi}
-\def\ltxref#1{\expandafter\ltx@setref\csname r@#1\endcsname\@firstoftwo{#1}}
+\@ifundefined{Fld@menulength}{%
+  \def\ltxref#1{\expandafter\ltx@setref\csname r@#1\endcsname\@firstoftwo{#1}}%
+}{%
+  \def\ltxref#1{\expandafter\ltx@setref\csname r@#1\endcsname\@firstoffive{#1}}%
+}%
 %
-% 単位付数値を受け取る （未定義時 [#1:default=0pt]）
-%   \dimenref : 戻り値は pt つき
-%   \dimenref*: 戻り値は無名数
+% $BC10LIU?tCM$r<u$1<h$k(B $B!JL$Dj5A;~(B [#1:default=0pt]$B!K(B
+%   \dimenref : $BLa$jCM$O(B pt $B$D$-(B
+%   \dimenref*: $BLa$jCM$OL5L>?t(B
+%   \dimenref**: $B=q$-=P$7CM!$La$jCM$OL5L>?t(B
 \def\dimenref{\@ifstar{\@dimenref@}{\@dimenref}}
 \def\@dimenref{\@ifnextchar[{\@@dimenref}{\@@dimenref[0pt]}}
-\def\@@dimenref[#1]#2#3{\@ifundefined{r@#2}{\edef#3{#1}}{%
-    \@tempdima=\ltxref{#2}\edef#3{\the\@tempdima}}%
-}
-\def\@dimenref@{\@ifnextchar[{\@@dimenref@}{\@@dimenref@[0]}}
-\def\@@dimenref@[#1]#2#3{\@ifundefined{r@#2}{\edef#3{#1}}{%
-    \@tempdima=\ltxref{#2}\edef#3{\strip@pt\@tempdima}}%
-}
-
-% ベクトルを受け取る （未定義時 (0,0)）
+\def\@@dimenref[#1]#2#3{%
+  \edef\dimenref@label{\prelabel #2}%
+%\typeout{@@dimenref:\dimenref@label}%
+  \@ifundefined{r@\dimenref@label}{\edef#3{#1}}{%
+%    \@tempdima=\ltxref{\dimenref@label}\edef#3{\the\@tempdima}%
+    \EMedef\dr@tmp{\ltxref{\dimenref@label}}%
+    \Strsep{\dr@tmp}{\hbox}\dr@a\dr@b
+    \edef#3{\dr@a}%
+  }%
+%\typeout{@@dimenref:ret=#3}%
+\ignorespaces
+}%
+\def\@dimenref@{\@ifstar{\dimenref@@}{\@@dimenref@}}
+\def\@@dimenref@{\@ifnextchar[{\@@@dimenref@}{\@@@dimenref@[0]}}
+\def\@@@dimenref@[#1]#2#3{%
+  \edef\dimenref@label{\prelabel #2}%
+  \@ifundefined{r@\dimenref@label}{\edef#3{#1}}{%
+    \@tempdima=\ltxref{\dimenref@label}\edef#3{\strip@pt\@tempdima}}%
+\ignorespaces
+}%
+\def\dimenref@@{\@ifnextchar[{\@dimenref@@}{\@dimenref@@[0]}}%
+\def\@dimenref@@[#1]#2#3{%
+  \edef\dimenref@label{\prelabel #2}%
+  \@ifundefined{r@\dimenref@label}{\edef#3{#1}}{%
+    \EMedef\dr@tmp{\ltxref{\dimenref@label}}%
+    \Strsep\dr@tmp{\hbox}#3\dr@tmp
+  }%
+}%
+%
+% $B%Y%/%H%k$r<u$1<h$k(B $B!JL$Dj5A;~(B (0,0)$B!K(B
 \def\vec@ref#1{\@ifundefined{r@#1}{\edef\vec@refX{0}\edef\vec@refY{0}}{%
   \def\vecXY@r(##1,##2){\edef\vec@refX{##1}\edef\vec@refY{##2}}%
   \edef\Nlabel@xy{\ltxref{#1}}\expandafter\vecXY@r\Nlabel@xy}}%
@@ -54,13 +91,13 @@
 
 % \getWHD#1#2
 % \getWHD*#1#2
-% #2 のサイズを ラベル #1 に書き出す。
+% #2 $B$N%5%$%:$r(B $B%i%Y%k(B #1 $B$K=q$-=P$9!#(B
 %   W#1 : width
 %   H#1 : height
 %   D#1 : depth
 %   T#1 : totalheight
-% 参照は \dimenref による。
-% *付は，#2を実行しない。
+% $B;2>H$O(B \dimenref $B$K$h$k!#(B
+% *$BIU$O!$(B#2$B$r<B9T$7$J$$!#(B
 
 \def\getWHD{\@ifstar{\getWHD@}{\@getWHD}}
 \def\@getWHD#1#2{{%
@@ -71,32 +108,196 @@
       \setbox0=\hbox{\ensuremath{\displaystyle #2}}%
     \fi
   \else
-    \setbox0=\hbox{#2}%\relax
+    \setbox0=\hbox{{#2}}%\relax
   \fi
-  \writeLabel{W#1}{\the\wd0}%
-  \writeLabel{H#1}{\the\ht0}%
-  \writeLabel{D#1}{\the\dp0}%
-  \@tempdima=\ht0\advance\@tempdima\dp0
-  \writeLabel{T#1}{\the\@tempdima}%
-  \leavevmode\box0
+%  \edef\getWHD@label{\prelabel #1}%
+  \leavevmode
+%  \writeLabel{W\getWHD@label}{\the\wd0}%
+%  \writeLabel{H\getWHD@label}{\the\ht0}%
+%  \writeLabel{D\getWHD@label}{\the\dp0}%
+  \writeLabel{\prelabel W#1}{\the\wd0}%
+  \writeLabel{\prelabel H#1}{\the\ht0}%
+  \writeLabel{\prelabel D#1}{\the\dp0}%
+%  \writeLabel{H\getWHD@label}{\the\ht0}%
+%  \writeLabel{D\getWHD@label}{\the\dp0}%
+  \@tempdima=\ht0\advance\@tempdima\dp0\relax
+%  \writeLabel{T\getWHD@label}{\the\@tempdima}%
+%  \writeLabel{\prelabel T#1}{\the\@tempdima}%
+  \edef\getWHD@tmp{\the\@tempdima}%
+  \writeLabel{\prelabel T#1}{\getWHD@tmp}%
+  \box0
 }}
-\def\getWHD@#1#2{{\setbox0=\hbox{#2}%\relax
-  \writeLabel{W#1}{\the\wd0}%
-  \writeLabel{H#1}{\the\ht0}%
-  \writeLabel{D#1}{\the\dp0}%
+\def\getWHD@#1#2{{\setbox0=\hbox{{#2}}%\relax
+  \edef\getWHD@label{\prelabel #1}%
+  \writeLabel{W\getWHD@label}{\the\wd0}%
+  \writeLabel{H\getWHD@label}{\the\ht0}%
+  \writeLabel{D\getWHD@label}{\the\dp0}%
   \@tempdima=\ht0\advance\@tempdima\dp0
-  \writeLabel{T#1}{\the\@tempdima}%
+  \writeLabel{T\getWHD@label}{\the\@tempdima}%
+  \@ifpackageloaded{hyperref}{}{\ignorespaces}%
 }}
+%
+\edef\prelabel{\empty}%
+%\def\EMlabel#1{%
+\DeclareRobustCommand\EMlabel[1]{{%
+  \let\apnitem\@gobble
+  \label{\prelabel #1}%
+}}%
+%
+\AtBeginDocument{%
+  \hairetusyokika{eqrefL@List}%
+  \hairetusyokika{eqrefR@List}%
+%
+  \let\LB@eqref\eqref
+  \def\eqref#1{\leavevmode%
+      \expandafter\ref@chk\csname r@#1@ref\endcsname
+%      \if 1\@miteigi
+        \srchhairetu{eqrefL@List}{#1}\eqref@tmp
+        \ifnum\eqref@tmp>\z@
+          \hairetukakunin{eqrefR@List}{#1}\dummy@
+        \fi
+%      \fi
+      \LB@eqref{#1}%
+  }%
+}%
+%
+\AtEndDocument{%
+  \ifnum\eqrefR@ListN>\z@
+    \Ifor*\i@val{1}{\eqrefR@ListN}\Do{%
+      \edef\tmp@{\hairetu{eqrefR@List}{\i@val}}%
+        \edefappend\tmp@{@ref}%
+        \immediate\write\@auxout{\string\newlabel{\tmp@}{{}{\thepage}}}%
+    }%
+  \fi
+}%
+%
+%\edef\EMeqlabel@o{}%
+\def\EMeqlabel#1{%
+%  \edef\EMeqlabel@o{#1}%
+  \eqlabel{\prelabel #1}%
+}%
+\def\EMenumlabel#1{{%
+  \let\apnitem\@gobble
+  \enumlabel{\prelabel #1}%
+}}%
+%\def\EMref#1{\leavevmode
+%  {\ref{\prelabel #1}}%
+%}%
+\def\EMref#1{%
+  \ref{\prelabel #1}%
+}%
+\def\EMpageref#1{%
+  \pageref{\prelabel #1}%
+}%
+%\def\EMeqref#1{\leavevmode
+\DeclareRobustCommand\EMeqref[1]{\leavevmode
+  {\eqref{\prelabel #1}}%
+}%
+\def\EMenumref#1{\leavevmode
+  {\enumref{\prelabel #1}}%
+}%
+\def\EMdashtag{\@ifnextchar({\@EMdashtag}{\@EMdashtag(1)}}%
+\def\@EMdashtag(#1)#2{%
+  \dashtag(#1){\prelabel #2}%
+}%
+\def\EMdashref{\@ifnextchar({\@EMdashref}{\@EMdashref(1)}}%
+\def\@EMdashref(#1)#2{%
+  \dashref(#1){\prelabel #2}%
+}%
+%
+%
+%
+% $B;2>H$5$l$?<0$N$_$KHV9f$r?6$k(B
+%   Q&A #44211 $B$O(B amsmath $B$N%P!<%8%g%s0MB8$J$N$G!$JL%3%^%s%I(B
+%
+\let\@latexeqref\eqref
+\def\Jobname{\jobname}%
+\def\eqlabel#1{%
+  \hairetukakunin{eqrefL@List}{#1}\eqlabel@tmp
+  \expandafter\ref@chk\csname r@#1@ref\endcsname
+  \@ifundefined{dp@label}{}{\hbox to 0pt {\color{red}$\quad{}^{\text{#1}}$}}%
+  \if 1\@miteigi
+    \notag
+  \else
+    \if@eqnsw\else
+      \ifnum\atag@ed=\z@
+        \atag
+      \fi
+    \fi
+    \label{#1}%
+  \fi
+  \edef\atag@ed{0}%
+}%
+%  \@ifundefined{r@#1@ref}{\notag}{\label{#1}}}%
+%\def\eqref#1{\leavevmode%
+%%\typeout{Lb:eqref:arg1=#1}%
+%           \@ifundefined{r@@#1@@ref}{%
+%                \writeLabel{#1@ref}{}%
+%                \expandafter\gdef\csname r@@#1@@ref\endcsname{}%
+%           }{}%
+%           \@latexeqref{#1}%
+%}%
+%%
 \endinput
 
 v 0.00 2003/11/28
 v 0.01 2003/11/29-12/01
-        getWHD* サイズのみを書き出す
+        getWHD* $B%5%$%:$N$_$r=q$-=P$9(B
 v 0.02 2003/12/05
-        \dimenref : ラベル未定義のとき返す値を[#1]オプションで指定可能
-        \dimenref*: `pt'をつけない，無名数を返す。
+        \dimenref : $B%i%Y%kL$Dj5A$N$H$-JV$9CM$r(B[#1]$B%*%W%7%g%s$G;XDj2DG=(B
+        \dimenref*: `pt'$B$r$D$1$J$$!$L5L>?t$rJV$9!#(B
 v 0.03 2004/07/15
-        hyperref.sty 対策
-          LaTeX 本来の \ref を \ltxref として，このファイルではこちらを用いる
+        hyperref.sty $BBP:v(B
+          LaTeX $BK\Mh$N(B \ref $B$r(B \ltxref $B$H$7$F!$$3$N%U%!%$%k$G$O$3$A$i$rMQ$$$k(B
 v 0.04 2004/09/27
-        \getWHD : 数式モード内か否かで分類
+        \getWHD : $B?t<0%b!<%IFb$+H]$+$GJ,N`(B
+v 0.05 2006/08/10
+        \eqlabel : $B;2>H$5$l$?<0$N$_$KHV9f$rIUM?$9$k(B
+v 0.05a 2006/12/15
+        v0.05 $B$NJQ99$r=$@5(B (----> BBS #5409)
+v 0.06 2007/01/18
+        \writeLabel : \ignorespaces
+v 0.07 2007/07/11
+        \getWHD : \leavevmode
+v 0.08 2008/01/10
+        \ltxref : hyperref $B$KBP1~(B (\@firstoffive) (saloon #528)
+v 0.09 2008/01/26
+        \eqref $B$N=$@53NG'(B
+v 0.10 2008/02/14
+        \RequirePackage{emath} $B$rIU2C(B
+v 0.11 2008/03/09
+        \eqref: \leavevmode $B$rIU2C(B
+v 0.12 2009/06/08
+        \getWHD: \hyperref $BBP:v(B (BBS #8174)
+        $B%m!<%I%*%W%7%g%s(B: onlyLb
+v 0.13 2009/11/20
+        \EMlabel, \EMref: label $B$N=EJ#BP:v(B
+v 0.14 2010/02/05
+        \EMenumlabel
+v 0.15 2010/03/02
+        \EMdashdag, EMdashref
+v 0.16 2010/03/11
+        \EMeqlabel
+        \getWHD, \dimenref: \jobname $B$rIU2C(B
+v 0.17 2010/04/02
+        hyperref $BBP1~(B
+v 0.18 2011/05/30
+        \dimenref: \ltxref $B$N7k2L$K4^$^$l$k(B \hbox{} $B$r@Z$j<N$F(B
+v 0.19 2012/03/21
+        \dimenref**
+v 0.20 2012/03/25
+        \dimenref* (BBS #10652)
+v 0.21 2012/05/05
+        \EMref: $BC1=c2=(B
+v 0.22 2012/05/07
+        \writeLabel: $BH>3Q6uGr$N%:%lBP:v(B
+v 0.23 2012/05/19
+        \writeLabel: $B=$@5(B (BBS #10787)
+v 0.24 2012/06/17
+        \dimenref**: \edef --> \EMedef
+v 0.25 2013/02/09
+        \getWHD: $B%i%Y%kL>D4@0(B
+v 0.26 2013/12/29
+        \getWHD: Totalheigth $B$,(B 0 $B$K$J$C$F$7$^$&%P%0=$@5(B (BBS #12123)
+v 0.27 2015/01/22
+        \EMpageref

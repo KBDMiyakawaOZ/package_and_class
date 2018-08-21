@@ -1,3 +1,4 @@
+
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{ttclass}[2009/05/07 v2.1]
 
@@ -1000,7 +1001,7 @@ JFM=min10.tfm^^J%
 \newcommand{\paragraph}{%
     \@startsection{paragraph}{4}{\z@}%
    {3.25ex \@plus 1ex \@minus .2ex}%
-   {1sp}%
+   {-1em}%
    {\@@ParagraphFont}}
 \newcommand{\subparagraph}{%
    \@startsection{subparagraph}{5}{\z@}%

@@ -1,45 +1,274 @@
 % emathEc.sty by tDB (emath@nifty.com)
 
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{emathEc}[2005/09/05 v0.00]%
-\RequirePackage{emathC}%
+\ProvidesPackage{emathEc}[2014/09/27 v0.22]%
+%\RequirePackage{emathC}%
+\RequirePackage{emathK}%
+%\RequirePackage{emathLb}%
 \RequirePackage{keyval}%
-
-\define@key{emE}{apnenum}{\def\apn@enum{#1}\relax}%
-
+\RequirePackage{enumerate}%
+%\RequirePackage{jquote}%
+%
+\@ifpackageloaded{emathLb}{}{\RequirePackage{emathLb}}%
+%
+\newcount\kizami@ti\kizami@ti=\@ne
+\newcount\syoki@ti\syoki@ti=\z@
+\newbox\em@label@box
+%
+\define@key{emE}{kizamiti}{\kizami@ti=#1\relax}%
+\define@key{emE}{syokiti}{\syoki@ti=#1\relax}%
+\define@key{emE}{usecounter}{%
+  \def\use@counter{#1}\syoki@ti=\csname c@#1\endcsname}%
+\define@key{emE}{apnlist}{\def\apn@list{#1}}%
+\define@key{emE}{listapn}{\def\list@apn{#1}}%
+\define@key{emE}{apnenum}{\edefappend\apn@enum{#1}}%
+\define@key{emE}{label}{\edef\emE@label{#1}}%
+\define@key{emE}{preitem}{\edef\pre@item{#1}}%
+%
+\edef\enum@firstleftmargin{0pt}%
+\define@key{emE}{enumfirstleftmargin}{\def\enum@firstleftmargin{#1}}%
+\define@key{emE}{enumleftmargin}{%
+  \edef\apn@enum{%
+    \itemindent=\leftmargin\relax
+    \advance\itemindent-#1\relax
+    \leftmargin=#1\relax
+    \advance\labelsep-\itemindent
+    \advance\labelsep\enum@firstleftmargin
+    \itemindent=\enum@firstleftmargin
+  }%
+}%
+%
+\@ifundefined{ltxitem}{\let\ltxitem\item}{}%
+\let\orgltxitem\item
+%
+%
+\let\ltxstepcounter\stepcounter
+\def\enumstepcounter#1{%
+  \addtocounter{#1}\kizami@ti
+  \begingroup
+    \let\@elt\@stpelt
+    \csname cl@#1\endcsname
+  \endgroup}
+%
 \newif\ifrenzi\renzitrue
-
+%
+  \let\emromancnt\roman
+  \let\emRomancnt\Roman
+  \let\emarabic\relax
+  \def\emarabiccnt#1{\protect\emarabic{\arabic{#1}}}%
+  \def\emKakkoromancnt#1{\protect\emKakkoroman{\arabic{#1}}}%
+  \def\emKakkoRomancnt#1{\protect\emKakkoRoman{\arabic{#1}}}%
+  \def\emKakkocnt#1{\protect\emKakko{\arabic{#1}}}%
+%  \def\emromancnt#1{\protect\emroman{\arabic{#1}}}%
+%  \def\emRomancnt#1{\protect\emRoman{\arabic{#1}}}%
+  \let\alphacnt\Alph
+  \let\betacnt\alph
 \def\@enloop@{%
   \ifx A\@entemp         \def\@tempa{\@enLabel\Alph  }\else
   \ifx a\@entemp         \def\@tempa{\@enLabel\alph  }\else
-  \ifx i\@entemp         \def\@tempa{\@enLabel\roman }\else
-  \ifx I\@entemp         \def\@tempa{\@enLabel\Roman }\else
+  \ifx i\@entemp         \def\@tempa{\@enLabel\emromancnt }\else
+  \ifx I\@entemp         \def\@tempa{\@enLabel\emRomancnt }\else
+  \ifx j\@entemp         \def\@tempa{\@enLabel\emKakkoromancnt }\else
+  \ifx J\@entemp         \def\@tempa{\@enLabel\emKakkoRomancnt }\else
+  \ifx k\@entemp         \def\@tempa{\@enLabel\emKakkocnt }\else
   \ifx 1\@entemp         \def\@tempa{\@enLabel\arabic}\else
   \ifx m\@entemp         \def\@tempa{\@enLabel\marucnt}\else
   \ifx M\@entemp         \def\@tempa{\@enLabel\Marucnt}\else
   \ifx n\@entemp         \def\@tempa{\@enLabel\nagamarucnt}\else
-  \ifx ア\@entemp         \def\@tempa{\@enLabel\カタカナ}\else
-  \ifx イ\@entemp         \def\@tempa{\@enLabel\イロハ}\else
-  \ifx あ\@entemp         \def\@tempa{\@enLabel\ひらがな}\else
-  \ifx い\@entemp         \def\@tempa{\@enLabel\いろは}\else
-  \ifx 一\@entemp         \renzifalse\def\@tempa{\@enLabel\Kanji}\else
-  \ifx １\@entemp         \def\@tempa{\@enLabel\rensuzi}\else
+  \ifx N\@entemp         \def\@tempa{\@enLabel\bnagamarucnt}\else
+  \ifx $B%"(B\@entemp         \def\@tempa{\@enLabel\$B%+%?%+%J(B}\else
+  \ifx $B%$(B\@entemp         \def\@tempa{\@enLabel\$B%$%m%O(B}\else
+  \ifx $B$"(B\@entemp         \def\@tempa{\@enLabel\$B$R$i$,$J(B}\else
+  \ifx $B$$(B\@entemp         \def\@tempa{\@enLabel\$B$$$m$O(B}\else
+  \ifx $B0l(B\@entemp         \renzifalse\def\@tempa{\@enLabel\Kanji}\else
+  \ifx $B#1(B\@entemp         \def\@tempa{\@enLabel\rensuzi}\else
+  \ifx $B9C(B\@entemp         \def\@tempa{\@enLabel\$B9C25(B}\else
+  \ifx $B;R(B\@entemp         \def\@tempa{\@enLabel\$B==Fs;Y(B}\else
+  \ifx $B&A(B\@entemp         \def\@tempa{\@enLabel\alphacnt}\else
+  \ifx $B&B(B\@entemp         \def\@tempa{\@enLabel\betacnt}\else
   \ifx \@sptoken\@entemp \let\@tempa\@enSpace         \else
   \ifx \bgroup\@entemp   \let\@tempa\@enGroup         \else
   \ifx \@enum@\@entemp   \let\@tempa\@gobble          \else
-%%% enumerate パッケージに下の1行を追加
+%%% enumerate $B%Q%C%1!<%8$K2<$N(B1$B9T$rDI2C(B
   \ifx \@edaenum@\@entemp   \let\@tempa\@gobble       \else
                          \let\@tempa\@enOther
-             \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+          \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \@tempa}
-
-% 全角数字によるナンバリング
-%\def\labelenumi{Ｑ\suuziToZen{\the\c@enumi}}%
-%\def\labelenumi{Ｑ\suuziToZen{\the\value{enumi}}.\ }%
-% 半角数字列を全角数字列に変換する．
+%
+\DeclareRobustCommand\apnitem{\relax}%
+\def\preitem{}
+\def\postitem{}
+\edef\pre@item{*}
+\let\mark@item\item
+\def\item{\@ifstar{\items}{\def\preitem{}\def\postitem{}\mark@item}}
+\def\items{\@ifstar{\items@}{\@items}}
+\def\@items{\@ifnextchar[{\@@items}{\@@items[\pre@item]}}
+\def\@@items[#1]{\@ifnextchar[{\@@@items[#1]}{\@@@items[#1][]}}
+\def\@@@items[#1][#2]{\def\preitem{#1}\def\postitem{#2}\mark@item}
+\def\items@{\@ifnextchar[{\items@@}{\items@@[*]}}
+\def\items@@[#1]{\def\preitem{}\def\postitem{#1}\mark@item}
+\let\EMitem\item
+%
+% list $B4D6-$N=$@5(B
+\def\apn@list{\relax}
+\def\list@apn{\relax}
+\def\apnlist#1{\def\apn@list{#1}}
+\def\narrowsep{\parsep\z@\itemsep\z@\parskip\z@}
+\let\ltxlist\list
+\edef\old@totalleftmargin{\z@}%
+\def\list#1#2{%
+  \def\in@EMlist{}%
+  \edef\old@totalleftmargin{\the\@totalleftmargin}%
+  \ltxlist{#1}{\apn@list #2 \list@apn}%
+}
+%
+\let\ltxitemize\itemize
+\def\itemize{\@ifnextchar<{\em@itemize}{\ltxitemize}}
+\def\em@itemize<#1>{\setkeys{emE}{#1}\ltxitemize}%
+%
+\let\ltxdescription\description
+\def\description{\@ifnextchar<{\em@description}{\ltxdescription}}
+\def\em@description<#1>{\setkeys{emE}{#1}\ltxdescription}%
+%
+\newcounter{enumT}%
+\newcounter{enumTi}%
+\newcounter{enumTii}%
+\newcounter{enumTiii}%
+\def\labelenumT{\arabic{enumT}}%
+\def\labelenumTi{\roman{enumTi}}%
+\def\labelenumTii{\Alph{enumTii}}%
+\def\labelenumTiii{\alph{enumTiii}}%
+\DeclareRobustCommand\itemT{\@ifnextchar<{\@itemT}{\@itemT<\empty>}}%
+\def\@itemT<#1>{%
+  \let\emE@label\undefined
+  \ifx\empty #1\else\setkeys{emE}{#1}\fi
+  \refstepcounter{enumT}\labelenumT
+  \@ifundefined{emE@label}{}{%
+    \writeLabel{\emE@label}{\labelenumT}%
+  }%
+}%
+\DeclareRobustCommand\itemTi{\@ifnextchar<{\@itemTi}{\@itemTi<\empty>}}%
+\def\@itemTi<#1>{%
+  \let\emE@label\undefined
+  \ifx\empty #1\else\setkeys{emE}{#1}\fi
+  \refstepcounter{enumTi}\labelenumTi
+  \@ifundefined{emE@label}{}{%
+    \writeLabel{\emE@label}{\labelenumTi}%
+  }%
+}%
+\DeclareRobustCommand\itemTii{\@ifnextchar<{\@itemTii}{\@itemTii<\empty>}}%
+\def\@itemTii<#1>{%
+  \let\emE@label\undefined
+  \ifx\empty #1\else\setkeys{emE}{#1}\fi
+  \refstepcounter{enumTii}\labelenumTii
+  \@ifundefined{emE@label}{}{%
+    \writeLabel{\emE@label}{\labelenumTii}%
+  }%
+}%
+\DeclareRobustCommand\itemTiii{\@ifnextchar<{\@itemTiii}{\@itemTiii<\empty>}}%
+\def\@itemTiii<#1>{%
+  \let\emE@label\undefined
+  \ifx\empty #1\else\setkeys{emE}{#1}\fi
+  \refstepcounter{enumTiii}\labelenumTiii
+  \@ifundefined{emE@label}{}{%
+    \writeLabel{\emE@label}{\labelenumTiii}%
+  }%
+}%
+\def\enumTlabel#1{{%
+  \EMedef\@currentlabel{\labelenumT}%
+  \label{#1}%
+}}%
+\def\enumTilabel#1{{%
+  \EMedef\@currentlabel{\labelenumTi}%
+  \label{#1}%
+}}%
+\def\enumTiilabel#1{{%
+  \EMedef\@currentlabel{\labelenumTii}%
+  \label{#1}%
+}}%
+\def\enumTiiilabel#1{{%
+  \EMedef\@currentlabel{\labelenumTiii}%
+  \label{#1}%
+}}%
+\def\EMenumTlabel#1{\enumTlabel{\prelabel #1}}%
+\def\EMenumTilabel#1{\enumTilabel{\prelabel #1}}%
+\def\EMenumTiilabel#1{\enumTiilabel{\prelabel #1}}%
+\def\EMenumTiiilabel#1{\enumTiiilabel{\prelabel #1}}%
+%
+\def\@save@enumT{%
+  \edef\save@enumT{\theenumT}%
+  \edef\save@enumTi{\theenumTi}%
+  \edef\save@enumTii{\theenumTii}%
+  \edef\save@enumTiii{\theenumTiii}%
+}%
+\def\@pop@enumT{%
+  \setcounter{enumT}{\save@enumT}%
+  \setcounter{enumTi}{\save@enumTi}%
+  \setcounter{enumTii}{\save@enumTii}%
+  \setcounter{enumTiii}{\save@enumTiii}%
+}%
+%
+%
+\def\save@label@box{%
+  \if@inlabel
+    \setbox\em@label@box=\box\@labels
+    \if@newlist\global\@newlistfalse\fi
+    \global\@inlabelfalse
+    \@minipagefalse
+    \everypar{}%
+  \else
+    \setbox\em@label@box=\box\voidb@x
+  \fi
+}%
+%
+%
+% $BA43Q?t;z$K$h$k%J%s%P%j%s%0(B
+%\def\labelenumi{$B#Q(B\suuziToZen{\the\c@enumi}}%
+%\def\labelenumi{$B#Q(B\suuziToZen{\the\value{enumi}}.\ }%
+% $BH>3Q?t;zNs$rA43Q?t;zNs$KJQ49$9$k!%(B
 \def\suuziToZen#1{%
   \expandafter\@tfor\expandafter\@c\expandafter:\expandafter=#1%
   \do{{\@tempcnta33359\advance\@tempcnta\@c\char\@tempcnta}}}%
+%
+\def\hfilll{\hskip0pt plus 1filll}%
+%
+% $B9`L\HV9f$K%"%s%@!<%i%$%s$J$I(B
+%
+\let\mfitemcmd\underline
+\def\mfitem{\@ifnextchar[{\mfitem@}{\@mfitem}}%
+\def\@mfitem{\def\makelabel##1{\hss\llap{\mfitemcmd{##1}}}\item
+  \def\makelabel##1{\hss\llap{##1}}}%%
+\def\mfitem@[#1]{\item[\mfitemcmd{#1}]}%
+%
+% $B9`L\HV9f$NJQ99(B
+%
+\def\addtocurrentenum#1{%
+  \edef\tmp@cnt{\getcurrentenum}\IAddself\tmp@cnt{#1}\setcurrentenum{\tmp@cnt}%
+}%
+%
+%
 \endinput
 
-v 0.00 2005/09/05 emathE, emathEy の共通部分
+v 0.00 2005/09/05 emathE, emathEy $B$N6&DLItJ,(B
+v 0.01 2006/05/27 \kizami@ti $B$J$I(B emathE $B$h$j0\4I(B
+v 0.02 2006/08/22 \ltxitem 
+v 0.03 2007/08/03 \preitem $B$J$I(B emathEy $B$h$j0\4I(B
+v 0.04 2008/01/05 \preitem $B$J$I$N=$>~(Benumerate$B4D6-$K$*$1$k(B \item $B$r(B \EMitem $B$H$bL>IU$1$k!#(B
+v 0.05 2008/01/12 enumerate.sty, jquote.sty, emathK.sty $B$r%m!<%I$9$k!#(B
+v 0.06 2008/03/04 enumerate $B$K(B [$B9C(B], [$B;R(B] $B%*%W%7%g%s(B
+v 0.07 2008/11/14 \hfilll
+v 0.08 2009/01/20 enumerate[*]: $B%a%?J8;z$K(B N (\bnagamaru)
+v 0.09 2009/05/01 romancnt $B$J$I(B
+v 0.10 2010/03/21 \emromancnt
+v 0.11 2010/12/09 \apnlist $B$J$I!$(BemathE.sty $B$+$i0\4I(B
+v 0.12 2011/01/08 enumerate[*]: $B%a%?J8;z$K(B J, j$B!J3g8LIU$-%m!<%^;z!K(B
+v 0.13 2011/01/11 \romancnt $B$NDj5A$r5l$KLa$9(B (BBS #9608)$B!#(B
+v 0.14 2011/01/28 enumerate[*]: $B%a%?J8;z$K(B k$B!J3g8LIU$-?t;z!K(B
+v 0.15 2011/03/21 \itemT: <...> $B%*%W%7%g%s(B
+v 0.16 2011/06/23 enumerate: <usecounter=..> $B%*%W%7%g%s(B
+v 0.17 2011/09/11 \itemTi, \itemTii, \itemTiii: $B%P%0=$@5(B
+v 0.18 2012/02/06 emathLb.sty $B$rFI$_9~$`!#(B
+v 0.19 2012/10/19 \save@label@box
+v 0.21 2013/11/04 \mfitem (\item: $B%"%s%@!<%i%$%s$J$I(B)
+                  jquote $B$rFHN)$5$;$k(B(jquote.sty)$B!#(B
+v 0.22 2014/09/27 preitem=.. 

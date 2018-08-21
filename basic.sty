@@ -1,0 +1,642 @@
+% -- 2017/10/24 teatime環境にfigure, tableの指定可能へ
+%               emathの式番号をキャンセル \resettagform
+% ---2017/10/02 新版用に若干modify
+% ---2010/03/08
+% 目次と索引の柱修正
+% 目次，抜き出し頁番号末尾の□を`Tea Time'と`TEST shuffile`において取る
+% ---2010/02/23
+% 扉の体裁変更（網掛けなど）
+% ``付表''，``TEST shuffile 20''の扉作成
+% ``問題''の体裁変更．連動して目次への出力形式の変更
+% ``TEST shuffile 20'' の体裁変更
+% abstract環境追加
+% \tableofcontens体裁変更
+% ---2009/12/15
+% 数式グループvarlargesymbolsを追加
+% \int, \sum, \iint, \iiintについて修正
+% サイズ調整．
+% インライン数式でもデフォルトでdisplaystyleとした．
+% \sumの添え字は常に\limits, \intの添え字は常に\nolimits
+% 今回の一連の修正により下記2009/12/14の\varsum, \varintは使用を禁止．
+% ---2009/12/14
+% \varsum, \varintの追加
+% 「解答」の数式を左寄せに
+%--- 2009/12/7
+%%  「解答」のフォントサイズを10Q, 15Hへ変更．
+%--- 2009/11/19
+%% \tyuuに参照番号を追加．
+%% TEST環境下でのboxレジスタ番号を修正(bug fix)
+%--- 2009/10/15
+%% 問題環境 \parindent追加
+%% 解説環境 \listparindent追加
+%--- 2009/10/08 追加訂正
+%% コラム追加
+%% TEST環境 追加
+%% [練習問題解答]の環境の追加
+%% ティータイムの体裁流用と微調整
+%--- 2009/07/21 追加訂正
+%% \tyuuの縦方向へのシフトオプション．(emath.styの既存オプション)
+%% \tyuuの傍注のマーク\tyuumark「★」を改行せず，なりで流す．
+%--- 2009/05/07 追加訂正
+%%  「解答」のフォントサイズを12Q, 22Hへ変更．
+%%  「解答」の注釈を\scriptsizeへ変更
+%%  mondaiカウンタをresetなしの本を通じて通し番号に修正
+%%  [問題]環境に[]optionを追加（任意の文字列パターンに対応）
+%%  同，目次へ抜き出し
+%---  2009/04/22(作成)
+%% 「問題」として[問題]環境作成．itembox環境より[問題]環境へ．要colortblパッケージ
+%%　\kaisetsuを[解説]環境に改変
+%%　\kaitouを[解答]環境に改変
+%%  網掛け環境に\smallを追加．網と記事の左右アキ設定
+%%  tyuukai環境に\small，\@解答を追加．\tyuuのデフォルトを\tinyへ
+
+
+%\ProvidesPackage{macros5th}[2009/11/19]
+%\ProvidesPackage{macros6th}[2009/12/07]
+%\ProvidesPackage{macros7th}[2009/12/15]
+%\ProvidesPackage{macros8th}[2010/02/25]
+\ProvidesPackage{basic}
+
+\renewcommand{\@@PageNumFont}{\reset@font\small\sf}
+
+\def\kaisetsu{\noindent {\bfseries \underline{解説}}}
+\newcommand{\kaitou}{\noindent{\bfseries 解答\addtocounter{kaitou}{1} \thekaitou}}
+
+
+\definecolor{grayII}{gray}{.9}
+\newenvironment{網掛け}[1][]{\par
+  \ifdim\lastskip=-2.5mm\vskip2.5mm\fi % 網伏せが連続した時の対策
+%  \setbox0\vbox\bgroup\small
+\@tempdima\textwidth\advance\@tempdima -1zw
+  \setbox0\hbox\bgroup\begin{minipage}{\@tempdima}\small
+  \abovedisplayskip\z@\belowdisplayskip\z@
+  \abovedisplayshortskip\z@\belowdisplayshortskip\z@
+  \topsep\z@\partopsep\z@\parsep\z@}
+  {\end{minipage}\egroup
+%  \setbox0=\vbox{\unvbox0}%
+  \setbox0=\hbox{\unhbox0}%
+  \begin{center}
+    \fboxsep\z@
+    \colorbox{grayII}{% 濃度
+      \vbox{\hsize\linewidth
+        \vskip1mm
+        \hb@xt@\linewidth{\hss\box0\hss}%
+        \vskip1mm
+      }%
+    }%
+  \end{center}%
+  \vskip-2.5mm
+}
+
+\let\@@@@tyuukai\tyuukai
+\let\end@@@@tyuukai\endtyuukai
+\renewenvironment{tyuukai}{\markright{\問題title}\begin{@@@@tyuukai}
+\small}{\end{@@@@tyuukai}}
+
+
+
+
+%%\begin{itembox}[l]{\kreidai \quad{\bfseries 標本空間・事象・確率}}
+\def\問題title{\relax}
+\newcounter{mondai}
+\def\themondai{%
+\ifnum\c@mondai<10\relax0\fi%
+\@arabic\c@mondai}
+
+
+\renewcommand*{\l@section}{\IfSecFontChange%
+\S@ectiontrue\@dottedtocline{1}{2.75em}{4em}}
+
+\newsavebox{\mondaibox}
+
+\def\問題{\@ifnextchar[{\@問題}{\@問題[基本]}}
+\def\@問題[#1]#2{\refstepcounter{mondai}\gdef\leve@@l@@{#1}%
+\def\問題@@title{#2}
+\gdef\問題title{\@tempdima\fboxsep\dimen1=\f@size\p@%
+問題\textsl{\themondai}\hskip.5zw{\fboxrule.12mm\fboxsep.1zw{\fontsize{.8\dimen1}{0pt}\selectfont\fbox{\leve@@l@@}}\hskip.5zw#2\relax\fboxsep\@tempdima}}
+\setbox\mondaibox=\hbox\bgroup\begin{minipage}{.95\textwidth}\parindent1zw\vskip2mm}
+
+
+\def\end問題{\vskip{2mm}A\end{minipage}\egroup%
+\par\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
+\begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{80mm}p{2zw}@{\vrule width1pt}}
+\hline
+\cellcolor[gray]{0}\textcolor{white}{\bf 問題}&\cellcolor[gray]{.9}\textsl{\themondai}&\問題@@title&\multicolumn{1}{c|}{\cellcolor[gray]{.6}\leve@@l@@}\\
+\noalign{\hrule height .5pt}
+\multicolumn{4}{|c@{\hskip.9\tabcolsep\vrule width1pt}}{\hfil\small\usebox{\mondaibox}\hfil}\\
+\hline
+\end{tabular}%
+\addcontentsline{toc}{Section}{\protect\def\protect\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
+}
+
+%---------------------------------------------------
+\DeclareRobustCommand{\Paren}[1]{\textmd{\fontsize{11Q}{11Q}\selectfont\kern1zw#1}}
+\def\問題{\@ifnextchar[{\@問題}{\@問題[基本]}}
+\def\@問題[#1]#2{\refstepcounter{mondai}\gdef\leve@@l@@{#1}%
+\def\問題@@title{#2}
+\gdef\問題title{\@tempdima\fboxsep\dimen1=\f@size\p@%
+問題\textsl{\themondai}\hskip.5zw{\fboxrule.12mm\fboxsep.1zw{\fontsize{.8\dimen1}{0pt}\selectfont\fbox{\leve@@l@@}}\hskip.5zw#2\relax\fboxsep\@tempdima}}
+\renewcommand{\labelenumi}{(\theenumi)}%
+\def\figure{\kb@figure}\def\endfigure{\end{minipage}\vspace{.25\baselineskip}\par}%
+\def\table{\kb@table}\def\endtable{\end{minipage}\vspace{.25\baselineskip}\par}%
+\setbox\mondaibox=\hbox\bgroup\begin{minipage}{.95\textwidth}\parindent1zw\vskip2mm}
+
+
+\def\end問題{\vspace{-1.5mm}\vskip\z@\end{minipage}\egroup%
+\begin{center}
+\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
+\begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{80mm}p{2zw}@{\vrule width1pt}}
+\hline
+\cellcolor[gray]{0}\textcolor{white}{\bf 問題}&\cellcolor[gray]{.9}\textsl{\themondai}&\textbf{\問題@@title}&\multicolumn{1}{c|}{\cellcolor[gray]{.6}\leve@@l@@}\\
+\noalign{\hrule height .5pt}
+\multicolumn{4}{|c@{\hskip.9\tabcolsep\vrule width1pt}}{\hfil\small\usebox{\mondaibox}\hfil}\\
+\hline
+\end{tabular}%
+\end{center}%
+\addcontentsline{toc}{Section}{\protect\def\protect\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
+}%---------------------------------------------------
+
+\newcounter{tyuunumber}[page]
+\def\thetyuunumber{\@arabic\c@tyuunumber}
+\tyuumark{★\kern0pt\thetyuunumber\hskip.5zw}
+%\def\HidariRangaiMozisize{\tiny}
+\def\HidariRangaiMozisize{\scriptsize}
+
+\def\tyuumark@@{\leavevmode\nolinebreak%
+\refstepcounter{tyuunumber}%
+\hbox{\@textsuperscript{\normalfont ★\kern0pt\thetyuunumber}}
+%\ensuremath{^{★\kern0pt\thetyuunumber}}
+}
+
+%************************************************
+\def\@tyuukai[#1]{%
+%
+  \def\tyuu{\@ifstar{\xdef\EMWR@tyuu{1}\tyuu@}{\xdef\EMWR@tyuu{0}\tyuu@}}%
+  \def\tyuu@{\@ifnextchar<{\@tyuu}{\@tyuu<\z@>}}%
+  \def\@tyuu<##1>{\@ifnextchar[{\@@tyuu<##1>}{\@@tyuu<##1>[\tyuu@mark]}}
+  \def\@@tyuu<##1>[##2]##3{\tyuumark@@{%
+      \MigiRangai<##1>{\makebox[\z@][l]{\HidariRangaiMozisize%
+%        \parbox[t]{\MigiRangaiHaba}{{##2}\\\relax##3}}}%
+        \parbox[t]{\MigiRangaiHaba}{##2##3}}}%
+    }%
+    \ignorespaces
+  }%
+  \def\atagtyuu{\@eqnswtrue\tyuu}%
+%
+  \MigiRangaiHaba=\tyuuhaba
+  \@tempdima=\tyuuhaba
+  \advance\@tempdima\marginparsep
+\@setminipage%%% added
+  \jquote(\z@)(\@tempdima)\relax
+  \leavevmode
+  \iftyuukeisen
+    \ifhidarityuukeisen
+      \breakLRline[#1]
+    \else
+      \breakRline[#1]
+    \fi
+  \else
+    \ifhidarityuukeisen
+      \breakLline[#1]
+    \fi
+  \fi
+}%************************************************
+
+\def\@解答{\includegraphics{parts/解答.eps}}
+\def\@解説{\includegraphics{parts/解説.eps}}
+
+\newenvironment{解説}{%
+	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw}
+		\item[\raisebox{-2mm}{\@解説}]
+		}
+	{\endlist}
+
+
+
+
+
+\newif\if@tempmathindent
+\@tempmathindenttrue
+%\@tempmathindentfalse
+\setlength{\tyuuhaba}{7zw}
+\newenvironment{解答}{%
+\@fleqntrue\@beginparpenalty\@M
+	\begin{tyuukai}
+	\fontsize{10Q}{15H}\selectfont\noindent\raisebox{-2mm}{\@解答}\par\nobreak\vskip0pt}
+	{\@fleqnfalse\end{tyuukai}}
+
+\def\testlabelG{{\unitlength=1mm
+\begin{picture}(0,0)
+\put(-18,119.5){\includegraphics[clip]{./parts/test-shuffleG.eps}}
+\end{picture}}}
+
+\def\testlabelK{{\unitlength=1mm
+\begin{picture}(0,0)
+%\put(126,119.5){\includegraphics[clip]{./parts/test-shuffleK.eps}}
+\put(121,119.5){\includegraphics[clip]{./parts/test-shuffleK.eps}}
+\end{picture}}}
+
+
+
+\newcommand{\SQlabelenumi}{\fbox{\theenumi}}
+\newcommand{\SQlabelenumii}{(\theenumii)}
+\newcommand{\SQlabelenumiii}{\theenumiii.}
+\newcommand{\SQlabelenumiv}{\theenumiv.}
+
+%% TEST環境
+\newenvironment{SQenumerate}
+  {\ifnum \@enumdepth >3\relax\@toodeep\else
+   \advance\@enumdepth\@ne
+   \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+   \list{\csname SQlabel\@enumctr\endcsname}{%
+         \ifnum \@listdepth=\@ne \topsep.5\normalbaselineskip
+           \else\topsep\z@\fi
+         \parskip\z@ \itemsep\z@ \parsep\z@
+         \labelwidth0pt \labelsep0pt
+         \ifnum \@enumdepth=\@ne \leftmargin0zw\relax
+           \else\leftmargin\leftskip\fi
+%         \advance\leftmargin 1zw
+         \usecounter{\@enumctr}%
+         \def\makelabel##1{\makebox[2zw][l]{##1}}}%
+   \fi}{\endlist}
+
+\newcounter{TesT}[chapter]
+\def\theTesT{%
+\ifnum\c@TesT<10\relax0\fi%
+\@arabic\c@TesT}
+\newbox\temp@TESTbox
+\newlength\temptabsep
+\temptabsep\textwidth
+\advance\temptabsep by-15.5mm\advance\temptabsep by-10mm\advance\temptabsep by-43mm
+\newenvironment{TEST}
+	{\markright{{\bfseries TEST shuffle 20}}\refstepcounter{TesT}%
+		\fontsize{12Q}{16H}\selectfont
+		\setbox\temp@TESTbox\hbox\bgroup\begin{minipage}{37zw}
+	}
+	{\end{minipage}\egroup\noindent%
+%		\ifodd\c@page\testlabelG\else\testlabelK\fi
+		\ifodd\c@TesT\testlabelG\else\testlabelK\fi
+\typeout{-------------------------------\the\c@page}%
+		\fboxsep\fboxrule\fbox{\vbox to.99\textheight{\hsize\textwidth%
+		\tabcolsep0pt\vspace*{-.2mm}\hspace*{-3.4mm}%
+%
+\begin{tabular}{@{\hskip.01mm}|p{15.5mm}|p{10mm}|p{\temptabsep}|p{43mm}}
+\cellcolor[gray]{0}\textcolor{white}{\makebox[15.5mm][c]{\fontsize{14Q}{\baselineskip}\selectfont\sffamily\bfseries\raisebox{.5mm}{TEST}}}&\makebox[10mm][c]{\fontsize{24Q}{\baselineskip}\selectfont%
+\raisebox{0mm}{\vrule width0pt height 6mm depth1.5mm \theTesT}}
+&&
+\makebox[43mm][r]{\fontsize{13Q}{\baselineskip}\selectfont 年　　月　　日　}\\
+\cline{1-2}\cline{4-4}
+\multicolumn{4}{c}{}\\
+\multicolumn{4}{p{\textwidth}}{\hfil\box\temp@TESTbox\hfil}
+\end{tabular}\vfil\noindent
+\hfil\rule{.99\textwidth}{.12mm}\hfil\\%
+{\fontsize{11Q}{21H}\selectfont
+\setbox0=\hbox{\fbox{$\vcenter to6mm{\hbox to6mm{}}$}}%
+\setbox2=\hbox{（\hskip1.45zw{\fontsize{13Q}{\baselineskip}\selectfont 分}）}%
+\setbox4=\hbox{\includegraphics[width=1zw]{./parts/TesT-arrow.eps}}
+%\begin{tabular}[b]{@{\hskip.5zw}l@{\hskip2zw}ccccccccc@{\hskip.5zw}}
+%解く順序（問題の選択）&\copy0& \copy4& \copy0& \copy4& \copy0& \copy4 &\copy0&\box4 &\box0\\
+%\multicolumn{6}{c}{}\\[-2mm]
+%予想時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2\\
+%実際の時間&\copy2&&\copy2&&\copy2&&\copy2&&\box2
+\begin{tabular}[b]{@{\hskip.5zw}l@{}ccccccccccccc@{\hskip.5zw}}
+解く順序\<（問題の選択）\<&\copy0& \copy4& \copy0& \copy4& \copy0& \copy4 &\copy0&\copy4 &\copy0&\copy4&\copy0&\box4&\box0\\
+\multicolumn{6}{c}{}\\[-2mm]
+予想時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\copy2\\
+実際の時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\box2
+\end{tabular}}
+}}}
+
+
+
+\newdimen\H@headsep\newdimen\H@footsep
+\H@headsep\headsep\H@footsep\footskip
+\advance\H@headsep by-2mm\advance\H@footsep by-3mm
+
+%% 練習問題解答
+\def\ps@Headings{\let\ps@jpl@in\ps@headnombre
+%    \let\@oddfoot\@empty\let\@evenfoot\@empty
+\def\@oddfoot{\raisebox{\H@footsep}{\vbox{\hrule width\textwidth height.5mm\vfil}}}
+\let\@evenfoot\@oddfoot
+    \def\@evenhead{\vbox{\hbox to\textwidth{\@@PageNumFont\thepage\hskip1.5zw\@@HeaderFont\leftmark\hfil}\vskip\H@headsep\hrule width\textwidth height.5mm}}%
+    \def\@oddhead{\vtop{\hbox to\textwidth{\@@HeaderFont\hfil{\rightmark}\@@PageNumFont\hskip1.5zw\thepage}\vskip\H@headsep\hrule width\textwidth height.5mm}}%
+    \let\@mkboth\markboth
+  \def\chaptermark##1{\markboth{%
+     \ifnum \c@secnumdepth >\m@ne
+         \if@mainmatter
+         \@chapapp\thechapter\@chappos\hskip1zw
+         \fi
+     \fi
+     \protect\@inhibitglue##1}{}}%
+  \def\sectionmark##1{\markright{%
+%     \ifnum \c@secnumdepth >\z@ \thesection\hskip1zw\fi
+     \protect\@inhibitglue##1}}%
+  }
+
+
+
+\newcounter{練習問題}[chapter]
+\def\the練習問題{%
+\ifnum\c@練習問題<10\relax0\fi%
+\@arabic\c@練習問題}
+
+\newenvironment{練習問題解答}
+{\clearpage
+\pagestyle{Headings}\sectionmark{練習問題解答}
+\def\Exitem{\refstepcounter{練習問題}%
+\par\addvspace{.25\baselineskip}\fontsize{13Q}{\baselineskip}\selectfont\noindent\textbf{練習問題\hskip.5zw\the練習問題}\vspace{.25\baselineskip}\nopagebreak\par\noindent}
+\columnseprule0.15mm\columnsep24Q
+\begin{multicols}{2}\fontsize{12Q}{18.6H}\selectfont}
+{%
+\end{multicols}
+\newpage
+\pagestyle{headings}
+}
+
+
+\DeclareRobustCommand{\Sfface}[1]{{\fontfamily{phv}\fontseries{b}\selectfont#1}}
+
+
+
+%% ティータイム
+
+\def\kb@figure{\@ifnextchar[{\kb@@figure}{\kb@@figure[\relax]}}
+\def\kb@@figure[#1]{\def\@captype{figure}%
+	\ifhmode\par\fi\addvspace{.25\baselineskip}%
+	\noindent\begin{minipage}{\linewidth}}
+\def\kb@table{\@ifnextchar[{\kb@@table}{\kb@@table[\relax]}}
+\def\kb@@table[#1]{\def\@captype{table}%
+	\ifhmode\par\fi\addvspace{.25\baselineskip}%
+	\noindent\begin{minipage}{\linewidth}}
+
+\definecolor{GrayXX}{gray}{0.8}
+\protected@edef\●{\hbox to1.25zw{\hfil\textcolor{GrayXX}{●}\hfil}}
+
+\def\@teatimeleader#1{\xleaders\hbox to#1{\hss ・\hss}\hfil}
+\def\Ch@@teatime@@title{\relax}
+\def\teatime@[#1]{\par\vspace{4mm}\noindent\markright{Tea Time}%
+\bgroup
+\def\figure{\kb@figure}\def\endfigure{\end{minipage}\vspace{.25\baselineskip}\par}%
+\def\table{\kb@table}\def\endtable{\end{minipage}\vspace{.25\baselineskip}\par}%
+\def\teatimetitle{#1}
+\ifx\Ch@@teatime@@title\teatimetitle%
+    \addcontentsline{toc}{section}{\global\let\protect\tocendsq\relax Tea Time}%
+\else
+%\def\teatimetitle{\@@teatimetitle\●#1}\addcontentsline{toc}{section}{\teatimetitle}
+\addcontentsline{toc}{section}{\global\let\protect\tocendsq\relax\Sfface{Tea Time}\hskip.1zw\●\teatimetitle}
+%\markright{ティータイム\●\teatimetitle}
+%\markright{Tea Time\●\teatimetitle}
+\markright{Tea Time}
+\fi
+\fontsize{11.5Q}{19.5H}\selectfont\hspace*{-1zw}%
+\leavevmode\hbox to\textwidth{%%
+\includegraphics[clip]{parts/Teatime-logo.eps}%
+\fontsize{12Q}{12Q}\selectfont\bfseries\@teatimeleader{.5zw}%
+\ifx\Ch@@teatime@@title\teatimetitle%
+\else
+\●%
+\fi%
+\teatimetitle%
+}\par\nobreak\vspace{-.5\baselineskip}\fboxsep.5zw\@nobreaktrue\begin{shaded}%
+\@nobreakfalse}
+
+
+\definecolor{shadecolor}{gray}{0.9}
+\def\teatime{\@ifnextchar[{\teatime@}{\teatime@[\relax]}}
+
+
+\def\endteatime{\end{shaded}\egroup}
+
+% 大きさを標準の0.85倍に変更した\varsumと\varintを定義します．
+% 大型演算子の\sumと\intを常に\displaystyleのサイズで出力させるために
+% \sumと\intの文字コードを変更しています．
+\DeclareFontShape{OMX}{cmex}{c}{n}{<->[0.85]cmex10}{}
+\DeclareSymbolFont{varlargesymbols}{OMX}{cmex}{c}{n}
+%	\DeclareMathSymbol{\varsumop}{\mathop}{varlargesymbols}{"50}
+\DeclareMathSymbol{\varsumop}{\mathop}{varlargesymbols}{'130}
+%	\def\varsum{\varsumop\limits}
+\def\varsum{\varsumop\limits}
+%	\DeclareMathSymbol{\varintop}{\mathop}{varlargesymbols}{"52}
+\DeclareMathSymbol{\varintop}{\mathop}{varlargesymbols}{'132}
+\def\varint{\varintop\nolimits}
+
+% \int, \sumの再定義．amsmath前提です．
+\renewcommand{\int}{\varint}
+\renewcommand{\sum}{\varsum}
+% 積算記号群の再定義
+\renewcommand{\iint}{\DOTSI\protect\@@@MultiIntegral{2}}
+\renewcommand{\iiint}{\DOTSI\protect\@@@MultiIntegral{3}}
+\renewcommand{\iiiint}{\DOTSI\protect\@@@MultiIntegral{4}}
+
+\newcommand{\@@@MultiIntegral}[1]{%
+  \edef\ints@c{\noexpand\varintop
+    \ifnum#1=\z@\noexpand\intdots@\else\noexpand\intkern@\fi
+    \ifnum#1>\tw@\noexpand\varintop\noexpand\intkern@\fi
+    \ifnum#1>\thr@@\noexpand\varintop\noexpand\intkern@\fi
+    \noexpand\varintop
+    \noexpand\ilimits@
+  }%
+  \futurelet\@let@token\ints@a
+}
+
+
+\def\@tableofcontens@head#1{\clearpage\thispagestyle{empty}{\parindent\z@
+\parbox[t]{\textwidth}{\includegraphics{parts/tochead.eps}\vskip1mm\prevdepth-\@m\p@
+\hfill\hbox{\fontsize{10Q}{0pt}\selectfont ★問題の頁数のあとのマス目は，自分の理解の度合いを記入しておくのにご利用ください．}\vskip1\normalbaselineskip
+%\hbox to\textwidth{\hfil\@@ChapterFont#1\hfil}
+}}\par}
+
+
+\renewcommand{\tableofcontents}{%
+  \if@twocolumn\@restonecoltrue\onecolumn
+  \else\@restonecolfalse\fi
+\@tableofcontens@head{\contentsname}%
+%    \@mkboth{\contentsname}{\contentsname}% ★
+    \@mkboth{}{\contentsname}%
+  \@starttoc{toc}%
+\par
+\vfill
+\hfill\hbox{\fontsize{11Q}{11Q}\selectfont ■カバー・表紙デザイン 高橋敦}
+  \if@restonecol\twocolumn\fi
+}
+
+\newcommand*{\l@chapterII}[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \addvspace{1.7em \@plus\p@}%
+    \begingroup
+      \parindent\z@ \rightskip\@pnumwidth \parfillskip-\rightskip
+      \leavevmode\@@TocChapterFont
+      \setlength\@lnumwidth{6.5zw}%
+      \advance\leftskip\@lnumwidth \hskip-\leftskip
+      \underline{\hbox to\textwidth{#1\nobreak\hfil\nobreak\@@TocNumChapterFont\hbox to\@pnumwidth{\hss#2}}}\vspace{1.5mm}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+
+\renewcommand*{\l@section}{\@tocsqendtrue\IfSecFontChange%
+\S@ectiontrue\@dottedtocline{1}{0em}{4em}}
+
+
+\newcommand*{\l@Section}{\@tocsqendfalse\IfSecFontChange%
+\S@ectiontrue\@dottedtocline{1}{0em}{4em}}
+
+
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \if@mainmatter
+    \refstepcounter{chapter}%
+    \xdef\@ref@prefix{\thechapter::}% for multicite.sty
+    \typeout{\@chapapp\space\thechapter\space\@chappos}%
+\if@tesetshuffle
+\addcontentsline{toc}{chapter}{#1}
+\else
+    \addcontentsline{toc}{chapterII}%
+      {\protect\numberline{\textmd{\itshape Chapter}\,{\protect\fontsize{28Q}{0pt}\selectfont\thechapter.}\@chappos}#1}%
+\fi
+%      {\protect\numberline{\fontfamily{pplx}\textmd{\itshape Chapter}{\protect\fontsize{28Q}{0pt}\selectfont\thechapter.}\@chappos}#1}%
+    \else\addcontentsline{toc}{chapter}{#1}\fi
+  \else
+    \addcontentsline{toc}{chapter}{#1}%
+  \fi
+  \chaptermark{#1}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \@makechapterhead{#2}\@afterheading}
+
+
+\newif\if@tocsqend
+\@tocsqendfalse
+
+
+\def\tocendsq{□□□}
+\let\@tocendsq\tocendsq
+\def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
+  \vskip\toclineskip \@plus.2\p@
+  {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+    \parindent #2\relax\@afterindenttrue
+   \interlinepenalty\@M
+   \leavevmode
+   \@lnumwidth #3\relax
+\if@tocsqend\renewcommand{\@pnumwidth}{1.8zw}\fi
+   \advance\leftskip \@lnumwidth \hbox{}\hskip -\leftskip
+    {\@TocSectionSlectFont#4}
+    \nobreak\leaders\hbox{$\m@th \mkern \@dotsep mu\cdot\mkern \@dotsep
+       mu$}\hfill \nobreak\hbox to\@pnumwidth{%
+         \hss\@TocSectionNumSlectFont#5\tocendsq}\par}\fi}
+
+\renewcommand{\@dotsep}{.5}
+\renewcommand{\@pnumwidth}{5zw}
+%\renewcommand{\@@TocChapterFont}          {\fontsize{18Q}{18Q}\selectfont\bfs}
+%\renewcommand{\@@TocNumChapterFont}       {\fontsize{18Q}{18Q}\selectfont\bfs}
+
+
+\newif\if@tesetshuffle
+\@tesetshufflefalse
+\def\tesetshuffle{\@tesetshuffletrue}
+\def\@makechapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
+    \if@mainmatter
+\bgroup\unitlength=1mm\begin{picture}(0,0)
+\put(-19,-196){\includegraphics[width=157mm,height=221mm,clip]{parts/chapterhead.eps}}\end{picture}\egroup\par\nointerlineskip
+\centering
+\if@tesetshuffle
+\vspace*{15mm}\par
+{\fontsize{42Q}{42Q}\selectfont{\fontfamily{phv}\bfseries{#1}}}
+\else
+{\fontsize{32Q}{32H}\itshape Chapter}\hskip1zw%
+{\fontsize{60Q}{32H}\selectfont\thechapter}\vskip20mm\prevdepth-\@m\p@
+\fontsize{38Q}{38Q}\selectfont
+\textbf{#1}
+\fi
+\vskip2mm\prevdepth-\@m\p@
+{\color[gray]{0.8}
+\vbox{\hsize=\textwidth\vrule height2mm width\textwidth depth0pt\vss}}
+\par
+\else
+\toplinebox{10}{% 10行取りにしています．
+   \raggedright
+   \@@ChapterNumFont
+   \ifnum \c@secnumdepth >\m@ne
+     \setlength\@tempdima{\linewidth}%
+    \if@mainmatter
+      \@chapapp\thechapter\@chappos
+     \else
+      \hbox{}
+    \fi
+     \vspace{.9\Cvs}\par
+     \@@ChapterFont\@inhibitglue#1\vfil\fi}
+\fi}%
+}
+
+\newenvironment{abstract}
+{\prevdepth-\@m\p@\vskip20mm\bgroup\fontsize{13Q}{20H}\selectfont
+\begin{center}
+\begin{minipage}{25zw}}
+{\end{minipage}\end{center}\egroup
+\clearpage
+}
+
+
+
+\renewenvironment{theindex}
+  {\if@twocolumn\@restonecolfalse\else\@restonecoltrue\fi
+   \columnseprule\z@ \columnsep 35\p@
+\@maketchapterhead{\indexname}
+%   \@mkboth{\indexname}{\indexname}%★
+   \@mkboth{}{\indexname}%
+\addcontentsline{toc}{chapter}{\indexname}
+\begin{multicols}{2}
+   \thispagestyle{empty}\parindent\z@
+   \parskip\z@ \@plus .3\p@\relax
+   \let\item\@idxitem\small}
+  {\if@restonecol\end{multicols}\else\clearpage\fi}
+
+\def\@maketchapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
+\includegraphics{parts/indexheader.eps}
+}\par}
+
+\def\tobiraback{\hbox to154mm{\vbox to100mm{}}}
+
+\definecolor{Gray}{gray}{0.9}
+\def\tobira#1{%
+\thispagestyle{empty}\vskip0mm\nointerlineskip\noindent
+\bgroup\unitlength=1pt
+\setbox\z@=\hbox{\includegraphics[height=100mm]{#1}}
+%	\setbox\z@=\hbox{\tobiraback}
+\@tempdima\wd\z@
+\advance\@tempdima by3.1mm
+\advance\@tempdima by17mm
+\edef\graphic@@shift{\strip@pt\@tempdima}
+\begin{picture}(0,0)
+%\put(-60,-412.6){%
+\put(-60,-355.6){%
+\includegraphics{tobira-eps/tobira-back.eps}%
+%	\colorbox{Gray}{\box\z@}
+		\put(-\graphic@@shift,0){\includegraphics[height=100mm,clip]{#1}}%
+}
+\end{picture}
+\egroup
+%\clearpage
+}
+
+
+\renewenvironment{tyuukai}{\trivlist\item[]}{\endtrivlist}
+
+\newcommand{\maegaki}[1]{%
+\clearpage%ページ調整のための強制改ページ
+\addcontentsline{toc}{chapter}{まえがき}%%  「まえがき」の目次へのエントリ
+\markboth{}{}%%  柱はとりえず偶数奇数両ページ「」としてます．
+\thispagestyle{empty}\par
+\vspace*{2zw}
+\begin{center}
+#1\par\prevdepth-10000pt\vskip2mm
+{\color[gray]{0.8}
+\vbox to-2mm{\hsize=\textwidth\vrule height2mm width\textwidth depth0pt\vss}}
+\end{center}
+\vspace*{3zw}
+}
+
+%% emathの式番号をキャンセル
+\resettagform
+
+
+\def\XXX{\if@nobreak \fbox{NOBREAK}\else \fbox{BREAK}\fi}

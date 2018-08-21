@@ -1,28 +1,55 @@
 % emathMw.sty by tDB (emath@nifty.com)
 %
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{emathMw}[2008/01/12 v0.24 回り込み]%
+\ProvidesPackage{emathMw}[2015/03/09 v0.46 $B2s$j9~$_(B]%
+%\RequirePackage{emath}
 \RequirePackage{emathC}
+%\RequirePackage{keyval}
 %\RequirePackage{emathEc}
 %\RequirePackage{emathLb}
 %
+\@ifundefined{em@label@box}{\newbox\em@label@box}{}%
+
   \def\Mw@old{0}
   \def\Mw@samepage{0}
   \DeclareOption{old}{\def\Mw@old{1}}%
   \DeclareOption{samepage}{\def\Mw@samepage{1}}%
+  \DeclareOption{silent}{\def\Mw@silent{}}%
   \ProcessOptions\relax
 %
-% list 環境下における図の回り込み
+% list $B4D6-2<$K$*$1$k?^$N2s$j9~$_(B
+%
+%
+\def\Mw@save@label@box{%
+  \if@inlabel
+    \setbox\em@label@box=\hbox{{%
+      \unhbox\@labels
+    }}%
+    \if@newlist\global\@newlistfalse\fi
+    \global\@inlabelfalse
+    \@minipagefalse
+    \everypar{}%
+  \else
+    \setbox\em@label@box=\box\voidb@x
+  \fi
+}%
 %
 % \mawarikomi<#1>[#2](#3,#4)#5#6
-%   #1 : はじめの回り込みを行わない行数
-%   #2 : 回り込み行数（相対指定可）
-%        先頭に`l'をつけたときは図を左に配置
-%   (#3,#4): 図の位置の微調整
-%   #5 : 図の横幅
-%   #6 : 図
+%   #1 : $B$O$8$a$N2s$j9~$_$r9T$o$J$$9T?t(B
+%   #2 : $B2s$j9~$_9T?t!JAjBP;XDj2D!K(B
+%        $B@hF,$K(B`l'$B$r$D$1$?$H$-$O?^$r:8$KG[CV(B
+%   (#3,#4): $B?^$N0LCV$NHyD4@0(B
+%   #5 : $B?^$N2#I}(B
+%   #6 : $B?^(B
 %
-
+\edef\Mw@precaption{\empty}%
+\edef\Mw@postcaption{\empty}%
+\define@key{emMw}{precaption}{\def\Mw@precaption{#1}\edef\prepost@caption{1}}%
+\define@key{emMw}{postcaption}{\def\Mw@postcaption{#1}\edef\prepost@caption{2}}%
+\define@key{emMw}{sep}{\MWsep{#1}}%
+\define@key{emMw}{prelines}{\edef\EMWR@overhanglines{#1}}%
+\define@key{emMw}{samepage}[no]{\MWnewpage{#1}}%
+%
 %\newdimen\@mawarikomisep
 %\newdimen\mawarikomisep
 \newskip\@mawarikomisep
@@ -35,6 +62,12 @@
 \let\EMWR@par\par
 \newif\if@mawarikomi@newpage\@mawarikomi@newpagetrue
 \def\mawarikomi@newpagesw{1}%
+%
+\def\MWsep#1{%
+  \@tempdima=#1\setlength{\mawarikomisep}{.5\@tempdima}%
+  \setlength{\mawarikomikankaku}{\mawarikomisep}%
+}%
+%
 \def\MWnewpage#1{%
   \ifthenelse{\equal{#1}{no}}{%
     \@mawarikomi@newpagefalse
@@ -57,23 +90,20 @@
     \EMWR@shape\EMitem}
 }%
 \let\after@end\relax
-
+%
 \let\EMWR@outputtombox\@outputtombow
 \xdef\EMWR@nxtpgfignum{0}%
+\newbox\EMWR@box
 \newbox\EMWR@boxi
 \newbox\EMWR@boxii
-
-\def\Migi@Haiti(#1,#2)#3{%
-%% \leavevmode\vadjust{\kern-\p@\smash{\vtop to \z@{%
+%
+\def\Migi@Haiti(#1,#2)#3{{%
   \leavevmode\vadjust{\kern-\p@\smash{\vtop{%
   \noindent\hspace*{\linewidth}\hspace*{-\EMWR@zuhaba}%
-  \hspace{\@totalleftmargin}%
-%  \@tempdimb\@totalleftmargin
-%  \advance\@tempdimb\linewidth
-%  \advance\@tempdimb-\EMWR@zuhaba
-%  \noindent\hspace*{\@tempdimb}\relax
+  \hspace{\@totalleftmargin}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \@tempdimb #2\relax
-  \relax\leavevmode\lower -\@tempdimb\hbox{\hspace*{#1}#3}}}\kern\p@}}%
+  \relax\leavevmode\lower -\@tempdimb\hbox{\hspace*{#1}#3}}}\kern\p@}%
+}}%
 %
 \def\Hidari@Haiti(#1,#2)#3{%
 %\typeout{zuhaba=\EMWR@zuhaba}%
@@ -85,18 +115,29 @@
   \@tempdimb #2\relax
   \relax\leavevmode\lower -\@tempdimb\hbox{\hspace*{#1}#3}}}\kern-\p@}}%
 %
-\def\mawarikomi{\@ifnextchar<{\@@mawarikomi}{\@@mawarikomi<\empty>}}
+%
+%
+%\def\mawarikomi{\@ifnextchar'{\m@w@rikomi}{\m@warikomi}}%
+%\def\m@w@rikomi'#1'{\setkeys{emMw}{#1}\m@warikomi}%
+%\def\m@warikomi{\@ifnextchar<{\@@mawarikomi}{\@@mawarikomi<\empty>}}
+\def\mawarikomi{\@ifnextchar<{\@@mawarikomi}{\@@mawarikomi<\empty>}}%
+\def\@mawarikomi{\@ifnextchar<{\@@mawarikomi}{\@@mawarikomi<\empty>}}%
 \def\@@mawarikomi<#1>{\@ifnextchar[{\@@@mawarikomi<#1>}{%
-  \@@@mawarikomi<#1>[\empty]}}
+  \@@@mawarikomi<#1>[\empty]}}%
 \def\@@@mawarikomi<#1>[#2]{\@ifnextchar({\@@@@mawarikomi<#1>[#2]}{%
-  \@@@@mawarikomi<#1>[#2](0,0)}}
-\long\def\@@@@mawarikomi<#1>[#2](#3,#4)#5#6{%
+  \@@@@mawarikomi<#1>[#2](0,0)}}%
+\long\def\@@@@mawarikomi<#1>[#2](#3,#4)#5#6{%\Mw@save@label@box
+  \edef\EMWR@inlabel{0}%
+  \if@inlabel\edef\EMWR@inlabel{1}\fi
+  \Mw@save@label@box
+  \@ifundefined{emeq@rindent}{}{\def\emeq@rindent{\z@}}%
   \ifnum\col@number>\@ne\MWnewpage{no}\fi
   \if@minipage\MWnewpage{no}\fi
   \def\mawarikomi@here@sw{0}%
+%\ifvmode\typeout{Av}\else\typeout{Ah}\fi
   \ifthenelse{\boolean{vmode}}{%
-    \@@@@@mawarikomi<#1>[#2](#3,#4){#5}{#6}\ignorespaces}{%段落途中に入れる場合
-\@warning{mawarikomi環境を段落途中に配置しました。}%
+    \@@@@@mawarikomi<#1>[#2](#3,#4){#5}{#6}\ignorespaces}{%$BCJMnESCf$KF~$l$k>l9g(B
+\@warning{mawarikomi$B4D6-$rCJMnESCf$KG[CV$7$^$7$?!#(B(mawarikomi environment must be used at the top of a paragraph.)}%
      \def\mawarikomi@here@sw{1}%
 %     \@bsphack
 %     \vadjust{%\@restorepar
@@ -108,11 +149,18 @@
     \parshape\@zu@shape\xdef\@zu@shape{1 \@totalleftmargin \linewidth}%
 \ignorespaces
     }%
-}
+}%
 \long\def\@@@@@mawarikomi<#1>[#2](#3,#4)#5#6{%
-  \edef\EMWR@inlabel{0}%
+  \edef\prepost@caption{0}%
+  \edef\EMWR@overhanglines{\empty}%
+  \edef\EMWR@arg@i{\empty}%
+  \def\prel@bel{\preHl@bel}%
+  \@ifundefined{EMLR@lskip}{}{%
+    \advance\linewidth\EMLR@lskip
+    \advance\linewidth\EMLR@rskip
+  }%
   \ifnum\@listdepth>\z@\if@inlabel\edef\EMWR@inlabel{1}\fi\fi
-% \mbox{}\ignorespaces% 12/26 保留
+% \mbox{}\ignorespaces% 12/26 $BJ]N1(B
 %
   \def\end##1{%
     \csname end##1\endcsname\@checkend{##1}%
@@ -121,10 +169,11 @@
     \if@ignore\@ignorefalse\ignorespaces\fi}%
   \let\EMWR@par\par
   \long\def\par{\EMWR@shape\ignorespaces}%
-\let\mwrkmpar\par
+\@ifundefined{mwrkmpar}{%
+\let\mwrkmpar\par}{\errmessage{mawarikomi$B4D6-$O%M%9%H$G$-$^$;$s(B}}%
   \let\EMWR@list\list
   \let\endEMWR@list\endlist
-  \def\list##1##2{\EMWR@shape\EMWR@list{##1}{##2}}%
+  \def\list##1##2{\EMWR@list{##1}{##2}\EMWR@shape\let\par\mwrkmpar}%% BBS #7906
   \def\endlist{\EMWR@shape\let\after@end\EMWR@shape\endEMWR@list}%
   \gdef\@outputtombow{\EMWR@outputtombox\afterEMWR@tombow}%
   \gdef\afterEMWR@tombow{{%
@@ -165,8 +214,30 @@
 %  \@ifnextchar<{\eda@enumerate}{\eda@enumerate<2>}}%
 %
   \global\@mawarikomisep=\mawarikomisep
-  \ifx\empty#1\edef\EMWR@overhanglines{0}\else
-    \edef\EMWR@overhanglines{#1}\fi
+  \edef\MW@tmp{0}%
+%  \ifx\empty #1\else
+%    \headchar{#1}\EMWR@h\EMWR@r
+%    \ifthenelse{\equal\EMWR@h{+}}{}{%
+%      \ifthenelse{\equal\EMWR@h{-}}{}{%
+%        \ifthenelse{\isodd{0\EMWR@h 1}}{}{\edef\MW@tmp{1}}%
+%      }%
+%    }%
+%  \fi
+  \Strchr{#1}{=}\MW@tmp
+  \ifnum\MW@tmp>\z@\setkeys{emMw}{#1}\relax
+    \ifx\empty\EMWR@overhanglines
+      \edef\EMWR@overhanglines{0}\relax
+    \else
+      \edef\EMWR@arg@i{y}%
+    \fi
+  \else
+    \ifx\empty #1\relax
+      \edef\EMWR@overhanglines{0}\relax
+    \else
+      \edef\EMWR@overhanglines{#1}\relax
+      \edef\EMWR@arg@i{y}%
+    \fi
+  \fi
   \xIncr\EMWR@lvl
 %
   \headchar{#2}\EMWR@lr\EMWR@@gyousuu
@@ -192,40 +263,86 @@
       \xdef\EMWR@lr{r}\edef\EMWR@@gyousuu{#2}}}}%
   \ifthenelse{\equal{#5}\empty}{%
     \global\@mawarikomisep=\mawarikomikankaku\relax
-    \setbox0=\hbox{#6}\xdef\EMWR@zuhaba{\the\wd0}%
-\typeout{mawarikomi:図幅=\EMWR@zuhaba}%
+    \setbox\EMWR@box=\hbox{{#6}}\xdef\EMWR@zuhaba{\the\wd\EMWR@box}%
+    \@ifundefined{Mw@silent}{\typeout{mawarikomi:$B?^I}(B=\EMWR@zuhaba}}{}%
+    \ifnum\prepost@caption=\@ne
+      \setbox\EMWR@box=\hbox{%
+        \begin{minipage}{\EMWR@zuhaba}%
+          \abovecaptionskip=\z@
+          \Mw@precaption
+\vskip\intextsep
+          \hbox{{#6}}%
+        \end{minipage}%
+      }%
+    \else\ifnum\prepost@caption=\tw@
+      \setbox\EMWR@box=\hbox{%
+        \begin{minipage}{\EMWR@zuhaba}%
+          \hbox{{#6}}%
+          \Mw@postcaption
+\vskip-\baselineskip
+\vskip\intextsep
+\null
+        \end{minipage}%
+      }%
+    \fi\fi
   }{%
-    \headchar{#5}\EMWR@a\EMWR@b
+    \Headchar{#5}\EMWR@a\EMWR@b
+    \global\@mawarikomisep=\mawarikomikankaku\relax
     \if +\EMWR@a
 %%      \@mawarikomisep=\EMWR@b
 %%      \divide\@mawarikomisep by \tw@
-      \global\@mawarikomisep=\mawarikomikankaku\relax
       \if r\EMWR@lr
-        \setbox0=\hbox{\mbox{}\hspace*{\EMWR@b}#6}\xdef\EMWR@zuhaba{\the\wd0}%
+        \setbox\EMWR@box=\hbox{\mbox{}\hspace*{\EMWR@b}\hbox{{#6}}}%
+        \xdef\EMWR@zuhaba{\the\wd\EMWR@box}%
       \else
-        \setbox0=\hbox{#6\hspace*{\EMWR@b}\mbox{}}\xdef\EMWR@zuhaba{\the\wd0}%
+        \setbox\EMWR@box=\hbox{{#6}\hspace*{\EMWR@b}\mbox{}}%
+        \xdef\EMWR@zuhaba{\the\wd\EMWR@box}%
       \fi
     \else\if -\EMWR@a
-      \global\@mawarikomisep=\mawarikomikankaku\relax
+%      \global\@mawarikomisep=\mawarikomikankaku\relax
       \if r\EMWR@lr
-        \setbox0=\hbox{\mbox{}\hspace*{-\EMWR@b}#6}\xdef\EMWR@zuhaba{\the\wd0}%
+        \setbox\EMWR@box=\hbox{\mbox{}\hspace*{-\EMWR@b}\hbox{{#6}}}%
+        \xdef\EMWR@zuhaba{\the\wd\EMWR@box}%
       \else
-        \setbox0=\hbox{#6\hspace*{-\EMWR@b}\mbox{}}\xdef\EMWR@zuhaba{\the\wd0}%
+        \setbox\EMWR@box=\hbox{{#6}\hspace*{-\EMWR@b}\mbox{}}%
+        \xdef\EMWR@zuhaba{\the\wd\EMWR@box}%
       \fi
     \else
-      \xdef\EMWR@zuhaba{#5}%
-      \setbox0=\hbox{\begin{minipage}{\EMWR@zuhaba}#6\end{minipage}}%
+      \setlength{\@tempdima}{#5}%
+      \xdef\EMWR@zuhaba{\the\@tempdima}%
+      \ifnum\prepost@caption=\@ne
+        \setbox\EMWR@box=\hbox{%
+          \begin{minipage}{\EMWR@zuhaba}%
+            \abovecaptionskip=\z@
+            \Mw@precaption
+            \vskip10\p@
+%            \hbox{{#6}}%
+            {#6}%
+          \end{minipage}%
+        }%
+      \else\ifnum\prepost@caption=\tw@
+        \setbox\EMWR@box=\hbox{%
+          \begin{minipage}{\EMWR@zuhaba}%
+            {#6}%
+            \Mw@postcaption
+          \end{minipage}%
+        }%
+      \else
+        \setbox\EMWR@box=\hbox{%
+          \begin{minipage}{\EMWR@zuhaba}%
+            {#6}\relax
+          \end{minipage}%
+        }%
+      \fi\fi
     \fi\fi
   }%
   \@tempdima\linewidth\advance\@tempdima-\EMWR@zuhaba\relax
   \@tempdimc\@tempdima
   \advance\@tempdima-\@mawarikomisep\advance\@tempdima-\@mawarikomisep
   \xdef\EMWRlinewidth{\the\@tempdima}% 2005/04/10
-% \edef\EMWR@linewidth{\the\@tempdima}% 2002/01/27
-% \setbox0=\hbox{\begin{minipage}{\EMWR@zuhaba}#6\end{minipage}}%
 %
   \ifx \EMWR@@gyousuu\empty
-    \@tempdimb\ht0\advance\@tempdimb\dp0\relax
+    \@tempdimb\ht\EMWR@box\advance\@tempdimb\dp\EMWR@box\relax
     \xdef\EMWR@zu@gyousuu{0}%
     \@whiledim\@tempdimb>1zh\do{\advance\@tempdimb-\baselineskip
       \xIncr\EMWR@zu@gyousuu}%
@@ -239,32 +356,34 @@
      \mbox{}\vspace{-\@tempdima}\EMWR@par}\fi
   \fi\fi
   \unitlength1pt%
-  \@tempdimb\ht0\advance\@tempdimb\dp0\advance\@tempdimb\parsep
+  \@tempdimb\ht\EMWR@box\advance\@tempdimb\dp\EMWR@box\advance\@tempdimb\parsep
   \advance\@tempdimb\EMWR@overhanglines\baselineskip%
 % \advance\@tempdimb-1zh\relax
   \@tempdima\pagegoal\advance\@tempdima-\pagetotal
 % 12/26
-  \ifthenelse{\lengthtest{\@tempdima<\@tempdimb}\and{\mawarikomi@newpagesw=1}\and\not\equal{#1}\empty}{%
-    \ifnum #1=0\strsep{\the\@tempdima}{.}\EMWR@a\EMWR@b
-    \strsep{\the\baselineskip}{.}\EMWR@b\EMWR@c
-    \IDiv\EMWR@a\EMWR@b\EMWR@c
-    \xdef\EMWR@overhanglines{\EMWR@c}\fi
+  \ifthenelse{\lengthtest{\@tempdima<\@tempdimb}\and{\mawarikomi@newpagesw=1}\and\not\equal{\EMWR@arg@i}\empty}{%
+    \ifnum\EMWR@overhanglines=\z@
+      \strsep{\the\@tempdima}{.}\EMWR@a\EMWR@b
+      \strsep{\the\baselineskip}{.}\EMWR@b\EMWR@c
+      \IDiv\EMWR@a\EMWR@b\EMWR@c
+      \xdef\EMWR@overhanglines{\EMWR@c}%
+    \fi
     \xIncr\EMWR@nxtpgfignum
     \global\setbox\csname EMWR@box\romannumeral\EMWR@nxtpgfignum\endcsname
-      =\box0\relax
+        =\box\EMWR@box\relax
     \edef\EMWR@a{\thepage}\Incr\EMWR@a
     \expandafter\xdef\csname EMWR@page\romannumeral\EMWR@nxtpgfignum
     \endcsname{\EMWR@a}%
     \if r\EMWR@lr
       \ifthenelse{\equal{#3}{0}}{}{\advance\@tempdimc#3}%
-%      \@tempdimb1ex\relax
+%     \@tempdimb1ex\relax
       \@tempdimb\z@\relax
 %     \advance\@tempdimb-\EMWR@overhanglines\baselineskip
       \ifthenelse{\equal{#4}{0}}{}{\advance\@tempdimb#4}%
-% 次の1行：2003/07/21 コメントアウト 2004/09/26 復活 2005/01/19 コメントアウト
+% $B<!$N(B1$B9T!'(B2003/07/21 $B%3%a%s%H%"%&%H(B 2004/09/26 $BI|3h(B 2005/01/19 $B%3%a%s%H%"%&%H(B
 %     \advance\@tempdimc\leftmargin
-%\advance\@tempdimc\@mawarikomisep
-%\advance\@tempdimc\@mawarikomisep
+%     \advance\@tempdimc\@mawarikomisep
+%     \advance\@tempdimc\@mawarikomisep
       \expandafter\xdef\csname EMWR@xpos\romannumeral\EMWR@nxtpgfignum
       \endcsname{\strip@pt\@tempdimc}%
       \expandafter\xdef\csname EMWR@ypos\romannumeral\EMWR@nxtpgfignum
@@ -272,7 +391,7 @@
     \else
       \@tempdimc\leftmargin
       \ifthenelse{\equal{#3}{0}}{}{\advance\@tempdimc#3}%
-%      \@tempdimb1ex\relax
+%     \@tempdimb1ex\relax
       \@tempdimb\z@
       \ifthenelse{\equal{#4}{0}}{}{\advance\@tempdimb#4}%
       \expandafter\xdef\csname EMWR@xpos\romannumeral\EMWR@nxtpgfignum
@@ -290,7 +409,6 @@
 %    }%
   \fi
   \if r\EMWR@lr
-%   \@ifundefined{Mw@old}{%
     \ifthenelse{\Mw@old=\z@}{%
       \@tempdimc=\z@
       \ifthenelse{\equal{#3}{0}}{}{\advance\@tempdimc#3}%
@@ -299,7 +417,29 @@
         \advance\@tempdimb-\EMWR@overhanglines\baselineskip
       \fi
       \ifthenelse{\equal{#4}{0}}{}{\advance\@tempdimb#4}%
-      \Migi@Haiti(\the\@tempdimc,\the\@tempdimb){\makebox(0,0)[lt]{\box0}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\typeout{listdepth=\the\@listdepth}%
+      \@ifundefined{I@mawarikomi}{%
+%        \noindent
+        \ifnum\EMWR@inlabel>\z@\noindent\fi
+        \Migi@Haiti(\the\@tempdimc,\the\@tempdimb){%
+            \makebox(0,0)[lt]{\box\EMWR@box}%
+        }%
+      }{%
+%        \global\let\I@mawarikomi\undefined
+        \global\let\mawarikomi\@mawarikomi
+        \item
+%       \leavevmode
+%        \advance\@tempdimc-\parindent
+        \edef\Mw@x{\strip@pt\@tempdimc}%
+        \edef\Mw@y{\strip@pt\@tempdimb}%
+        \begin{picture}(0,0)\relax
+          \put(\Mw@x,\Mw@y){\makebox(0,0)[lt]{\box\EMWR@box}}%
+        \end{picture}%
+      }%
     }{%
       \begin{picture}(0,0)%
         \advance\@tempdimc-\parindent
@@ -309,11 +449,10 @@
         \ifthenelse{\equal{#4}{0}}{}{\advance\@tempdimb#4}%
           \ukansan\@tempdimc\@@x
           \ukansan\@tempdimb\@@y
-          \put(\@@x,\@@y){\makebox(0,0)[lt]{\box0}}%
+          \put(\@@x,\@@y){\makebox(0,0)[lt]{\box\EMWR@box}}%
       \end{picture}%
     }%
   \else
-%   \@ifundefined{Mw@old}{%
     \ifthenelse{\Mw@old=\z@}{%
       \@tempdimc=\z@
       \ifthenelse{\equal{#3}{0}}{}{\advance\@tempdimc#3}%
@@ -322,7 +461,10 @@
         \advance\@tempdimb-\EMWR@overhanglines\baselineskip
       \fi
       \ifthenelse{\equal{#4}{0}}{}{\advance\@tempdimb#4}%
-      \Hidari@Haiti(\the\@tempdimc,\the\@tempdimb){\makebox(0,0)[lt]{\box0}}%
+\edef\MW@itmwd{\the\wd\em@label@box}%
+\advance\@tempdimc\MW@itmwd
+      \Hidari@Haiti(\the\@tempdimc,\the\@tempdimb){%
+        \makebox(0,0)[lt]{\box\EMWR@box}}%
     }{%
       \begin{picture}(0,0)%
         \ifnum \EMWR@overhanglines=\z@
@@ -340,16 +482,13 @@
         \advance\@tempdimc-\parindent
         \ifnum \EMWR@overhanglines=\z@
           \put(\strip@pt\@tempdimc,\strip@pt\@tempdimb){%
-            \makebox(0,0)[rt]{\box0}}%
+            \makebox(0,0)[rt]{\box\EMWR@box}}%
         \else
           \put(\strip@pt\@tempdimc,\strip@pt\@tempdimb){%
-            \makebox(0,0)[lt]{\box0}}%
+            \makebox(0,0)[lt]{\box\EMWR@box}}%
         \fi
       \end{picture}%
     }%
-%    \begin{picture}(0,0)%
-%      \put(0,-\strip@pt\@tempdimb){\makebox(0,0)[lb]{\box0}}%
-%    \end{picture}%
   \fi
 }% 12/26
 }%
@@ -358,9 +497,16 @@
   \Cfor{\edef\zu@i{0}}{\zu@i<\EMWR@overhanglines}{\Incr\zu@i}\do{%
       \edefappend\zu@shape{ \the\@totalleftmargin \the\linewidth}}%
   \if r\EMWR@lr
+    \@tempdimb=\@totalleftmargin
+    \advance\@tempdimb-\leftskip%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \edef\EMWR@lmargin{\the\@tempdimb}%
+\@totalleftmargin=\EMWR@lmargin
     \Cfor{\edef\zu@i{1}}{\zu@i<\EMWR@zu@gyousuu}{\Incr\zu@i}\do{%
-      \edefappend\zu@shape{ \the\@totalleftmargin \the\@tempdima}}%
-    \edefappend\zu@shape{ \the\@totalleftmargin \the\linewidth}%
+%      \edefappend\zu@shape{ \the\@totalleftmargin \the\@tempdima}%
+      \edefappend\zu@shape{ \EMWR@lmargin \the\@tempdima}%
+    }%
+%    \edefappend\zu@shape{ \the\@totalleftmargin \the\linewidth}%
+    \edefappend\zu@shape{ \EMWR@lmargin \the\linewidth}%
   \else
     \@tempdimb\@totalleftmargin\advance\@tempdimb\EMWR@zuhaba
     \advance\@tempdimb\@mawarikomisep\advance\@tempdimb\@mawarikomisep
@@ -369,23 +515,40 @@
     \edefappend\zu@shape{ \the\@totalleftmargin \the\linewidth}%
   \fi
 %  \if l\EMWR@lr\mbox{}\vspace{-\baselineskip}\par\fi
-  \parshape\zu@shape\ignorespaces}
-
+  \parshape\zu@shape\ignorespaces
+\if r\EMWR@lr
+   \box\em@label@box
+%    \leavevmode\hbox to \z@{\hss\box\em@label@box}%
+\else
+  \leavevmode\hbox to 0zw{\hspace{-\EMWR@zuhaba}%
+    \hspace{-\the\@mawarikomisep}\hspace{-\the\@mawarikomisep}%
+    \box\em@label@box\hss}%
+\fi
+}%
+%
 \def\endmawarikomi{%
+%  \global\let\mawarikomi\@mawarikomi
   \xdef\save@EMWR@zuhaba{\EMWR@zuhaba}%
   \gdef\EMWR@zuhaba{\z@}%
   \xdef\save@mawarikomisep{\the\@mawarikomisep}%
   \global\@mawarikomisep=\z@
-  \xDecr\EMWR@lvl\par}
-
-\def\mawarikomiowari{\@ifstar{\mawarikomimusi}{\@mawarikomiowari}}
-\def\@mawarikomiowari{\leavevmode\EMWR@shape{\ifnum\EMWR@gyousuu>\@ne
-  \Decr\EMWR@gyousuu\@tempdima\EMWR@gyousuu\baselineskip
-  \vskip\@tempdima\xdef\EMWR@gyousuu{0}\fi}%
-  \parshape 1 \@totalleftmargin \linewidth}
-\def\mawarikomimusi{\xdef\EMWR@gyousuu{0}}
-
-% 継続
+  \xDecr\EMWR@lvl\par}%
+%
+\def\mawarikomiowari{\@ifstar{\mawarikomimusi}{\@mawarikomiowari}}%
+\def\@mawarikomiowari{%
+  \leavevmode
+  \ifnum\EMWR@gyousuu>\@ne
+    {\EMWR@shape
+      \Decr\EMWR@gyousuu\@tempdima\EMWR@gyousuu\baselineskip
+      \vskip\@tempdima
+    }%
+  \fi
+  \parshape 1 \@totalleftmargin \linewidth
+  \xdef\EMWR@gyousuu{0}%
+}%
+\def\mawarikomimusi{\xdef\EMWR@gyousuu{0}}%
+%
+% $B7QB3(B
 \expandafter\def\csname mawarikomi*\endcsname{%
   \xdef\EMWR@zuhaba{\save@EMWR@zuhaba}%
   \setlength{\@mawarikomisep}{\save@mawarikomisep}%
@@ -400,13 +563,13 @@
     \csname end##1\endcsname\@checkend{##1}%
     \expandafter\endgroup\after@end\let\after@end\relax
     \if@endpe\@doendpe\fi
-    \if@ignore\@ignorefalse\ignorespaces\fi}
+    \if@ignore\@ignorefalse\ignorespaces\fi}%
   \let\EMWR@par\par
   \long\def\par{\EMWR@shape\ignorespaces}%
 \let\mwrkmpar\par
   \let\EMWR@list\list
   \let\endEMWR@list\endlist
-  \def\list##1##2{\EMWR@shape\EMWR@list{##1}{##2}}%\EMWR@shape
+  \def\list##1##2{\EMWR@shape\EMWR@list{##1}{##2}\let\par\mwrkmpar}%\EMWR@shape
   \def\endlist{\EMWR@shape\let\after@end\EMWR@shape\endEMWR@list}%
   \let\item\EMWR@item
   \xIncr\EMWR@lvl\EMWR@par\EMWR@shape
@@ -416,30 +579,34 @@
   }{}%
 }
 %
-\expandafter\def\csname endmawarikomi*\endcsname{\endmawarikomi}
+\expandafter\def\csname endmawarikomi*\endcsname{\endmawarikomi}%
 %
-% 改ページをしない mawarikomi
+% $B2~%Z!<%8$r$7$J$$(B mawarikomi
 %
-\def\Pmawarikomi{\MWnewpage{no}\mawarikomi}
-\def\endPmawarikomi{\endmawarikomi}
+\def\Pmawarikomi{\MWnewpage{no}\mawarikomi}%
+\def\endPmawarikomi{\endmawarikomi}%
 %
-% 行頭で配置する旧形式の mawarikomi
+% $B9TF,$GG[CV$9$k5l7A<0$N(B mawarikomi
 %
-\def\Amawarikomi{\def\Mw@old{1}\mawarikomi}
-\def\endAmawarikomi{\endmawarikomi}
+\def\Amawarikomi{\def\Mw@old{1}\mawarikomi}%
+\def\endAmawarikomi{\endmawarikomi}%
 %
-% 行末で配置する形式の mawarikomi（デフォルト）
+% $B9TKv$GG[CV$9$k7A<0$N(B mawarikomi$B!J%G%U%)%k%H!K(B
 %
-\def\Zmawarikomi{\def\Mw@old{0}\mawarikomi}
-\def\endZmawarikomi{\endmawarikomi}
+\def\Zmawarikomi{\def\Mw@old{0}\mawarikomi}%
+\def\endZmawarikomi{\endmawarikomi}%
 %
-\def\Fmawarikomi{\def\@captype{figure}\mawarikomi}
-\def\endFmawarikomi{\endmawarikomi}
-\def\Tmawarikomi{\def\@captype{table}\mawarikomi}
-\def\endTmawarikomi{\endmawarikomi}
-
-\def\mawarikomishape{\EMWR@shape}
-\def\mawarikomipar{\EMWR@shape\par}
+\def\Fmawarikomi{\def\@captype{figure}\mawarikomi}%
+\def\endFmawarikomi{\endmawarikomi}%
+\def\Tmawarikomi{\def\@captype{table}\mawarikomi}%
+\def\endTmawarikomi{\endmawarikomi}%
+\def\Imawarikomi{\def\I@mawarikomi{}\@mawarikomi}%
+\def\endImawarikomi{\endmawarikomi}%
+\def\itemmawarikomi{\let\mawarikomi\Imawarikomi}%
+\let\itemMw\itemmawarikomi
+%
+\def\mawarikomishape{\EMWR@shape}%
+\def\mawarikomipar{\EMWR@shape\par}%
 \def\EMWR@shape{\ifhmode\EMWR@par%
   \xISub\EMWR@gyousuu{\the\prevgraf}\EMWR@gyousuu\fi
   \@tempdima\linewidth\advance\@tempdima-\EMWR@zuhaba\relax
@@ -463,9 +630,9 @@
   \else
     \parshape 1 \@totalleftmargin \linewidth
   \fi
-  }
+  }%
 %
-% テキスト幅
+% $B%F%-%9%HI}(B
 %
 \def\getmawarikomitextwidth#1{{%
   \@tempdima\linewidth\advance\@tempdima-\EMWR@zuhaba\relax
@@ -473,16 +640,16 @@
   \advance\@tempdima-\@mawarikomisep\advance\@tempdima-\@mawarikomisep
   \xdef #1{\the\@tempdima}}}%
 %
-% 右空け
+% $B1&6u$1(B
 %   \Akeru<#1>[#2]#3
-%     #2 : 行数
-%            0 のときは，右空けを終了する。
-%            指定しないときは,無限に続く。
-%     #3 : 空ける幅
-%            指定しないときは,既に Nidan 環境で指定したものが使われる。
+%     #2 : $B9T?t(B
+%            0 $B$N$H$-$O!$1&6u$1$r=*N;$9$k!#(B
+%            $B;XDj$7$J$$$H$-$O(B,$BL58B$KB3$/!#(B
+%     #3 : $B6u$1$kI}(B
+%            $B;XDj$7$J$$$H$-$O(B,$B4{$K(B Nidan $B4D6-$G;XDj$7$?$b$N$,;H$o$l$k!#(B
 \def\Migihaiti{\@ifnextchar({\@Migihaiti}{\@Migihaiti(\z@,\z@)}}
 \def\@Migihaiti(#1,#2)#3{\ignorespaces{%
-  \setbox0=\hbox{#3}%
+  \setbox0=\hbox{{#3}}%
 % \leavevmode\vadjust{\kern-\p@\smash{\vtop to \z@{%
   \leavevmode\vadjust{\kern-\p@\smash{\vtop{%
   \noindent\hspace*{\linewidth}\hspace*{-\wd0}%
@@ -512,12 +679,12 @@
     \edefappend\zu@shape{ \@totalleftmargin \linewidth}%
     \parshape\zu@shape
   \fi\fi\ignorespaces}
-
-% 右空け enumerate
+%
+% $B1&6u$1(B enumerate
 % \begin{nidanenumerate}[#1]<#2>
-%   #1 : enumerate 環境の [...] オプションと同じ
-%   #2 : 回り込み行数
-
+%   #1 : enumerate $B4D6-$N(B [...] $B%*%W%7%g%s$HF1$8(B
+%   #2 : $B2s$j9~$_9T?t(B
+%
 \edef\nidanenum@depth{0}%
 \def\ND@item{\ND@shape\ltxitem}
 \def\nidanenumerate{\let\item\ND@item\Incr\nidanenum@depth
@@ -529,9 +696,9 @@
 \def\endnidanenumerate{\Decr\nidanenum@depth
 \ifnum\nidanenum@depth=\z@\ND@shape\fi
 \csname endNidan*\endcsname\endenumerate}
-
 %
-% enumerate 環境下で番号位置の修正
+%
+% enumerate $B4D6-2<$GHV9f0LCV$N=$@5(B
 %
 %\newdimen\eitemindent
 \newskip\eitemindent
@@ -546,16 +713,16 @@
   \setlength{\templa}{\linewidth}%
   \addtolength{\templa}{-#1}\hspace*{#1}%
   \begin{minipage}{\templa}\item[#2]#3\end{minipage}\par}%
-
+%
 %%%
-%%% 図のまわりのテキスト回り込み
+%%% $B?^$N$^$o$j$N%F%-%9%H2s$j9~$_(B
 %%%
 \newlength\zu@width
 \newlength\zuitemwidth
-
+%
 \def\zu{\@ifnextchar<{\@@@zu}{\@@@zu<r>}}
 \def\@@@zu<#1>{\edef\fig@placement{#1}\@@zu}
-\def\@@zu{\@ifnextchar({\z@u}{\z@u(1zw)}}%  インデント量
+\def\@@zu{\@ifnextchar({\z@u}{\z@u(1zw)}}%  $B%$%s%G%s%HNL(B
 \def\z@u(#1){%
   \@ifundefined{c@WF@wrappedlines}{}{%
     \leavevmode\vspace{-1.85\baselineskip}\par}%
@@ -564,11 +731,11 @@
 \long\def\@zu[#1]#2#3{%
   \global\setlength{\zu@width}{#2}%
   \begin{wrapfigure}[#1]{\fig@placement}{#2}\noindent #3\end{wrapfigure}}%
-\long\def\zu@#1#2{%              #1=図の横巾 #2=図
+\long\def\zu@#1#2{%              #1=$B?^$N2#6R(B #2=$B?^(B
   \global\setlength{\zu@width}{#1}%
   \begin{wrapfigure}{\fig@placement}{#1}\noindent #2\end{wrapfigure}}%
 \def\endzu{\end{minipage}\vskip\topsep\vskip\parskip\endtrivlist}%
-
+%
 \def\zuitem{\@ifnextchar[{\@zuitem}{\@zuitem[0pt]}}%
 \def\@zuitem[#1]{\@ifnextchar({\@@zuitem[#1]}{\@@zuitem[#1](0pt)}}%
 \long\def\@@zuitem[#1](#2)#3{%
@@ -578,33 +745,33 @@
   \addtolength{\zuitemwidth}{-\columnsep}%
   \item \parbox[t]{\zuitemwidth}{#3}\\[#1]}%
 %
-% zuhaiti 環境
+% zuhaiti $B4D6-(B
 % \begin{zuhaiti}
 %   \haiti[#1](#2,#3)#4
 %   ...................
 % \end{zuhaiti}
-% このあと \wakudori で枠を設定する。
+% $B$3$N$"$H(B \wakudori $B$GOH$r@_Dj$9$k!#(B
 %
 %   \haiti[#1](#2,#3)#4
-%     #1 : r : 右配置（デフォルト）
-%          l : 左配置
-%     (#2,#3) : 自然な位置からの修正ベクトル
-%               #2>0 のときは右へ，#2<0のときは左へ
-%               #3>0 のときは上へ，#3<0のときは下へ
-%               #2, #3 はいずれも単位を伴う長さ
-%    #4 : 図表など
+%     #1 : r : $B1&G[CV!J%G%U%)%k%H!K(B
+%          l : $B:8G[CV(B
+%     (#2,#3) : $B<+A3$J0LCV$+$i$N=$@5%Y%/%H%k(B
+%               #2>0 $B$N$H$-$O1&$X!$(B#2<0$B$N$H$-$O:8$X(B
+%               #3>0 $B$N$H$-$O>e$X!$(B#3<0$B$N$H$-$O2<$X(B
+%               #2, #3 $B$O$$$:$l$bC10L$rH<$&D9$5(B
+%    #4 : $B?^I=$J$I(B
 %
-\def\zuhaiti{%
-  \def\haiti{\@ifnextchar[{\@haiti}{\@haiti[r]}}
-  \def\@haiti[##1]{\@ifnextchar({\@@haiti[##1]}{\@@haiti[##1](0pt,0pt)}}
+\def\zuhaiti{\ignorespaces%
+  \def\haiti{\@ifnextchar[{\@haiti}{\@haiti[r]}}%
+  \def\@haiti[##1]{\@ifnextchar({\@@haiti[##1]}{\@@haiti[##1](0pt,0pt)}}%
   \def\@@haiti[##1](##2,##3)##4{%
-    \setbox0=\hbox{##4}%
+    \setbox0=\hbox{{##4}}%
     \@tempdima\ht0\advance\@tempdima\dp0\relax
     \ifdim\zuhaiti@Y=\z@\advance\@tempdima-1zw\fi
     \@tempdimc\@tempdima
     \advance\@tempdima\zuhaiti@Y
     \edef\zuhaiti@Y{\the\@tempdimc}%
-    \typeout{図幅=\the\wd0}%
+    \@ifundefined{Mw@silent}{\typeout{$B?^I}(B=\the\wd0}}{}%
     \if l##1\relax
       \@tempdimb\z@%
     \else
@@ -618,22 +785,22 @@
     \put(\zuhaiti@x,\zuhaiti@y){\makebox(0,0)[lb]{\box0}}%
   }%
   \edef\zuhaiti@Y{0pt}%
-  \bgroup\unitlength1pt\relax\picture(0,0)}
-\def\endzuhaiti{\endpicture\egroup}
-
-% 図の枠をあける
-% \wakudori#1
-%   #1 は
-%     行数*(左枠の幅,右枠の幅)
-%   を`;'区切りで並べる。
+  \bgroup\unitlength1pt\relax\picture(0,0)\ignorespaces}%
+\def\endzuhaiti{\endpicture\egroup\@ignoretrue}%
 %
-%   （注1）右枠のみのときは
-%     行数*右枠の幅
-%   と略記できる。
-%   （注2）解除は
+% $B?^$NOH$r$"$1$k(B
+% \wakudori#1
+%   #1 $B$O(B
+%     $B9T?t(B*($B:8OH$NI}(B,$B1&OH$NI}(B)
+%   $B$r(B`;'$B6h@Z$j$GJB$Y$k!#(B
+%
+%   $B!JCm(B1$B!K1&OH$N$_$N$H$-$O(B
+%     $B9T?t(B*$B1&OH$NI}(B
+%   $B$HN,5-$G$-$k!#(B
+%   $B!JCm(B2$B!K2r=|$O(B
 %       \wakudori{}
 %
-\def\wakudori#1{%
+\def\wakudori#1{\ignorespaces%
   \ifthenelse{\equal{#1}{\empty}}{%
     \parshape \@ne \@totalleftmargin \linewidth
   }{%
@@ -664,6 +831,7 @@
     \parshape \wakudori@gyousuu \space \wakudori@shape
       \the\@totalleftmargin \the\linewidth
   }%
+\ignorespaces
 }
 %
 \newcommand{\MWintertext}{\@amsmath@err{\Invalid@@\intertext}\@eha}
@@ -696,59 +864,115 @@
   }%
 }%
 %
+\AtBeginDocument{%
+  \@ifundefined{numcases}{}{%
+    \let\ltxnumcases\numcases
+    \let\endltxnumcases\endnumcases
+    \renewenvironment{numcases}[1]{%
+      \@ifundefined{EMWR@zuhaba}{}{%
+        \ifthenelse{\lengthtest{\EMWR@zuhaba>\z@}}{%
+          \ifnum\EMWR@gyousuu>\@ne
+            \advance\linewidth-\EMWR@zuhaba
+            \advance\linewidth-\@mawarikomisep
+            \advance\linewidth-\@mawarikomisep
+          \fi
+        }{}%
+      }%
+      \ltxnumcases{#1}%
+    }{%
+      \endltxnumcases
+    }%
+  }%
+}%
+%
 \endinput
-
+%
 v 0.00 2003/09/03
-        emathE.sty から独立
+        emathE.sty $B$+$iFHN)(B
 v 0.01 2003/11/26
-        mawarikomi環境で，図幅指定を省略したとき，
-        実際の図幅をログファイルに書き出す。
+        mawarikomi$B4D6-$G!$?^I};XDj$r>JN,$7$?$H$-!$(B
+        $B<B:]$N?^I}$r%m%0%U%!%$%k$K=q$-=P$9!#(B
 v 0.02 2003/11/28
-        emathLb.sty を読み込む
+        emathLb.sty $B$rFI$_9~$`(B
 v 0.03 2004/01/18
         \@mawarikomisep, \mawarikomisep, \mawarikomikankaku :
             dimen ---> skip
 v 0.04 2004/07/19
-        右配置を \vadjust による方法に変更
-        ロードオプション [old] により，旧形式となる
+        $B1&G[CV$r(B \vadjust $B$K$h$kJ}K!$KJQ99(B
+        $B%m!<%I%*%W%7%g%s(B [old] $B$K$h$j!$5l7A<0$H$J$k(B
 v 0.05 2004/08/28-30
-        段落途中での使用を可能とする試み
-        強制改ページを許可するか否かを \if@mawarikomi@newpage で制御
+        $BCJMnESCf$G$N;HMQ$r2DG=$H$9$k;n$_(B
+        $B6/@)2~%Z!<%8$r5v2D$9$k$+H]$+$r(B \if@mawarikomi@newpage $B$G@)8f(B
 v 0.06 2004/11/19
         vtop to \z@ ---> \vtop
 v 0.08 2005/03/06
-        Amawarikomi環境：行頭で配置する旧形式のmawarikomi
-        Zmawarikomi環境：行末で配置する形式のmawarikomi
+        Amawarikomi$B4D6-!'9TF,$GG[CV$9$k5l7A<0$N(Bmawarikomi
+        Zmawarikomi$B4D6-!'9TKv$GG[CV$9$k7A<0$N(Bmawarikomi
 v 0.09 2005/03/08
-        \mawarikomitextwidth : 新設 --->xxx
+        \mawarikomitextwidth : $B?7@_(B --->xxx
 v 0.10 2005/04/11
-        \getmawarikomitextwidth#1 : 大域変数#1に単位付の値をセット --->xxx
-        \EMWRlinewidth：テキスト部の横幅
-        Pmawarikomi環境：次ページに送る処理をしない
-          （ロードオプション[samepage}を付加しても同じ効果）
-v 0.11 \mawarikomimusi : \mawarikomiowari と異なり，終了処理をしない
+        \getmawarikomitextwidth#1 : $BBg0hJQ?t(B#1$B$KC10LIU$NCM$r%;%C%H(B --->xxx
+        \EMWRlinewidth$B!'%F%-%9%HIt$N2#I}(B
+        Pmawarikomi$B4D6-!'<!%Z!<%8$KAw$k=hM}$r$7$J$$(B
+          $B!J%m!<%I%*%W%7%g%s(B[samepage]$B$rIU2C$7$F$bF1$88z2L!K(B
+v 0.11 \mawarikomimusi : \mawarikomiowari $B$H0[$J$j!$=*N;=hM}$r$7$J$$(B
 v 0.12 2005/08/01
           \mawarikomiowari* = \mawarikomimusi
 v 0.13 2005/09/03
-          emathLb.sty の読み込み中止
+          emathLb.sty $B$NFI$_9~$_Cf;_(B
 v 0.14 2005/11/30
           \EMintertext
 v 0.15 2006/06/14
-        \mwrkmpar : mawarikomi環境内で list系環境を用いるときの \par
+        \mwrkmpar : mawarikomi$B4D6-Fb$G(B list$B7O4D6-$rMQ$$$k$H$-$N(B \par
 v 0.16 2006/12/12
-        \mwrkmpar : mawarikomi*環境内でも使用可
+        \mwrkmpar : mawarikomi*$B4D6-Fb$G$b;HMQ2D(B
 v 0.17 2007/01/11
-        １行目と２行目の行間が，他と比較して狭いことの修正
+        $B#19TL\$H#29TL\$N9T4V$,!$B>$HHf3S$7$F69$$$3$H$N=$@5(B
 v 0.18 2007/04/02
-        EMminipages環境
+        EMminipages$B4D6-(B
 v 0.19 2007/07/14
-        tadan環境
+        tadan$B4D6-(B
 v 0.20 2007/07/17
-        tadan環境 ---> EMminipages環境 ---> EMminipages.sty
+        tadan$B4D6-(B ---> EMminipages$B4D6-(B ---> EMminipages.sty
 v 0.22 2008/01/05
-        mawarikomi環境内に，修飾enumerate環境の \item* を配置可能とする。
-v 0.23 2008/01\11
-        emathEc.sty を読み込む
+        mawarikomi$B4D6-Fb$K!$=$>~(Benumerate$B4D6-$N(B \item* $B$rG[CV2DG=$H$9$k!#(B
+v 0.23 2008/01/11
+        emathEc.sty $B$rFI$_9~$`(B
 v 0.24 2008/01/12
-        単独使用を考慮し，emathEc.sty のロードを外し，
-        \EMitem が未定義の場合に対応 (BBS #6944)
+        $BC1FH;HMQ$r9MN8$7!$(BemathEc.sty $B$N%m!<%I$r30$7!$(B
+        \EMitem $B$,L$Dj5A$N>l9g$KBP1~(B (BBS #6944)
+v 0.25 2008/08/11
+        'precaption=..', 'postcaption=..' $B%*%W%7%g%s(B
+v 0.26 2008/08/17
+        \wakudori: $B4D6-$H$7$F$b;HMQ$G$-$k$h$&$K$7!$(B
+                   \endwakudori $B$K(B \par $B$r4^$a$k!#(B(BBS #7420)
+v 0.27 2008/09/12
+        \mawarikomi: #6 $B$r(B \hbox $B$G$/$k$`!#(B(BBS #7520)
+v 0.28 2008/11/06
+        sep $B@0Hw(B
+v 0.29 2009/01/08
+        <samepage>$B%*%W%7%g%s(B
+        <#1> $B%*%W%7%g%s(B
+        minipage $B$KF~$l$k>l9g$NI{:nMQ(B \textwidth (BBS #7844)
+        mawarikomi$B4D6-Fb$N(B list $B$G$O(B \let\par\mwrkmpar
+v 0.30 2009/01/22
+        minipage $B$KF~$l$k>l9g$NI{:nMQ:FD{(B
+v 0.31 2009/10/18
+        \leftskip $BBP1~(B
+v 0.32 2010/01/30 $B6uGr$N:.F~2sHr(B
+v 0.33 2010/09/08 \box0 --> \box\EMWR@box
+v 0.34 2011/02/03 $B%m!<%I%*%W%7%g%s(B silent: $B?^I}>pJs$N=PNO$rM^@)(B
+v 0.35 2011/04/17 \numcases $BBP1~(B (BBS #9808)
+v 0.36 2011/04/29 Imawarikomi: \item $BD>8e$N(B mawarikomi
+                     (item$BHV9f$H$NJ,N%$rHr$1$k!$(B\ReadTeXFile<Imawarikomi>)
+%                 http://oku.edu.mie-u.ac.jp/~okumura/texfaq/qa/27350.html
+v 0.37 2011/06/20 preoption, postoption $B@0Hw(B
+v 0.38 2011/06/25 v0.37 $B$N%P%0=$@5(B (BBS #9984)
+v 0.39 2011/07/23 mawarikomi$B4D6-$N2#I}$K!$7W;;<0(B(calc.sty)$B$r5vMF(B
+v 0.40 2011/11/20 Fmwarikomi: \caption $B$H?^$J$I$N4V3V$r(B \intextsep $B$H$9$k!#(B
+v 0.41 2012/10/16 \item $BD>8e$N>l9g(B
+v 0.42 2012/11/10 $B",=$@5(B (BBS #11230)
+v 0.43 2013/02/02 \item $BD>8e$N>l9g(B (BBS #11510) Imawarikomi$B4D6-(B
+v 0.44 2014/05/28 $BCJMn@hF,$N;z2<$2(B (BBS #12307)
+v 0.45 2014/10/07 $B",=$@5(B (BBS #12517)
+v 0.46 2015/03/09 \listparindent $B$r;XDj$7$?>l9g(B (BBS #12631)

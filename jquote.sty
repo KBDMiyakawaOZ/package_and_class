@@ -1,14 +1,17 @@
 %%% jquote.sty by tDB(emath@nifty.com)
 %
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{jquote}[2005/10/31 v0.01]%
+\ProvidesPackage{jquote}[2012/11/23 v0.14]%
 %
     \RequirePackage{keyval}%
 %
-%%% インデント
+\@ifundefined{ltxitem}{\let\ltxitem\item}{}%
+%
+%
+%%% $B%$%s%G%s%H(B
 %%% jquote(#1)(#2)[#3]
-%%%     #1 : 左インデント（デフォルト値 2zw）
-%%%     #2 : 右インデント（デフォルト値 0zw）
+%%%     #1 : $B:8%$%s%G%s%H!J%G%U%)%k%HCM(B 2zw$B!K(B
+%%%     #2 : $B1&%$%s%G%s%H!J%G%U%)%k%HCM(B 0zw$B!K(B
 %%%     #3 : \topsep
 %
   \define@key{jquote}{tsep}{\edef\t@sep{#1}}%
@@ -17,8 +20,8 @@
 %
 \def\jquote{%
   \def\t@sep{0pt}\def\b@sep{0pt}%
-  \@ifnextchar<{\jquote@}{\@jquote}}
-\def\jquote@<#1>{\setkeys{jquote}{#1}\@jquote}
+  \@ifnextchar<{\jquote@}{\@jquote}}%
+\def\jquote@<#1>{\setkeys{jquote}{#1}\@jquote}%
 \def\@jquote{\@ifnextchar({\@@jquote}{\@@jquote(2zw)}}%
 \def\@@jquote(#1){%
   \@ifnextchar({\@@@jquote(#1)}{\@@@jquote(#1)(\z@)}}%
@@ -29,15 +32,18 @@
   \ifdim\t@sep=\z@\else\vspace*{\t@sep}\fi
   \list{}{\setlength{\leftmargin}{#1}\setlength{\rightmargin}{#2}%
     \parsep\z@ plus\p@\setlength{\topsep}{#3}}%
-  \item\relax}%
+  \@ifundefined{EMWR@list}{\ltxitem\relax}{\item\relax}%
+%  \hsize=\linewidth%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% for framed
+  \ignorespaces%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2008/03/07
+}%
 \def\endjquote{\endlist
   \ifdim\b@sep=\z@\else\vspace*{\b@sep}\fi
-}
+}%
 %
 \def\jquotation{%
   \def\t@sep{0pt}\def\b@sep{0pt}%
-  \@ifnextchar<{\jquotation@}{\@jquotation}}
-\def\jquotation@<#1>{\setkeys{jquote}{#1}\@jquotation}
+  \@ifnextchar<{\jquotation@}{\@jquotation}}%
+\def\jquotation@<#1>{\setkeys{jquote}{#1}\@jquotation}%
 \def\@jquotation{\@ifnextchar({\@@jquotation}{\@@jquotation(2zw)}}%
 \def\@@jquotation(#1){\@ifnextchar({\@@@jquotation(#1)}{%
 \@@@jquotation(#1)(0zw)}}%
@@ -45,12 +51,97 @@
     \@@@@jquotation(#1)(#2)[\z@ plus\p@]}}%
 \def\@@@@jquotation(#1)(#2)[#3]{%
     \ifdim\t@sep=\z@\else\vspace*{\t@sep}\fi
-    \list{}{\leftmargin#1\rightmargin#2\listparindent\parindent%
-    \itemindent\parindent\parsep\z@ plus\p@\topsep#3\relax}%
+    \list{}{\setlength{\leftmargin}{#1}\setlength{\rightmargin}{#2}%
+    \listparindent\parindent%
+    \itemindent\parindent\parsep\z@ plus\p@
+    \topsep#3\relax}%
+%    \hsize=\linewidth%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% for framed
     \item\relax}%
 \def\endjquotation{\endlist
   \ifdim\b@sep=\z@\else\vspace*{\b@sep}\fi
-}
+}%
+%
+\def\EMchangeLRskip{%
+  \edef\top@par{1}%
+  \edef\LR@vsep{\empty}%
+  \edef\LR@tsep{\empty}%
+  \edef\LR@bsep{\empty}%
+  \define@key{LRskip}{toppar}{\edef\top@par{##1}}%
+  \define@key{LRskip}{vsep}{\def\LR@vsep{##1}}%
+  \define@key{LRskip}{tsep}{\def\LR@tsep{##1}}%
+  \define@key{LRskip}{bsep}{\def\LR@bsep{##1}}%
+  \@ifnextchar<{\@EMchangeLRskip}{\@EMchangeLRskip<\empty>}}%
+\def\@EMchangeLRskip<#1>{\@ifnextchar({\@@EMchangeLRskip<#1>}{\@@EMchangeLRskip<#1>(2zw)}}%
+\def\@@EMchangeLRskip<#1>(#2){\@ifnextchar({\@@@EMchangeLRskip<#1>(#2)}{\@@@EMchangeLRskip<#1>(#2)(\z@)}}%
+\def\@@@EMchangeLRskip<#1>(#2)(#3){%
+  \@ifnextchar[{\@@@@EMchangeLRskip<#1>(#2)(#3)}{%
+                \@@@@EMchangeLRskip<#1>(#2)(#3)[\z@ plus \p@]}}%
+\def\@@@@EMchangeLRskip<#1>(#2)(#3)[#4]{%
+%
+\@ifundefined{Migi@Haiti}{}{%
+\def\Migi@Haiti(##1,##2)##3{%
+  \leavevmode\vadjust{\kern-\p@\smash{\vtop{%
+  \noindent\hspace*{\linewidth}\hspace*{-\EMWR@zuhaba}%
+%\@ifundefined{EMLR@lskip}{}{%
+  \hspace{-\EMLR@lskip}%
+  \hspace{-\EMLR@lskip}%
+  \hspace{-\EMLR@rskip}%
+%}%
+  \hspace{\@totalleftmargin}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \@tempdimb ##2\relax
+  \relax\leavevmode\lower -\@tempdimb\hbox{\hspace*{##1}##3}}}\kern\p@}}%
+}%
+%
+  \ifx\empty #1\else
+    \setkeys{LRskip}{#1}%
+  \fi
+  \ifnum\top@par>\z@
+    \ifvmode\else\par\noindent\fi
+  \fi
+  \ifx\empty\LR@vsep\else
+    \ifx\empty\LR@tsep\def\LR@tsep{\LR@vsep}\fi
+    \ifx\empty\LR@bsep\def\LR@bsep{\LR@vsep}\fi
+  \fi
+  \@tempdima=#2\relax
+  \@tempdimb=#3\relax
+  \edef\EMLR@lskip{\the\@tempdima}%
+  \edef\EMLR@rskip{\the\@tempdimb}%
+  \advance\leftskip#2\relax
+%  \advance\rightskip#3\relax
+  \advance\hsize-\@tempdimb
+  \@ifundefined{mathindent}{}{\advance\mathindent#2\relax}%
+%  \advance\@totalleftmargin#2\relax%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \@ifundefined{mwrkmpar}{%
+    \advance\linewidth-\@tempdima%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \advance\@totalleftmargin\@tempdima%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \advance\linewidth-\@tempdimb%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  }{\let\par\mwrkmpar}%
+  \ifx\empty\LR@tsep\else\vskip\LR@tsep\fi
+  \ignorespaces
+}%
+%
+\def\endEMchangeLRskip{%
+  \ifx\empty\LR@bsep\else\vskip\LR@bsep\fi
+  \par
+  \@ifundefined{mwrkmpar}{}{%
+    \endgroup\par
+    \begingroup\def\@currenvir{EMchangeLRskip}%
+  }%
+}%
 \endinput
 
-v 0.00 2005/06/30 emath.sty から独立
+v 0.00 2005/06/30 emath.sty $B$+$iFHN)(B
+v 0.02 2006/06/07 EMchangeLRskip$B4D6-(B
+                  jquote $B$r(B edaenumerate$B4D6-Fb$G;HMQ2DG=(B
+v 0.03 2006/07/30 mawarikomi$B4D6-Fb$N;HMQ$KG[N8$7$F!$>e5-$r=$@5(B
+v 0.04 2008/01/12 0.03 $B$N=$@5$,5U$@$C$?(B
+v 0.05 2008/03/07 \ignorespaces $BIU2C(B
+v 0.06 2008/09/04 $B6uGr$N:.F~BP:v(B
+v 0.07 2009/01/10 \ltxitem $BL$Dj5ABP:v(B
+v 0.08 2009/06/01 framed$B4D6-$KBP1~(B ---> framed $B$G9T$&(B (6/16)
+v 0.09 2009/06/16 \hsize=\linewidth $B$r(B ..framed.sty $B$K0\4I(B
+v 0.10 2010/10/18 EMchangeLRskip $B@0Hw(B (BBS #8396)
+v 0.11 2010/10/21 $B!8(B (BBS #8398)
+v 0.12 2010/11/16 EMchangeLRskip: vsep, tsep, bsep
+v 0.13 2012/01/06 EMchangeLRskip: $B=q<0$r(B jquotation $B$HB7$($k(B
+v 0.14 2012/11/23 EMchangeLRskip: \hsize

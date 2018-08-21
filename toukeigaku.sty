@@ -1,6 +1,35 @@
-% -- 2017/10/24 teatime環境にfigure, tableの指定可能へ
-%               emathの式番号をキャンセル \resettagform
-% ---2017/10/02 新版用に若干modify
+% ---2011/09/16 章末問題，章末問題解答の柱を変更
+% ---2011/09/13 参考文献，章末問題，章末問題解答，登場人物の年表を追加
+% ---2011/09/12 TEST環境の\<を\inhibitglueへ
+% ---2011/08/10
+% 「解答」の体裁をtyuukai環境へ戻して，罫線だけはずす．
+%  同時に傍注は\tyuu形式へ戻す．
+%  傍注のフォントサイズを11Qから8Qへ変更．
+%  ファイル名をmacros3rd.styへ変更
+%  \tableofcontentsでの\gdefに\protectを付加．bugfix
+%  ＊2011/07/12の改変では\ProvidesPackageでのファイル名指定が
+%    macros1stとなっていた．
+% ---2011/07/12
+% 「問題」の幅が版面より僅かに短かったのを修正．bugfix
+% 「解答」の傍注をmawarikomi環境で処理へ変更．
+%  tyuukai環境は使わないようになった．
+% ファイル名をmacros1st.styからmacros2nd.styへ
+%
+% ---2010/10/08
+% 「弱点克服 大学生のフーリエ解析」用へ転用．
+% ファイル名をmacros9th.styからmacros1st.styとする．
+%「解答」：現状から1Q大とする			(10 -> 11Q)．
+%「補足」："現状"の「解答」のサイズとする	(10Q)
+%「脚注」："現状"の「解答」のサイズ とする	(10Q)
+%「問題」：現状から1Q落とす			(13 -> 12Q)
+%「解説」：現状から1Q落とす			(13 -> 12Q)
+%「例.」  ：現状から1Q落とす			(13 -> 12Q)
+%「解.」  ：現状から1Q落とす			(13 -> 12Q)
+%  * 設定を分かりやすくするため上記設定をkeyvalを試す．
+% 「解答」のロゴ以降は改行せず，一字空けで文章を続ける．
+% 「例」「解」「補足」環境を追加．
+% 網掛け環境をすこし手直し(\begin{網掛け}の直前の\vspaceを削除)
+%--------------------------------------
 % ---2010/03/08
 % 目次と索引の柱修正
 % 目次，抜き出し頁番号末尾の□を`Tea Time'と`TEST shuffile`において取る
@@ -55,7 +84,11 @@
 %\ProvidesPackage{macros6th}[2009/12/07]
 %\ProvidesPackage{macros7th}[2009/12/15]
 %\ProvidesPackage{macros8th}[2010/02/25]
-\ProvidesPackage{macros9th}[2010/03/08]
+%\ProvidesPackage{macros1st}[2010/10/08]
+%\ProvidesPackage{macros1st}[2011/07/12]
+%\ProvidesPackage{macros3rd}[2011/08/10]
+%\ProvidesPackage{macros4th}[2011/09/13]
+\ProvidesPackage{toukeigaku}[2011/09/16]
 
 \renewcommand{\@@PageNumFont}{\reset@font\small\sf}
 
@@ -94,8 +127,6 @@
 \small}{\end{@@@@tyuukai}}
 
 
-
-
 %%\begin{itembox}[l]{\kreidai \quad{\bfseries 標本空間・事象・確率}}
 \def\問題title{\relax}
 \newcounter{mondai}
@@ -116,9 +147,8 @@
 問題\textsl{\themondai}\hskip.5zw{\fboxrule.12mm\fboxsep.1zw{\fontsize{.8\dimen1}{0pt}\selectfont\fbox{\leve@@l@@}}\hskip.5zw#2\relax\fboxsep\@tempdima}}
 \setbox\mondaibox=\hbox\bgroup\begin{minipage}{.95\textwidth}\parindent1zw\vskip2mm}
 
-
-\def\end問題{\vskip{2mm}A\end{minipage}\egroup%
-\par\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
+\def\end問題{\vskip2mm\end{minipage}\egroup%
+\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
 \begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{80mm}p{2zw}@{\vrule width1pt}}
 \hline
 \cellcolor[gray]{0}\textcolor{white}{\bf 問題}&\cellcolor[gray]{.9}\textsl{\themondai}&\問題@@title&\multicolumn{1}{c|}{\cellcolor[gray]{.6}\leve@@l@@}\\
@@ -126,7 +156,7 @@
 \multicolumn{4}{|c@{\hskip.9\tabcolsep\vrule width1pt}}{\hfil\small\usebox{\mondaibox}\hfil}\\
 \hline
 \end{tabular}%
-\addcontentsline{toc}{Section}{\protect\def\protect\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
+\addcontentsline{toc}{Section}{\gdef\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
 }
 
 %---------------------------------------------------
@@ -136,38 +166,42 @@
 \def\問題@@title{#2}
 \gdef\問題title{\@tempdima\fboxsep\dimen1=\f@size\p@%
 問題\textsl{\themondai}\hskip.5zw{\fboxrule.12mm\fboxsep.1zw{\fontsize{.8\dimen1}{0pt}\selectfont\fbox{\leve@@l@@}}\hskip.5zw#2\relax\fboxsep\@tempdima}}
-\renewcommand{\labelenumi}{(\theenumi)}%
 \def\figure{\kb@figure}\def\endfigure{\end{minipage}\vspace{.25\baselineskip}\par}%
 \def\table{\kb@table}\def\endtable{\end{minipage}\vspace{.25\baselineskip}\par}%
-\setbox\mondaibox=\hbox\bgroup\begin{minipage}{.95\textwidth}\parindent1zw\vskip2mm}
+\setbox\mondaibox=\hbox\bgroup\begin{minipage}{.95\textwidth}\parindent1zw\vskip2mm\progfont
+\begin{fleqn}[0pt]}
 
 
-\def\end問題{\vspace{-1.5mm}\vskip\z@\end{minipage}\egroup%
-\begin{center}
-\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
-\begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{80mm}p{2zw}@{\vrule width1pt}}
+\def\end問題{\end{fleqn}\vspace{1mm}%
+\end{minipage}\egroup%
+\noindent\arrayrulewidth=1pt\tabcolsep\@@tabcolsep@@%
+\begin{tabular}{|p{2zw}c@{\hskip\tabcolsep\vrule width.5pt\hskip\tabcolsep}p{82.3mm}p{2zw}@{\vrule width1pt}}
 \hline
 \cellcolor[gray]{0}\textcolor{white}{\bf 問題}&\cellcolor[gray]{.9}\textsl{\themondai}&\textbf{\問題@@title}&\multicolumn{1}{c|}{\cellcolor[gray]{.6}\leve@@l@@}\\
 \noalign{\hrule height .5pt}
 \multicolumn{4}{|c@{\hskip.9\tabcolsep\vrule width1pt}}{\hfil\small\usebox{\mondaibox}\hfil}\\
 \hline
 \end{tabular}%
-\end{center}%
-\addcontentsline{toc}{Section}{\protect\def\protect\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
-}%---------------------------------------------------
+\addcontentsline{toc}{Section}{\gdef\protect\tocendsq{□□□}\protect\numberline{問題\themondai}[\leve@@l@@]\hskip1zw\問題@@title}%
+\markright{\問題title}}%---------------------------------------------------
 
 \newcounter{tyuunumber}[page]
 \def\thetyuunumber{\@arabic\c@tyuunumber}
 \tyuumark{★\kern0pt\thetyuunumber\hskip.5zw}
+\newcommand{\BOXn}{%
+{\fboxsep0pt\colorbox[gray]{0.8}{\hbox to\linewidth{\rule[-.3zh]{0pt}{1.5zh}\hskip.25zw\scriptsize$*\thetyuunumber$\hfil}}}\\[.5mm]}%+
+\tyuumark{\BOXn}%+
 %\def\HidariRangaiMozisize{\tiny}
 \def\HidariRangaiMozisize{\scriptsize}
+\def\HidariRangaiMozisize{\fontsize{8Q}{12H}\selectfont}
 
 \def\tyuumark@@{\leavevmode\nolinebreak%
 \refstepcounter{tyuunumber}%
-\hbox{\@textsuperscript{\normalfont ★\kern0pt\thetyuunumber}}
+\hbox{\@textsuperscript{\normalfont\mbox{$*$}\kern0pt\thetyuunumber}}
 %\ensuremath{^{★\kern0pt\thetyuunumber}}
 }
 
+\migityuukeisenfalse
 %************************************************
 \def\@tyuukai[#1]{%
 %
@@ -206,24 +240,31 @@
 \def\@解説{\includegraphics{parts/解説.eps}}
 
 \newenvironment{解説}{%
-	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw}
+%\lineskip1pt\lineskiplimit\z@
+	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw\explanationfont}
 		\item[\raisebox{-2mm}{\@解説}]
 		}
 	{\endlist}
 
 
-
-
-
 \newif\if@tempmathindent
 \@tempmathindenttrue
-%\@tempmathindentfalse
+\@tempmathindentfalse
 \setlength{\tyuuhaba}{7zw}
 \newenvironment{解答}{%
-\@fleqntrue\@beginparpenalty\@M
-	\begin{tyuukai}
-	\fontsize{10Q}{15H}\selectfont\noindent\raisebox{-2mm}{\@解答}\par\nobreak\vskip0pt}
-	{\@fleqnfalse\end{tyuukai}}
+\if@tempmathindent
+\@fleqntrue
+	\fi
+%%	\begin{tyuukai}
+%	\small\noindent\raisebox{-2mm}{\@解答}\\\relax
+%	\fontsize{12Q}{22H}\selectfont\noindent\raisebox{-2mm}{\@解答}\\\relax}
+%	\fontsize{10Q}{15H}\selectfont\noindent\raisebox{-2mm}{\@解答}\\\relax}
+	\small\anserfont%\lineskip1pt\lineskiplimit\z@
+	\noindent
+\raisebox{-2mm}{\@解答}\hskip.5zw}
+	{\@fleqnfalse
+	%\end{tyuukai}
+		}
 
 \def\testlabelG{{\unitlength=1mm
 \begin{picture}(0,0)
@@ -300,13 +341,50 @@
 %予想時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2\\
 %実際の時間&\copy2&&\copy2&&\copy2&&\copy2&&\box2
 \begin{tabular}[b]{@{\hskip.5zw}l@{}ccccccccccccc@{\hskip.5zw}}
-解く順序\<（問題の選択）\<&\copy0& \copy4& \copy0& \copy4& \copy0& \copy4 &\copy0&\copy4 &\copy0&\copy4&\copy0&\box4&\box0\\
+解く順序\inhibitglue （問題の選択） \inhibitglue&\copy0& \copy4& \copy0& \copy4& \copy0& \copy4 &\copy0&\copy4 &\copy0&\copy4&\copy0&\box4&\box0\\
 \multicolumn{6}{c}{}\\[-2mm]
 予想時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\copy2\\
 実際の時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\copy2&&\box2
 \end{tabular}}
 }}}
 
+
+%%%%%%%%% TEST下コラムの囲みが5つのパターン
+\newenvironment{TESTv}
+	{\markright{{\bfseries TEST shuffle 20}}\refstepcounter{TesT}%
+		\fontsize{12Q}{16H}\selectfont
+		\setbox\temp@TESTbox\hbox\bgroup\begin{minipage}{37zw}
+	}
+	{\end{minipage}\egroup\noindent%
+%		\ifodd\c@page\testlabelG\else\testlabelK\fi
+		\ifodd\c@TesT\testlabelG\else\testlabelK\fi
+\typeout{-------------------------------\the\c@page}%
+		\fboxsep\fboxrule\fbox{\vbox to.99\textheight{\hsize\textwidth%
+		\tabcolsep0pt\vspace*{-.2mm}\hspace*{-3.4mm}%
+%
+\begin{tabular}{@{\hskip.01mm}|p{15.5mm}|p{10mm}|p{\temptabsep}|p{43mm}}
+\cellcolor[gray]{0}\textcolor{white}{\makebox[15.5mm][c]{\fontsize{14Q}{\baselineskip}\selectfont\sffamily\bfseries\raisebox{.5mm}{TEST}}}&\makebox[10mm][c]{\fontsize{24Q}{\baselineskip}\selectfont%
+\raisebox{0mm}{\vrule width0pt height 6mm depth1.5mm \theTesT}}
+&&
+\makebox[43mm][r]{\fontsize{13Q}{\baselineskip}\selectfont 年　　月　　日　}\\
+\cline{1-2}\cline{4-4}
+\multicolumn{4}{c}{}\\
+\multicolumn{4}{p{\textwidth}}{\hfil\box\temp@TESTbox\hfil}
+\end{tabular}\vfil\noindent
+\hfil\rule{.99\textwidth}{.12mm}\hfil\\%
+{\fontsize{11Q}{21H}\selectfont
+\setbox0=\hbox{\fbox{$\vcenter to6mm{\hbox to6mm{}}$}}%
+\setbox2=\hbox{（\hskip1.45zw{\fontsize{13Q}{\baselineskip}\selectfont 分}）}%
+\setbox4=\hbox{\includegraphics[width=1zw]{./parts/TesT-arrow.eps}}
+\begin{tabular}[b]{@{\hskip.5zw}l@{}c@{\celfil}c@{\celfil}c@{\celfil}c@{\celfil}c@{\celfil}c@{\celfil}c@{\celfil}c@{\celfil}c@{\hskip.5zw}}
+解く順序\inhibitglue （問題の選択） \inhibitglue&\copy0& \copy4& \copy0& \copy4& \copy0& \copy4 &\copy0&\box4 &\box0\\
+\multicolumn{10}{c}{}\\[-2mm]
+予想時間&\copy2&&\copy2&&\copy2&&\copy2&&\copy2\\
+実際の時間&\copy2&&\copy2&&\copy2&&\copy2&&\box2
+\end{tabular}}
+}}}
+\def\celfil{\hskip1.1zw}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \newdimen\H@headsep\newdimen\H@footsep
@@ -356,8 +434,6 @@
 
 \DeclareRobustCommand{\Sfface}[1]{{\fontfamily{phv}\fontseries{b}\selectfont#1}}
 
-
-
 %% ティータイム
 
 \def\kb@figure{\@ifnextchar[{\kb@@figure}{\kb@@figure[\relax]}}
@@ -397,8 +473,8 @@
 \●%
 \fi%
 \teatimetitle%
-}\par\nobreak\vspace{-.5\baselineskip}\fboxsep.5zw\@nobreaktrue\begin{shaded}%
-\@nobreakfalse}
+}\vspace{-.5\baselineskip}\fboxsep.5zw\begin{shaded}
+}
 
 
 \definecolor{shadecolor}{gray}{0.9}
@@ -569,11 +645,8 @@
 
 \newenvironment{abstract}
 {\prevdepth-\@m\p@\vskip20mm\bgroup\fontsize{13Q}{20H}\selectfont
-\begin{center}
-\begin{minipage}{25zw}}
-{\end{minipage}\end{center}\egroup
-\clearpage
-}
+\hfill\begin{minipage}{25zw}}
+{\end{minipage}\hfill\egroup}
 
 
 
@@ -593,6 +666,49 @@
 \def\@maketchapterhead#1{{\parindent\z@%%\interlinepenalty\@M%
 \includegraphics{parts/indexheader.eps}
 }\par}
+
+\def\登場人物{\clearpage{\parindent\z@
+\includegraphics{parts/登場人物.eps}
+}}
+
+\def\参考文献{\clearpage
+{\parindent\z@
+\includegraphics{parts/参考文献.eps}
+}}
+
+
+
+\newenvironment{登場人物の年表}
+  {\登場人物\thispagestyle{empty}%%\thispagestyle{pageonly}
+%   \@mkboth{\indexname}{\indexname}%★
+   \@mkboth{}{登場人物の年表}%
+\addcontentsline{toc}{chapter}{登場人物の年表}\vskip\z@\nointerlineskip}
+  {\clearpage}
+
+
+\renewenvironment{thebibliography}[1]
+{\参考文献\thispagestyle{empty}%%\thispagestyle{pageonly}
+%\@mkboth{\bibname}{\bibname}
+\@mkboth{}{\bibname}
+\addcontentsline{toc}{chapter}{\bibname}
+   \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}\small}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+
+
 
 \def\tobiraback{\hbox to154mm{\vbox to100mm{}}}
 
@@ -619,7 +735,181 @@
 }
 
 
-\renewenvironment{tyuukai}{\trivlist\item[]}{\endtrivlist}
+\RequirePackage{keyval}
+\def\@@denkyuutiny{\scalebox{0.025}{\includegraphics{fig/denkyuu}}}
+\newenvironment{補足}{%
+\topsep.5\baselineskip\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\additionfont\textbf{補足\@@denkyuutiny}\hskip.5zw
+}{\endtrivlist}
+\newenvironment{例}[1][\relax]{%
+\topsep\z@\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\Exercisefont\textbf{例#1.}\hskip.5zw
+}{\endtrivlist}
+\newenvironment{解}[1][\relax]{%
+\topsep\z@\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\Solutionfont\textbf{解#1.}\hskip.5zw
+}{\endtrivlist}
+
+
+
+\define@key{脚注文字設定}{Q数}{\def\footnote@unitsize{#1}}
+\define@key{脚注文字設定}{行送}{\def\footnote@baseline{#1}}
+\def\脚注文字設定#1{\def\footnote@unitsize{10Q}\def\footnote@baseline{16H}\setkeys{脚注文字設定}{#1}\def\Footnotesize{\fontsize{\footnote@unitsize}{\footnote@baseline}\selectfont}
+}\脚注文字設定{}
+
+
+
+\long\def\@footnotetext#1{\insert\footins{%
+    \reset@font\footnotesize\Footnotesize
+    \interlinepenalty\interfootnotelinepenalty
+    \splittopskip\footnotesep
+    \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+    \hsize\columnwidth \@parboxrestore
+    \protected@edef\@currentlabel{%
+       \csname p@footnote\endcsname\@thefnmark
+    }%
+    \color@begingroup
+      \@makefntext{%
+        \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
+    \color@endgroup}}%
+
+
+\define@key{解答文字設定}{Q数}{\def\anser@unitsize{#1}}
+\define@key{解答文字設定}{行送}{\def\anser@baseline{#1}}
+\def\解答文字設定#1{\def\anser@unitsize{11Q}\def\anser@baseline{16H}\setkeys{解答文字設定}{#1}\def\anserfont{\fontsize{\anser@unitsize}{\anser@baseline}\selectfont}}\解答文字設定{}
+
+
+
+\define@key{補足文字設定}{Q数}{\def\addition@unitsize{#1}}
+\define@key{補足文字設定}{行送}{\def\addition@baseline{#1}}
+\def\補足文字設定#1{\def\addition@unitsize{10Q}\def\addition@baseline{15H}\setkeys{補足文字設定}{#1}\def\additionfont{\fontsize{\addition@unitsize}{\addition@baseline}\selectfont}}\補足文字設定{}
+
+\define@key{問題文字設定}{Q数}{\def\prog@unitsize{#1}}
+\define@key{問題文字設定}{行送}{\def\prog@baseline{#1}}
+\def\問題文字設定#1{\def\prog@unitsize{12Q}\def\prog@baseline{20H}\setkeys{問題文字設定}{#1}\def\progfont{\fontsize{\prog@unitsize}{\prog@baseline}\selectfont}}\問題文字設定{}
+
+\define@key{解説文字設定}{Q数}{\def\explanation@unitsize{#1}}
+\define@key{解説文字設定}{行送}{\def\explanation@baseline{#1}}
+\def\解説文字設定#1{\def\explanation@unitsize{12Q}\def\explanation@baseline{20H}\setkeys{解説文字設定}{#1}\def\explanationfont{\fontsize{\explanation@unitsize}{\explanation@baseline}\selectfont}
+}\解説文字設定{}
+
+\define@key{例文字設定}{Q数}{\def\Exercise@unitsize{#1}}
+\define@key{例文字設定}{行送}{\def\Exercise@baseline{#1}}
+\def\例文字設定#1{\def\Exercise@unitsize{12Q}\def\Exercise@baseline{20H}\setkeys{例文字設定}{#1}\def\Exercisefont{\fontsize{\Exercise@unitsize}{\Exercise@baseline}\selectfont}
+}\例文字設定{}
+
+\define@key{解文字設定}{Q数}{\def\Solution@unitsize{#1}}
+\define@key{解文字設定}{行送}{\def\Solution@baseline{#1}}
+\def\解文字設定#1{\def\Solution@unitsize{12Q}\def\Solution@baseline{20H}\setkeys{解文字設定}{#1}\def\Solutionfont{\fontsize{\Solution@unitsize}{\Solution@baseline}\selectfont}
+}\解文字設定{}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+
+\renewenvironment{網掛け}{%
+\@tempdima\linewidth\advance\@tempdima -1zw
+  \setbox0\hbox\bgroup\begin{minipage}{\@tempdima}\small
+  \abovedisplayskip\z@\belowdisplayskip\z@
+  \abovedisplayshortskip\z@\belowdisplayshortskip\z@
+  \topsep\z@\partopsep\z@\parsep\z@}
+  {\end{minipage}\egroup
+  \setbox0=\hbox{\unhbox0}%
+\topsep.5\baselineskip\partopsep\z@
+\trivlist\item[]
+    \fboxsep\z@
+    \colorbox{grayII}{% 濃度
+      \vbox{\hsize\linewidth
+        \vskip1mm
+        \hb@xt@\linewidth{\hss\box0\hss}%
+        \vskip1mm
+      }%
+    }%
+\endtrivlist
+}
+
+
+
+  \def\ps@Sheadings{\let\ps@jpl@in\ps@headnombre
+    \let\@oddfoot\@empty\let\@evenfoot\@empty
+%    \def\@evenhead{\@@PageNumFont\thepage\hskip1.5zw\@@HeaderFont\leftmark\hfil}%
+    \def\@evenhead{\parbox{\textwidth}{\@@PageNumFont\thepage\hskip1.5zw\@@HeaderFont\leftmark\hfil\vskip1mm\hrule height.5mm}}%
+    \def\@oddhead{\parbox{\textwidth}{\@@HeaderFont\hfill{\rightmark}\@@PageNumFont\hskip1.5zw\thepage\vskip1mm\hrule height.5mm}}%
+    \let\@mkboth\markboth
+  \def\chaptermark##1{\markboth{%
+     \ifnum \c@secnumdepth >\m@ne
+         \if@mainmatter
+         \@chapapp\thechapter\@chappos\hskip1zw
+         \fi
+     \fi
+     \protect\@inhibitglue##1}{}}%
+  \def\sectionmark##1{\markright{%
+     \ifnum \c@secnumdepth >\z@ \thesection\hskip1zw\fi
+     \protect\@inhibitglue##1}}%
+  }
+
+
+\def\the章末番号{%
+\ifnum\c@chapter<10\relax\hbox{0}\fi\arabic{chapter}}
+
+\newenvironment{章末問題}{\noindent
+\protected@edef\@currentlabel
+       {\csname p@chapter\endcsname\csname thechapter\endcsname}%
+\begin{minipage}{\textwidth}%
+\vbox{\hsize\textwidth\hrule
+\colorbox{black}{\textcolor{white}{\textbf{章末問題}}}\hfill
+\hbox{\footnotesize 解答は\pageref{kaitou:ID\thechapter}ページから}\quad\colorbox{grayII}{\kern-\fboxsep\vrule\hbox to18mm{\hfil\vphantom{章}\textcolor{black}{\sffamily\bfseries \the章末番号}\hskip.25zw}\vrule\kern.3\fboxrule\kern-\fboxsep}
+\hrule}
+\end{minipage}\label{mondai:ID\thechapter}%
+\pagestyle{Sheadings}\thispagestyle{headings}%%\thispagestyle{pageonly}%%\thispagestyle{empty}%
+%
+\addcontentsline{toc}{section}{\global\let\protect\tocendsq\relax 章末問題\the章末番号}%
+\markright{章末問題\ \textbf{\the章末番号}}}{\clearpage\pagestyle{headings}%
+\vspace{-\baselineskip}
+}
+
+
+\newenvironment{章末問題解答}{\noindent
+\protected@edef\@currentlabel
+       {\csname p@chapter\endcsname\csname thechapter\endcsname}%
+\begin{minipage}{\textwidth}%
+\vbox{\hsize\textwidth\hrule
+\colorbox{black}{\textcolor{white}{\textbf{章末問題解答}}}\hfill
+\hbox{\footnotesize 問題は\pageref{mondai:ID\thechapter}ページから}\quad\colorbox{grayII}{\kern-\fboxsep\vrule\hbox to18mm{\hfil\vphantom{章}\textcolor{black}{\sffamily\bfseries \the章末番号}\hskip.25zw}\vrule\kern.3\fboxrule\kern-\fboxsep}
+\hrule}
+\end{minipage}\label{kaitou:ID\thechapter}%
+\pagestyle{Sheadings}%%\ifodd\c@page
+%\thispagestyle{pageonly}%
+\thispagestyle{headings}%
+%\thispagestyle{empty}%
+%%\fi%
+\addcontentsline{toc}{section}{\global\let\protect\tocendsq\relax 章末問題解答\the章末番号}
+\markright{章末問題解答\ \textbf{\the章末番号}}\footnotesize}{\clearpage\pagestyle{headings}%
+}
+
+%% emathの式番号をキャンセル
+\resettagform
+
+\def\ps@pageonly{\let\@mkboth\@gobbletwo
+    \let\@oddfoot\@empty\let\@evenfoot\@empty
+    \def\@evenhead{\@@PageNumFont\thepage\hskip1.5zw\hfil}%
+    \def\@oddhead{\hfil\@@PageNumFont\thepage}%
+  }
+
+\DeclareRobustCommand{\NewLine}{\\}
+\DeclareRobustCommand{\NewLineII}{\\\hspace*{-2zw}}
+
+\newif\ifsasikae
+\sasikaefalse
+\sasikaetrue
+
+%% 解答のフォントサイズを解説と同じに変更2018/08/21
+\let\anserfont\explanationfont
+\newcommand\VS[1]{\vspace{#1\baselineskip}}
+
 
 \newcommand{\maegaki}[1]{%
 \clearpage%ページ調整のための強制改ページ
@@ -634,9 +924,3 @@
 \end{center}
 \vspace*{3zw}
 }
-
-%% emathの式番号をキャンセル
-\resettagform
-
-
-\def\XXX{\if@nobreak \fbox{NOBREAK}\else \fbox{BREAK}\fi}

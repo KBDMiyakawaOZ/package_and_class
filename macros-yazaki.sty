@@ -1,0 +1,118 @@
+% ---2010/10/08 by ヤザキ
+% ファイル名をmacros-yazaki.styとする．
+% 「補足」の電球なしで枠をつけた「補足0」を作成
+% 「例」と同様に番号付け環境で「例題」を作成
+% 「補足0」と同じ環境で「注」「定理」を作成
+%
+% ---2011/04/09 by ヤザキ
+% 「例」と同様に番号付け環境で「定義」を作成
+%
+% ---2011/04/15 by ヤザキ
+% 「例」と同様に番号付け環境で「仮定」を作成
+%
+\RequirePackage{keyval}
+\newenvironment{補足0}[1][\relax]{%
+\topsep.5\baselineskip\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\additionfont\textbf{補足#1.}\hskip.5zw
+}{\endtrivlist}
+%
+\newenvironment{例題}[1][\relax]{%
+\topsep\z@\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\Exercisefont\textbf{例題#1.}\hskip.5zw
+}{\endtrivlist}
+%
+\newenvironment{定理}[1][\relax]{%
+\topsep\z@\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\Exercisefont\textbf{定理#1.}\hskip.5zw
+}{\endtrivlist}
+%
+\newenvironment{注}[1][\relax]{%
+\topsep.5\baselineskip\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\additionfont\textbf{注#1.}\hskip.5zw
+}{\endtrivlist}
+%
+\newenvironment{定義}[1][\relax]{%
+\topsep\z@\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\Exercisefont\textbf{定義#1.}\hskip.5zw
+}{\endtrivlist}
+%
+\newenvironment{仮定}[1][\relax]{%
+\topsep\z@\partopsep\z@
+\lineskip1pt\lineskiplimit0pt
+\trivlist\item[]\Exercisefont\textbf{仮定#1.}\hskip.5zw
+}{\endtrivlist}
+
+%
+% ---2011/04/06 by ヤザキ
+% macros1st.sty より
+%「解説」環境と同じにした「解答零」環境を作成
+%「解答」環境で「解答」文字をなくし，横脚注のみにした「解答壱」環境を作成
+%
+% ---2011/04/28 by ヤザキ
+%「解答零」環境のフォントサイズを「解答」環境と同じにした
+%（anserfont は answerfont に名称変更した方が良いと思う）
+%
+\ProvidesPackage{macros-yazaki}[2011/04/06]
+
+\def\@解答零{\includegraphics{parts/解答.eps}}
+
+\newenvironment{解答零}{%
+\lineskip1pt\lineskiplimit\z@
+%	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw\explanationfont}
+	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw\anserfont}
+		\item[\raisebox{-2mm}{\@解答零}]
+		}
+	{\endlist}
+
+\newif\if@tempmathindent
+\@tempmathindenttrue
+%\@tempmathindentfalse
+\setlength{\tyuuhaba}{7zw}
+\newenvironment{解答壱}{%
+%\if@tempmathindent
+\@fleqntrue
+%\fi
+	\begin{tyuukai}
+%	\small\noindent\raisebox{-2mm}{\@解答}\\\relax
+%	\fontsize{12Q}{22H}\selectfont\noindent\raisebox{-2mm}{\@解答}\\\relax}
+%	\fontsize{10Q}{15H}\selectfont\noindent\raisebox{-2mm}{\@解答}\\\relax}
+	\small\anserfont\lineskip1pt\lineskiplimit\z@\noindent
+\raisebox{-2mm}{}\hskip.5zw}
+%\raisebox{-2mm}{\@解答}\hskip.5zw}
+	{\@fleqnfalse\end{tyuukai}}
+
+%
+% ---2011/04/16 by ヤザキ
+%「解説」環境と同じにした「研究」環境を作成
+% 研究.eps も作成
+%
+\def\@研究{\includegraphics{parts/研究.eps}}
+
+\newenvironment{研究}{%
+\lineskip1pt\lineskiplimit\z@
+	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw\explanationfont}
+		\item[\raisebox{-2mm}{\@研究}]
+		}
+	{\endlist}
+
+%
+% ---2011/04/25 by ヤザキ
+%「解説」環境で「解答」文字と横脚注をなくした「解答弐」環境を作成（つまりフォントサイズだけ「解説」環境に等しい）
+%
+% ---2011/04/28 by ヤザキ
+%「解答弐」環境のフォントサイズを「解答」環境と同じにした
+%（anserfont は answerfont に名称変更した方が良いと思う）
+%
+\newenvironment{解答弐}{%
+\lineskip1pt\lineskiplimit\z@
+%	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw\explanationfont}
+	\list{}{\leftmargin0pt\rightmargin0pt\labelwidth-1mm\labelsep.5zw\listparindent1zw\anserfont}
+%		\item[\raisebox{-2mm}{\@解答零}]
+		\item[\raisebox{-2mm}{}]
+		}
+	{\endlist}
